@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Race</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_game_settings">GameSettings</string>
+
+    <string name="title_activity_one_gamer_option">OneGamerOption</string>
+
+    <string name="title_activity_two_gamers_option">TwoGamersOption</string>
+
+    <string name="title_activity_one_player_option">OnePlayerOption</string>
+
+    <string name="title_activity_two_players_option">TwoPlayersOption</string>
+</resources>
