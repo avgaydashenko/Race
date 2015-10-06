@@ -158,11 +158,6 @@ public class GameMenu extends Activity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
-    public void onClickButtonGameSettings(View view) {
-        Intent intent = new Intent(GameMenu.this, GameSettings.class);
-        startActivity(intent);
-    }
-
     public void onClickButtonOnePlayerOption(View view) {
         Intent intent = new Intent(GameMenu.this, OnePlayerOption.class);
         startActivity(intent);

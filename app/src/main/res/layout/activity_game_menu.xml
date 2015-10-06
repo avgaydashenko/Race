@@ -25,14 +25,6 @@
         </LinearLayout>
 
         <Button
-            android:layout_width="148dp"
-            android:layout_height="91dp"
-            android:text="GameSettings"
-            android:id="@+id/buttonGameSettings"
-            android:layout_gravity="left|bottom"
-            android:onClick="onClickButtonGameSettings" />
-
-        <Button
             android:layout_width="302dp"
             android:layout_height="99dp"
             android:text="OnePlayerOption"
