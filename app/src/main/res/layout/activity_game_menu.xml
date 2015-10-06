@@ -25,20 +25,36 @@
         </LinearLayout>
 
         <Button
-            android:layout_width="302dp"
-            android:layout_height="99dp"
+            android:layout_width="230dp"
+            android:layout_height="69dp"
             android:text="OnePlayerOption"
             android:id="@+id/buttonOnePlayerOption"
             android:layout_gravity="center_horizontal|top"
             android:onClick="onClickButtonOnePlayerOption" />
 
         <Button
-            android:layout_width="302dp"
-            android:layout_height="99dp"
+            android:layout_width="218dp"
+            android:layout_height="74dp"
             android:text="TwoPlayersOption"
             android:id="@+id/buttonTwoPlayersOption"
             android:layout_gravity="center"
             android:onClick="onClickButtonTwoPlayrsOption" />
+
+        <Button
+            android:layout_width="166dp"
+            android:layout_height="75dp"
+            android:text="GameAbout"
+            android:id="@+id/buttonGameAbout"
+            android:layout_gravity="right|bottom"
+            android:onClick="onClickButtonGameAbout" />
+
+        <Button
+            android:layout_width="155dp"
+            android:layout_height="64dp"
+            android:text="GameInfo"
+            android:id="@+id/buttonGameInfo"
+            android:layout_gravity="left|bottom"
+            android:onClick="onClickButtonGameInfo" />
 
     </FrameLayout>
 

@@ -4,7 +4,6 @@ import ru.spbau.anastasia.race.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +18,7 @@ import android.support.v4.app.NavUtils;
  *
  * @see SystemUiHider
  */
-public class TwoPlayersOption extends Activity {
+public class GameAbout extends Activity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -52,7 +51,7 @@ public class TwoPlayersOption extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_two_players_option);
+        setContentView(R.layout.activity_game_about);
         setupActionBar();
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
@@ -188,10 +187,5 @@ public class TwoPlayersOption extends Activity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
-    }
-
-    public void onClickButtonStartTwoPlayers(View view) {
-        Intent intent = new Intent(TwoPlayersOption.this, RoadForTwo.class);
-        startActivity(intent);
     }
 }

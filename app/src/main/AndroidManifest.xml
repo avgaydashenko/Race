@@ -48,6 +48,46 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.spbau.anastasia.race.GameMenu" />
         </activity>
+        <activity
+            android:name=".GameInfo"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_game_info"
+            android:parentActivityName=".GameMenu"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.spbau.anastasia.race.GameMenu" />
+        </activity>
+        <activity
+            android:name=".GameAbout"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_game_about"
+            android:parentActivityName=".GameMenu"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.spbau.anastasia.race.GameMenu" />
+        </activity>
+        <activity
+            android:name=".RoadForOne"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_road_for_one"
+            android:parentActivityName=".OnePlayerOption"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.spbau.anastasia.race.OnePlayerOption" />
+        </activity>
+        <activity
+            android:name=".RoadForTwo"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_road_for_two"
+            android:parentActivityName=".TwoPlayersOption"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.spbau.anastasia.race.TwoPlayersOption" />
+        </activity>
     </application>
 
 </manifest>

@@ -13,4 +13,12 @@
     <string name="title_activity_one_player_option">OnePlayerOption</string>
 
     <string name="title_activity_two_players_option">TwoPlayersOption</string>
+
+    <string name="title_activity_game_info">GameInfo</string>
+
+    <string name="title_activity_game_about">GameAbout</string>
+
+    <string name="title_activity_road_for_one">RoadForOne</string>
+
+    <string name="title_activity_road_for_two">RoadForTwo</string>
 </resources>

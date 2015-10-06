@@ -4,6 +4,7 @@ import ru.spbau.anastasia.race.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -187,5 +188,10 @@ public class OnePlayerOption extends Activity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    public void onClickButtonStartOnePlayer(View view) {
+        Intent intent = new Intent(OnePlayerOption.this, RoadForOne.class);
+        startActivity(intent);
     }
 }
