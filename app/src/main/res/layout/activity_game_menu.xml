@@ -48,6 +48,22 @@
             android:nestedScrollingEnabled="false"
             android:onClick="onClickButtonTwoPlayersOption" />
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonGameInfo"
+            android:layout_gravity="left|bottom"
+            android:onClick="onClickButtonGameInfo"
+            android:src="@drawable/rules" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonGameAbout"
+            android:layout_gravity="right|bottom"
+            android:src="@drawable/about"
+            android:onClick="onClickButtonGameAbout" />
+
     </FrameLayout>
 
 </FrameLayout>
