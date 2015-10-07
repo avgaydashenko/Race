@@ -24,37 +24,29 @@
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="230dp"
-            android:layout_height="69dp"
-            android:text="OnePlayerOption"
-            android:id="@+id/buttonOnePlayerOption"
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageGameMenu"
+            android:layout_gravity="center"
+            android:src="@drawable/game_menu" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonOnePlayer"
             android:layout_gravity="center_horizontal|top"
+            android:src="@drawable/one_player"
             android:onClick="onClickButtonOnePlayerOption" />
 
-        <Button
-            android:layout_width="218dp"
-            android:layout_height="74dp"
-            android:text="TwoPlayersOption"
-            android:id="@+id/buttonTwoPlayersOption"
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonTwoPlayers"
             android:layout_gravity="center"
+            android:src="@drawable/two_players"
+            android:nestedScrollingEnabled="false"
             android:onClick="onClickButtonTwoPlayersOption" />
-
-        <Button
-            android:layout_width="166dp"
-            android:layout_height="75dp"
-            android:text="GameAbout"
-            android:id="@+id/buttonGameAbout"
-            android:layout_gravity="right|bottom"
-            android:onClick="onClickButtonGameAbout" />
-
-        <Button
-            android:layout_width="155dp"
-            android:layout_height="64dp"
-            android:text="GameInfo"
-            android:id="@+id/buttonGameInfo"
-            android:layout_gravity="left|bottom"
-            android:onClick="onClickButtonGameInfo" />
 
     </FrameLayout>
 
