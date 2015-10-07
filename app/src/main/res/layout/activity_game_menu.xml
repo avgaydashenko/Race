@@ -38,7 +38,7 @@
             android:text="TwoPlayersOption"
             android:id="@+id/buttonTwoPlayersOption"
             android:layout_gravity="center"
-            android:onClick="onClickButtonTwoPlayrsOption" />
+            android:onClick="onClickButtonTwoPlayersOption" />
 
         <Button
             android:layout_width="166dp"

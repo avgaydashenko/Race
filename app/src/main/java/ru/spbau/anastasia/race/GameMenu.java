@@ -163,7 +163,7 @@ public class GameMenu extends Activity {
         startActivity(intent);
     }
 
-    public void onClickButtonTwoPlayrsOption(View view) {
+    public void onClickButtonTwoPlayersOption(View view) {
         Intent intent = new Intent(GameMenu.this, TwoPlayersOption.class);
         startActivity(intent);
     }

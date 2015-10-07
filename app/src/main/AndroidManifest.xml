@@ -19,16 +19,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GameSettings"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_game_settings"
-            android:parentActivityName=".GameMenu"
-            android:theme="@style/FullscreenTheme" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ru.spbau.anastasia.race.GameMenu" />
-        </activity>
-        <activity
             android:name=".OnePlayerOption"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_one_player_option"
