@@ -24,13 +24,61 @@
 
         </LinearLayout>
 
-        <Button
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageOnePlayerOption"
+            android:layout_gravity="center"
+            android:src="@drawable/players_option" />
+
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="StartOnePlayer"
-            android:id="@+id/buttonStartOnePlayer"
+            android:id="@+id/buttonStart"
+            android:layout_gravity="center_horizontal|bottom"
+            android:src="@drawable/start"
+            android:onClick="onClickButtonStartOnePlayer"
+            android:layout_marginBottom="20dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonBack"
+            android:layout_gravity="right|bottom"
+            android:src="@drawable/back" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSound"
+            android:layout_gravity="right|top"
+            android:src="@drawable/sound" />
+
+        <TextView
+            android:layout_width="182dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="You can choose the character. Your choice: Finn."
+            android:id="@+id/textChooseCharacter"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="20dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonChooseFinn"
             android:layout_gravity="center"
-            android:onClick="onClickButtonStartOnePlayer" />
+            android:layout_marginRight="50dp"
+            android:src="@drawable/choose_finn" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonChooseJake"
+            android:layout_gravity="center"
+            android:src="@drawable/choose_jake"
+            android:layout_marginLeft="50dp" />
+
     </FrameLayout>
 
 </FrameLayout>

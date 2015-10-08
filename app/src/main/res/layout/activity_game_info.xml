@@ -23,6 +23,20 @@
             tools:ignore="UselessParent">
 
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageGameInfo"
+            android:layout_gravity="center"
+            android:src="@drawable/game_info" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonBack"
+            android:layout_gravity="right|bottom"
+            android:src="@drawable/back" />
     </FrameLayout>
 
 </FrameLayout>

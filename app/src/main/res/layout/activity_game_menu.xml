@@ -25,8 +25,8 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/imageGameMenu"
             android:layout_gravity="center"
             android:src="@drawable/game_menu" />
@@ -37,7 +37,8 @@
             android:id="@+id/buttonOnePlayer"
             android:layout_gravity="center_horizontal|top"
             android:src="@drawable/one_player"
-            android:onClick="onClickButtonOnePlayerOption" />
+            android:onClick="onClickButtonOnePlayerOption"
+            android:layout_marginTop="20dp" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -54,7 +55,9 @@
             android:id="@+id/buttonGameInfo"
             android:layout_gravity="left|bottom"
             android:onClick="onClickButtonGameInfo"
-            android:src="@drawable/rules" />
+            android:src="@drawable/rules"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="20dp" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -62,7 +65,9 @@
             android:id="@+id/buttonGameAbout"
             android:layout_gravity="right|bottom"
             android:src="@drawable/about"
-            android:onClick="onClickButtonGameAbout" />
+            android:onClick="onClickButtonGameAbout"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="30dp" />
 
         <ImageButton
             android:layout_width="wrap_content"
