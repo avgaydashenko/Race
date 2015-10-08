@@ -24,13 +24,44 @@
 
         </LinearLayout>
 
-        <Button
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageTwoPlayersOption"
+            android:layout_gravity="center"
+            android:src="@drawable/players_option" />
+
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="StartTwoPlayers"
-            android:id="@+id/buttonStartTwoPlayers"
+            android:id="@+id/buttonConnect"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@drawable/connect"
+            android:layout_marginTop="50dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonStart"
             android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/start"
             android:onClick="onClickButtonStartTwoPlayers" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSound"
+            android:layout_gravity="right|top"
+            android:src="@drawable/sound" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonBack"
+            android:layout_gravity="right|bottom"
+            android:src="@drawable/back" />
+
     </FrameLayout>
 
 </FrameLayout>
