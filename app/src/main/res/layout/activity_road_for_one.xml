@@ -24,6 +24,34 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageRoadForOne"
+            android:layout_gravity="center"
+            android:src="@drawable/game_road" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSound"
+            android:layout_gravity="right|top"
+            android:src="@drawable/sound" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonBack"
+            android:layout_gravity="right|bottom"
+            android:src="@drawable/back" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonPause"
+            android:layout_gravity="left|bottom"
+            android:src="@drawable/pause" />
+
     </FrameLayout>
 
 </FrameLayout>
