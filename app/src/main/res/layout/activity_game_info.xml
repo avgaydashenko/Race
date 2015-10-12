@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageGameInfo"
             android:layout_gravity="center"
+            android:scaleType="fitXY"
             android:src="@drawable/game_info" />
 
         <ImageButton
