@@ -37,21 +37,30 @@
             android:layout_height="wrap_content"
             android:id="@+id/buttonSound"
             android:layout_gravity="right|top"
-            android:src="@drawable/sound" />
+            android:src="@drawable/sound"
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            android:layout_marginTop="10dp" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonBack"
             android:layout_gravity="right|bottom"
-            android:src="@drawable/back" />
+            android:src="@drawable/back"
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            android:layout_marginBottom="10dp" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonPause"
             android:layout_gravity="left|bottom"
-            android:src="@drawable/pause" />
+            android:src="@drawable/pause"
+            android:layout_marginBottom="10dp"
+            android:background="@null"
+            android:layout_marginLeft="10dp" />
 
     </FrameLayout>
 

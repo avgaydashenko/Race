@@ -39,6 +39,7 @@
             android:layout_gravity="center_horizontal|top"
             android:src="@drawable/one_player"
             android:onClick="onClickButtonOnePlayerOption"
+            android:background="@null"
             android:layout_marginTop="20dp" />
 
         <ImageButton
@@ -48,6 +49,7 @@
             android:layout_gravity="center"
             android:src="@drawable/two_players"
             android:nestedScrollingEnabled="false"
+            android:background="@null"
             android:onClick="onClickButtonTwoPlayersOption" />
 
         <ImageButton
@@ -58,6 +60,7 @@
             android:onClick="onClickButtonGameInfo"
             android:src="@drawable/rules"
             android:layout_marginLeft="30dp"
+            android:background="@null"
             android:layout_marginBottom="20dp" />
 
         <ImageButton
@@ -68,6 +71,7 @@
             android:src="@drawable/about"
             android:onClick="onClickButtonGameAbout"
             android:layout_marginBottom="20dp"
+            android:background="@null"
             android:layout_marginRight="30dp" />
 
         <ImageButton
@@ -75,7 +79,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/buttonSound"
             android:layout_gravity="right|top"
-            android:src="@drawable/sound" />
+            android:src="@drawable/sound"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:layout_marginRight="10dp" />
 
     </FrameLayout>
 
