@@ -37,7 +37,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/buttonBack"
             android:layout_gravity="right|bottom"
-            android:src="@drawable/back" />
+            android:background="@null"
+            android:src="@drawable/back"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp" />
     </FrameLayout>
 
 </FrameLayout>
