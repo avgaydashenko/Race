@@ -39,7 +39,6 @@
             android:layout_gravity="center_horizontal|bottom"
             android:src="@drawable/start"
             android:onClick="onClickButtonStartOnePlayer"
-            android:background="@null"
             android:layout_marginBottom="20dp" />
 
         <ImageButton
@@ -47,20 +46,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/buttonBack"
             android:layout_gravity="right|bottom"
-            android:src="@drawable/back"
-            android:layout_marginRight="10dp"
-            android:background="@null"
-            android:layout_marginBottom="10dp" />
+            android:src="@drawable/back" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonSound"
             android:layout_gravity="right|top"
-            android:src="@drawable/sound"
-            android:layout_marginTop="10dp"
-            android:background="@null"
-            android:layout_marginRight="10dp" />
+            android:src="@drawable/sound" />
 
         <TextView
             android:layout_width="182dp"
@@ -77,7 +70,6 @@
             android:id="@+id/buttonChooseFinn"
             android:layout_gravity="center"
             android:layout_marginRight="50dp"
-            android:background="@null"
             android:src="@drawable/choose_finn" />
 
         <ImageButton
@@ -86,7 +78,6 @@
             android:id="@+id/buttonChooseJake"
             android:layout_gravity="center"
             android:src="@drawable/choose_jake"
-            android:background="@null"
             android:layout_marginLeft="50dp" />
 
     </FrameLayout>

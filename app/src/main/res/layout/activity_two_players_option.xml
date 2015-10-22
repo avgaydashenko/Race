@@ -38,7 +38,6 @@
             android:id="@+id/buttonConnect"
             android:layout_gravity="center_horizontal|top"
             android:src="@drawable/connect"
-            android:background="@null"
             android:layout_marginTop="50dp" />
 
         <ImageButton
@@ -48,7 +47,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:src="@drawable/start"
-            android:background="@null"
             android:onClick="onClickButtonStartTwoPlayers" />
 
         <ImageButton
@@ -56,20 +54,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/buttonSound"
             android:layout_gravity="right|top"
-            android:src="@drawable/sound"
-            android:layout_marginTop="10dp"
-            android:background="@null"
-            android:layout_marginRight="10dp" />
+            android:src="@drawable/sound" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonBack"
             android:layout_gravity="right|bottom"
-            android:src="@drawable/back"
-            android:layout_marginRight="10dp"
-            android:background="@null"
-            android:layout_marginBottom="10dp" />
+            android:src="@drawable/back" />
 
     </FrameLayout>
 
