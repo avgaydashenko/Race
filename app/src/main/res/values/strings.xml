@@ -21,4 +21,14 @@
     <string name="title_activity_road_for_one">RoadForOne</string>
 
     <string name="title_activity_road_for_two">RoadForTwo</string>
+
+    <string name="title_activity_h">h</string>
+
+    <string name="choose_information">You can choose the character. Your choice: </string>
+
+    <string name="finn">Finn</string>
+    <string name="jake">Jake</string>
+    <string name="game_about">The game is developed as coursework project of SPbAU second year bachelors.  The source code of the program you can find here: https://github.com/avgaydashenko/Race Authors: Anastasia Gaydashenko, Alexandra Malysheva</string>
+    <string name="game_info">The player has three lives. He loses one if he bumps into a barrier. Player can score points during the game, the best result is saved. Single player game: Player can choose a character to play. The game ends if the player runs out of lives. A game with a friend: To play with a friend you must connect to the device using Bluetooth. The game ends when one player runs out of life. He is a loser.</string>
+
 </resources>

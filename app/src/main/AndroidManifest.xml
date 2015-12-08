@@ -9,9 +9,9 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".GameMenu"
-            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
+            android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +21,10 @@
         </activity>
         <activity
             android:name=".OnePlayerOption"
-            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_one_player_option"
             android:parentActivityName=".GameMenu"
+            android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -32,10 +32,10 @@
         </activity>
         <activity
             android:name=".TwoPlayersOption"
-            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_two_players_option"
             android:parentActivityName=".GameMenu"
+            android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,10 +43,10 @@
         </activity>
         <activity
             android:name=".GameInfo"
-            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_game_info"
             android:parentActivityName=".GameMenu"
+            android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -54,10 +54,10 @@
         </activity>
         <activity
             android:name=".GameAbout"
-            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_game_about"
             android:parentActivityName=".GameMenu"
+            android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -65,10 +65,10 @@
         </activity>
         <activity
             android:name=".RoadForOne"
-            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_road_for_one"
             android:parentActivityName=".OnePlayerOption"
+            android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -76,10 +76,10 @@
         </activity>
         <activity
             android:name=".RoadForTwo"
-            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_road_for_two"
             android:parentActivityName=".TwoPlayersOption"
+            android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

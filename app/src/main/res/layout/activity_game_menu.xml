@@ -5,85 +5,68 @@
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
-    <TextView android:id="@+id/fullscreen_content" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#33b5e5"
-        android:textStyle="bold" android:textSize="50sp" android:gravity="center"
-        android:text="" />
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
-    <FrameLayout android:layout_width="match_parent" android:layout_height="318dp"
-        android:fitsSystemWindows="true"
-        android:background="#944cff">
 
-        <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay" android:orientation="horizontal"
-            tools:ignore="UselessParent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageGameMenu"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/game_menu" />
 
-        </LinearLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonOnePlayer"
+        android:layout_gravity="center_horizontal|top"
+        android:src="@drawable/one_player"
+        android:onClick="onClickButtonOnePlayerOption"
+        android:background="@null"
+        android:layout_marginTop="20dp" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageGameMenu"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
-            android:src="@drawable/game_menu" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonTwoPlayers"
+        android:layout_gravity="center"
+        android:src="@drawable/two_players"
+        android:nestedScrollingEnabled="false"
+        android:background="@null"
+        android:onClick="onClickButtonTwoPlayersOption" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonOnePlayer"
-            android:layout_gravity="center_horizontal|top"
-            android:src="@drawable/one_player"
-            android:onClick="onClickButtonOnePlayerOption"
-            android:background="@null"
-            android:layout_marginTop="20dp" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonGameInfo"
+        android:layout_gravity="left|bottom"
+        android:onClick="onClickButtonGameInfo"
+        android:src="@drawable/rules"
+        android:layout_marginLeft="30dp"
+        android:background="@null"
+        android:layout_marginBottom="20dp" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonTwoPlayers"
-            android:layout_gravity="center"
-            android:src="@drawable/two_players"
-            android:nestedScrollingEnabled="false"
-            android:background="@null"
-            android:onClick="onClickButtonTwoPlayersOption" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonGameAbout"
+        android:layout_gravity="right|bottom"
+        android:src="@drawable/about"
+        android:onClick="onClickButtonGameAbout"
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:layout_marginRight="30dp" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonGameInfo"
-            android:layout_gravity="left|bottom"
-            android:onClick="onClickButtonGameInfo"
-            android:src="@drawable/rules"
-            android:layout_marginLeft="30dp"
-            android:background="@null"
-            android:layout_marginBottom="20dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonGameAbout"
-            android:layout_gravity="right|bottom"
-            android:src="@drawable/about"
-            android:onClick="onClickButtonGameAbout"
-            android:layout_marginBottom="20dp"
-            android:background="@null"
-            android:layout_marginRight="30dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonSound"
-            android:layout_gravity="right|top"
-            android:src="@drawable/sound"
-            android:layout_marginTop="10dp"
-            android:background="@null"
-            android:layout_marginRight="10dp" />
-
-    </FrameLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSound"
+        android:layout_gravity="right|top"
+        android:src="@drawable/sound"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:layout_marginRight="10dp" />
 
 </FrameLayout>

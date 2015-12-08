@@ -3,92 +3,71 @@
     android:layout_height="match_parent" android:background="#0099cc"
     tools:context="ru.spbau.anastasia.race.OnePlayerOption">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-    <TextView android:id="@+id/fullscreen_content" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#33b5e5"
-        android:textStyle="bold" android:textSize="50sp" android:gravity="center"
-        android:text="@string/dummy_content" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imagePlayersOption"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/players_option" />
 
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
-    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonChooseFinn"
+        android:layout_gravity="center"
+        android:layout_marginRight="50dp"
+        android:background="@null"
+        android:src="@drawable/choose_finn"
+        android:onClick="onFinnChosen" />
 
-        <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay" android:orientation="horizontal"
-            tools:ignore="UselessParent">
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonBack"
+        android:layout_gravity="right|bottom"
+        android:src="@drawable/back"
+        android:layout_marginRight="10dp"
+        android:background="@null"
+        android:layout_marginBottom="10dp"
+        android:onClick="onClickButtonBack" />
 
-        </LinearLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonStart"
+        android:layout_gravity="center_horizontal|bottom"
+        android:src="@drawable/start"
+        android:onClick="onClickButtonStartOnePlayer"
+        android:background="@null"
+        android:layout_marginBottom="20dp" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageOnePlayerOption"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
-            android:src="@drawable/players_option" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSound"
+        android:layout_gravity="right|top"
+        android:src="@drawable/sound"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:layout_marginRight="10dp" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonStart"
-            android:layout_gravity="center_horizontal|bottom"
-            android:src="@drawable/start"
-            android:onClick="onClickButtonStartOnePlayer"
-            android:background="@null"
-            android:layout_marginBottom="20dp" />
+    <TextView
+        android:layout_width="182dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/choose_information"
+        android:id="@+id/choose_text"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="20dp" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonBack"
-            android:layout_gravity="right|bottom"
-            android:src="@drawable/back"
-            android:layout_marginRight="10dp"
-            android:background="@null"
-            android:layout_marginBottom="10dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonSound"
-            android:layout_gravity="right|top"
-            android:src="@drawable/sound"
-            android:layout_marginTop="10dp"
-            android:background="@null"
-            android:layout_marginRight="10dp" />
-
-        <TextView
-            android:layout_width="182dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="You can choose the character. Your choice: Finn."
-            android:id="@+id/textChooseCharacter"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="20dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonChooseFinn"
-            android:layout_gravity="center"
-            android:layout_marginRight="50dp"
-            android:background="@null"
-            android:src="@drawable/choose_finn" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonChooseJake"
-            android:layout_gravity="center"
-            android:src="@drawable/choose_jake"
-            android:background="@null"
-            android:layout_marginLeft="50dp" />
-
-    </FrameLayout>
-
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton"
+        android:layout_gravity="center"
+        android:src="@drawable/choose_jake"
+        android:background="@null"
+        android:layout_marginLeft="50dp"
+        android:onClick="onJakeChosen" />
 </FrameLayout>
