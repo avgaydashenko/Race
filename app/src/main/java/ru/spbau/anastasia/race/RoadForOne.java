@@ -15,7 +15,6 @@ import android.widget.ImageButton;
 public class RoadForOne extends Activity {
 
     public static final String TAG =  RoadForOne.class.getSimpleName();
-
     OnePlayerGameView gameView;
     SceneManager sceneManager;
     SensorManager sensorManager;

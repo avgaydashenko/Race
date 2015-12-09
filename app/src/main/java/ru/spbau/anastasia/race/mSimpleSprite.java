@@ -14,7 +14,7 @@ public abstract class mSimpleSprite extends mBasic{
 	public static final int SIZE_OF_BARRIER = 40;
 	public static final int SIZE_OF_DELTA_BARRIER = 5;
 	public static final int SIZE_OF_BACKGROUND = 70;
-	public static final int SIZE_OF_DELTA_BACKGROUND = 2;
+	public static final int SIZE_OF_DELTA_BACKGROUND = 4;
 
 	boolean selected = false;
 
@@ -102,6 +102,7 @@ public abstract class mSimpleSprite extends mBasic{
 	@Override
 	public void draw(Canvas c, Paint p)
 	{
+		recalcParametrs();
 		if (type != TYPE_LIVE) {
 			dst.set(- (int) width, -2 * (int) width, (int) width, 2 * (int) width);
 		}

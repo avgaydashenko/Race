@@ -12,6 +12,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -80,6 +81,7 @@ public class OnePlayerGameView extends View {
             }
             scene.player.draw(canvas, mainPaint);
             scene.live.draw(canvas, mainPaint);
+            canvas.drawText(String.valueOf((int) scene.count), mSettings.CurrentXRes / 2, 50, mainPaint);
         }
         Log.d(TAG, "onDraw finished");
         invalidate();

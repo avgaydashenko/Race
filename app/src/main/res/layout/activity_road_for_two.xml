@@ -20,16 +20,6 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonSound"
-            android:layout_gravity="right|top"
-            android:src="@drawable/sound"
-            android:layout_marginTop="10dp"
-            android:background="@null"
-            android:layout_marginRight="10dp" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/buttonBack"
             android:layout_gravity="right|bottom"
             android:src="@drawable/back"
@@ -49,6 +39,13 @@
             android:layout_marginLeft="10dp"
             android:onClick="onClickButtonPauseRoadForTwo"
             android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/count2"
+            android:layout_gravity="center_horizontal|top" />
 
     </FrameLayout>
 

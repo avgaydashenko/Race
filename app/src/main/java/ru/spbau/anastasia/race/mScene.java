@@ -3,6 +3,9 @@ package ru.spbau.anastasia.race;
 import android.content.res.Resources;
 
 public class mScene {
+    public static final double DELTE_COUNT = 0.1;
+    public double count = 0;
+
     public static final int SINGLE_PLAY = 1;
     public static final int PLAY_TOGETHER = 2;
 
@@ -27,17 +30,12 @@ public class mScene {
 
     public int width = 0, height = 0;
 
-    public mScene(Resources res, int type) {
+    public mScene(Resources res, int type_) {
         this.res = res;
         for (int i = 0; i < LAY_COUNT; i++) {
             layers[i] = new mLayer(i);
         }
-        if (type == SINGLE_PLAY)
-        {
-            this.type = SINGLE_PLAY;
-        } else {
-            this.type = PLAY_TOGETHER;
-        }
+        type = type_;
         status = STOPED;
     }
 
@@ -54,6 +52,7 @@ public class mScene {
             add();
             update(dx, dy);
             updateExist();
+            count += DELTE_COUNT;
         }
     }
 
@@ -62,6 +61,7 @@ public class mScene {
             add();
             update(dx, dy, dx2, dy2);
             updateExist();
+            count += DELTE_COUNT;
         }
     }
 
@@ -95,9 +95,9 @@ public class mScene {
         mBarrierSprite.initBarrier(res);
         mBackgroundSprite.initBarrier(res);
         player = new mPlayerSprite(width/2 - 60 * mSettings.ScaleFactorX, height - 120 * mSettings.ScaleFactorY, res, R.drawable.jake1, R.drawable.jake2);
-        live = new mLive(res, SINGLE_PLAY);
+        live = new mLive(res, mLive.FIRST_PLAYER);
         player2 = new mPlayerSprite(width/2 + 60 * mSettings.ScaleFactorX, height - 120 * mSettings.ScaleFactorY, res, R.drawable.finn1, R.drawable.finn2);
-        live2 = new mLive(res, PLAY_TOGETHER);
+        live2 = new mLive(res, mLive.SECOND_PLAYER);
     }
 
     public void add() {
