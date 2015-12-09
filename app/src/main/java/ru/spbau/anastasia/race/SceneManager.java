@@ -14,14 +14,14 @@ public class SceneManager implements SensorEventListener {
     private static final String TAG = "SceneManager";
     public static final int FPS = 10;
 
-    mScene scene;
+    final mScene scene;
     float dx, dy;
 
     class SceneTask extends TimerTask {
         @Override
         public void run() {
             synchronized (scene){
-                if(scene.type == scene.SINGLE_PLAY) {
+                if(scene.type == mScene.SINGLE_PLAY) {
                     scene.oneStep(dx, dy);
                 } else {
                     scene.oneStep(dx, dy, 0, 0);

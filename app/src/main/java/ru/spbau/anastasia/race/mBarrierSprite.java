@@ -52,8 +52,8 @@ public class mBarrierSprite extends mSimpleSprite {
 
     @Override
     void update() {
-        this.x = this.x + this.dx;
-        this.y = this.y + this.dy;
+        x = x + dx;
+        y = y + dy;
         updateExist();
     }
 }

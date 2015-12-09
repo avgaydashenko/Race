@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 public class mLayer {
 
-    public static final int FREQUENCY_OF_ADDING = 3;
+    public static final int FREQUENCY_OF_ADDING = 5;
     private int lastAdding;
 
     ArrayList<mBasic> data = new ArrayList<>();
@@ -67,10 +67,10 @@ public class mLayer {
     }
 
 
-    public synchronized mBasic select(float f, float g) {
+    public synchronized mBasic select(mBasic player) {
         mBasic tmp = null;
         for (int i = 0; i < data.size(); i++) {
-            if (data.get(i) != null && data.get(i).isSelected(f, g)) {
+            if (data.get(i) != null && data.get(i).isSelected(player)) {
                 tmp = data.get(i);
                 break;
             }

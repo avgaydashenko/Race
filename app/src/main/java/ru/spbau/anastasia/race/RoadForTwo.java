@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class RoadForTwo extends Activity {
@@ -26,14 +27,11 @@ public class RoadForTwo extends Activity {
     SceneManager sceneManager;
     SensorManager sensorManager;
     Sensor sensor;
-    Button pause;
-    Button resum;
+    ImageButton pause;
+    mScene scene;
 
-    public RoadForTwo() {
-       pause = (Button) findViewById(R.id.buttonPause);
-       resum = (Button) findViewById(R.id.buttonResum);
-       resum.setClickable(false);
-    }
+    View.OnClickListener onPauseListener, onResumeListener;
+
 
 
     @Override
@@ -44,7 +42,7 @@ public class RoadForTwo extends Activity {
         setContentView(R.layout.activity_road_for_two);
         gameView = (TwoPlayerGameView)  findViewById(R.id.game_view);
 
-        mScene scene = new mScene(getResources(), mScene.PLAY_TOGETHER);
+        scene = new mScene(getResources(), mScene.PLAY_TOGETHER);
         scene.width = gameView.getWidth();
         scene.height = gameView.getHeight();
         scene.player_id = mScene.FINN;
@@ -53,6 +51,28 @@ public class RoadForTwo extends Activity {
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+
+        pause = (ImageButton) findViewById(R.id.buttonPause);
+
+        onPauseListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scene.stop();
+                pause.setImageResource(R.drawable.back);
+                pause.setOnClickListener(onResumeListener);
+            }
+        };
+
+        onResumeListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scene.start();
+                pause.setImageResource(R.drawable.pause);
+                pause.setOnClickListener(onPauseListener);
+            }
+        };
+
+        pause.setOnClickListener(onPauseListener);
     }
 
     @Override
@@ -62,20 +82,15 @@ public class RoadForTwo extends Activity {
         sceneManager.start();
     }
 
-    public void onClickButtonPause(View view){
-        onPause();
-        pause.setClickable(false);
-    }
-
-    public void onClickButtonResum(View view){
-        onResume();
-        resum.setClickable(false);
-    }
 
     @Override
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(sceneManager);
         sceneManager.stop();
+    }
+
+    public void onClickButtonBackRoadForTwo(View view) {
+        finish();
     }
 }

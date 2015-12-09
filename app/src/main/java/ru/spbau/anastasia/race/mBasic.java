@@ -14,6 +14,7 @@ public abstract class mBasic {
 
 	float x, y;
 	float dx, dy;
+	float width, height;
 
 	public static final int TYPE_PLAYERSPRITE = 1;
 	public static final int TYPE_BARRIERSPRITE = 2;
@@ -22,7 +23,7 @@ public abstract class mBasic {
 
 	abstract void update();
 
-	abstract boolean isSelected(float f, float g);
+	abstract boolean isSelected(mBasic player);
 	
 	abstract void draw(Canvas c, Paint p);
 
@@ -30,6 +31,11 @@ public abstract class mBasic {
 
 	public float getY() { return y; }
 
+	public float getWidth() {
+		return width;
+	}
+
+	public float getHeight() { return height; }
 
 	public void setX(float x) {
 		this.x = x;

@@ -35,8 +35,8 @@ public class mBackgroundSprite extends mSimpleSprite {
         for(int i = 0; i < 2; i++){
             rowX[i] = mSettings.ScaleFactorX * (330 + i * 140 );
             rowY[i] = 80 * mSettings.ScaleFactorY;
-            rowDY[i] = 9 * mSettings.ScaleFactorY;
-            rowDX[i] = (-18 + i * 36) * mSettings.ScaleFactorX;
+            rowDY[i] = 4 * mSettings.ScaleFactorY;
+            rowDX[i] = (-37 + i * 68) * mSettings.ScaleFactorX;
         }
     }
     private static Bitmap whithBarrier(Resources res){
@@ -50,8 +50,8 @@ public class mBackgroundSprite extends mSimpleSprite {
 
     @Override
     void update() {
-        this.x = this.x + this.dx;
-        this.y = this.y + this.dy;
+        x = x + dx;
+        y = y + dy;
         updateExist();
     }
 }

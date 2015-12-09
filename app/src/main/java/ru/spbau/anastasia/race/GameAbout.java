@@ -16,9 +16,7 @@ public class GameAbout extends Activity {
         setContentView(R.layout.activity_game_about);
     }
 
-
-    public void onClickButtonBack(View view) {
-        Intent intent = new Intent(this, GameMenu.class);
-        startActivity(intent);
+    public void onClickButtonBackGameAbout(View view) {
+        finish();
     }
 }

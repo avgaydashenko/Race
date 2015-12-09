@@ -5,7 +5,11 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class RoadForOne extends Activity {
@@ -16,6 +20,8 @@ public class RoadForOne extends Activity {
     SceneManager sceneManager;
     SensorManager sensorManager;
     Sensor sensor;
+    ImageButton pause;
+    View.OnClickListener onPauseListener, onResumeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +30,10 @@ public class RoadForOne extends Activity {
 
         int player_id = getIntent().getExtras().getInt("player");
         setContentView(R.layout.activity_road_for_one);
+
         gameView = (OnePlayerGameView)  findViewById(R.id.game_view);
 
-        mScene scene = new mScene(getResources(), mScene.SINGLE_PLAY);
+        final mScene scene = new mScene(getResources(), mScene.SINGLE_PLAY);
         scene.width = gameView.getWidth();
         scene.height = gameView.getHeight();
         scene.player_id = player_id;
@@ -36,7 +43,33 @@ public class RoadForOne extends Activity {
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+        pause = (ImageButton) findViewById(R.id.pause);
+
+        onPauseListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scene.stop();
+                pause.setImageResource(R.drawable.back);
+                pause.setOnClickListener(onResumeListener);
+            }
+        };
+
+        onResumeListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scene.start();
+                pause.setImageResource(R.drawable.pause);
+                pause.setOnClickListener(onPauseListener);
+            }
+        };
+
+        pause.setOnClickListener(onPauseListener);
     }
+
+    public void onBackButtonClickRoadForOne(View view) {
+        finish();
+    }
+
 
     @Override
     protected void onResume() {

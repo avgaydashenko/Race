@@ -41,7 +41,7 @@
             android:src="@drawable/back"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:onClick="onClickButtonBack" />
+            android:onClick="onClickButtonBackGameInfo" />
 
         <TextView
             android:layout_width="match_parent"

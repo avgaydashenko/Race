@@ -25,4 +25,7 @@ public class TwoPlayersOption extends Activity {
         Intent intent = new Intent(TwoPlayersOption.this, RoadForTwo.class);
         startActivity(intent);
     }
+    public void onClickButtonBackTwoPlayerOption(View view) {
+        finish();
+    }
 }

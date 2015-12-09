@@ -23,7 +23,7 @@ public class GameInfo extends Activity {
         setContentView(R.layout.activity_game_info);
     }
 
-    public void onClickButtonBack(View view) {
-        Intent intent = new Intent(this, GameMenu.class);
-        startActivity(intent);
-    }}
+    public void onClickButtonBackGameInfo(View view) {
+        finish();
+    }
+}

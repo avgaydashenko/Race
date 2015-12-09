@@ -63,13 +63,12 @@ public class OnePlayerGameView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        synchronized (scene){
-            super.onDraw(canvas);
-
-            if (scene == null) {
-                return;
-            }
-            Log.d(TAG, "onDraw started");
+        super.onDraw(canvas);
+        if (scene == null) {
+            return;
+        }
+        Log.d(TAG, "onDraw started");
+        synchronized (scene) {
             canvas.drawBitmap(fon, 0, 0, mainPaint);
             for (mLayer l : scene.layers) {
                 if (l != null) {

@@ -29,7 +29,6 @@ public class mScene {
 
     public mScene(Resources res, int type) {
         this.res = res;
-
         for (int i = 0; i < LAY_COUNT; i++) {
             layers[i] = new mLayer(i);
         }
@@ -39,7 +38,7 @@ public class mScene {
         } else {
             this.type = PLAY_TOGETHER;
         }
-        status = PLAYED;
+        status = STOPED;
     }
 
     public void start() {
@@ -85,7 +84,7 @@ public class mScene {
     public void initSingleScene() {
         mBarrierSprite.initBarrier(res);
         mBackgroundSprite.initBarrier(res);
-        player = new mPlayerSprite(width/2 - 20, height - 60, res,
+        player = new mPlayerSprite(width/2, height - 120 * mSettings.ScaleFactorY, res,
                 (player_id == JAKE) ? R.drawable.jake1 : R.drawable.finn1,
                 (player_id == JAKE) ? R.drawable.jake2 : R.drawable.finn2
         );
@@ -95,9 +94,9 @@ public class mScene {
     public void initDoubleScene() {
         mBarrierSprite.initBarrier(res);
         mBackgroundSprite.initBarrier(res);
-        player = new mPlayerSprite(width/2 - 40, height - 60, res, R.drawable.jake1, R.drawable.jake2);
+        player = new mPlayerSprite(width/2 - 60 * mSettings.ScaleFactorX, height - 120 * mSettings.ScaleFactorY, res, R.drawable.jake1, R.drawable.jake2);
         live = new mLive(res, SINGLE_PLAY);
-        player2 = new mPlayerSprite(width/2 + 40, height - 60, res, R.drawable.finn1, R.drawable.finn2);
+        player2 = new mPlayerSprite(width/2 + 60 * mSettings.ScaleFactorX, height - 120 * mSettings.ScaleFactorY, res, R.drawable.finn1, R.drawable.finn2);
         live2 = new mLive(res, PLAY_TOGETHER);
     }
 
@@ -142,18 +141,23 @@ public class mScene {
         for (int i = 0; i < LAY_COUNT; i++) {
             layers[i].updateExist();
         }
+        mBasic barrier = player.updateExist(layers[0].data);
+        deleteBarrier(barrier);
+        live.update();
         if (this.type == SINGLE_PLAY){
-            mBasic barrier = player.updateExist(layers[0].data);
-            deleteBarrier((mBarrierSprite) barrier);
-            live.update();
             if (!player.exist) {
                 player.setY(-10);
                 endTheGame();
             }
         } else {
             player2.updateExist(layers[0].data);
+            mBasic barrier2 = player.updateExist(layers[0].data);
+            deleteBarrier(barrier2);
+            live2.update();
+
             if (!player2.exist) {
                 //ToDo
+                endTheGame();
                 player2.setY(-10);
             }
             if (!player.exist) {
@@ -186,12 +190,6 @@ public class mScene {
 
     public int getHeight() {
         return height;
-    }
-
-    public mBasic selectSprite(float f, float g) {
-        mBasic sel = null;
-        sel = layers[0].select(f, g);
-        return sel;
     }
 
     public void update(float dx, float dy) {

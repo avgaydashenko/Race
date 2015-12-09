@@ -31,9 +31,8 @@ public class OnePlayerOption extends Activity {
         startActivity(intent);
     }
 
-    public void onClickButtonBack(View view) {
-        Intent intent = new Intent(this, GameMenu.class);
-        startActivity(intent);
+    public void onClickButtonBackOnePlayerOption(View view) {
+        finish();
     }
 
     protected void chooseCharacter(int string_id, int character) {
