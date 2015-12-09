@@ -204,7 +204,7 @@ public class mScene {
         update(dx, dy);
         if(type == PLAY_TOGETHER){
             player2.update(dx2, dy2);
-            live2.update(player);
+            live2.update(player2);
         }
     }
 
