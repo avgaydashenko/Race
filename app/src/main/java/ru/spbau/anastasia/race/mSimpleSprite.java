@@ -54,9 +54,9 @@ public abstract class mSimpleSprite extends mBasic{
 	abstract void update();
 
 	private boolean intersect( float x1, float y1, float dx, float dy){
-		Rect a = new Rect((int) x1 - 10, (int) (y1 + dy) + 10, (int) (x1 + dx) + 10, (int) y1 - 10);
-		Rect b = new Rect((int) x - 10, (int) (y + height) + 10, (int) (x + width) + 10, (int) y - 10);
-		return a.intersect(b);
+		Rect a = new Rect((int) x1, (int) y1, (int) (x1 + dx), (int) (y1 + dy));
+		Rect b = new Rect((int) x, (int) y, (int) (x + width), (int) (y + height));
+		return Rect.intersects(a, b);
 	}
 
 	public boolean isSelected(mBasic player) {
