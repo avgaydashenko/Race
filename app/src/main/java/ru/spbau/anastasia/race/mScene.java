@@ -3,11 +3,21 @@ package ru.spbau.anastasia.race;
 import android.content.res.Resources;
 
 public class mScene {
+    public float speed = 1;
+
+    public boolean isNewRound = false;
+    public static final int TIME_OF_ROUND = 30;
     public static final double DELTE_COUNT = 0.1;
+    public static final double PAUSE_ON_NEW_ROUND = 10;
     public double count = 0;
+    public int round = 0;
+    private int lastRound = 0;
 
     public static final int SINGLE_PLAY = 1;
     public static final int PLAY_TOGETHER = 2;
+    public static final double DELTE_SPEED = 0.1;
+    public static final double DELTE_ADDING_BARRIERS = 0.2;
+
 
     public static final int PLAYED= 1;
     public static final int STOPED = 2;
@@ -27,6 +37,12 @@ public class mScene {
     mPlayerSprite player2;
     mLive live;
     mLive live2;
+
+    interface SceneListener {
+        void onGameOver();
+    }
+
+    SceneListener sceneListener;
 
     public int width = 0, height = 0;
 
@@ -48,20 +64,58 @@ public class mScene {
     }
 
     public void oneStep(float dx, float dy) {
-        if (status != STOPED) {
+        recalcNewRound();
+        if (status != STOPED && !isNewRound) {
             add();
             update(dx, dy);
             updateExist();
-            count += DELTE_COUNT;
+            recalcParametrs();
         }
     }
 
+    private void recalcParametrs(){
+        count += DELTE_COUNT;
+        if (status == STOPED && sceneListener != null) {
+            sceneListener.onGameOver();
+        }
+    }
+
+    private void recalcNewRound (){
+        if ((int) count % TIME_OF_ROUND == 0 && count > TIME_OF_ROUND){
+            newRound();
+            count++;
+        }
+        if (lastRound < PAUSE_ON_NEW_ROUND){
+            lastRound++;
+        }
+        if (lastRound == PAUSE_ON_NEW_ROUND && isNewRound){
+            for (mLayer l : layers){
+                if (l.frequencyOfAdding > 2) {
+                    l.frequencyOfAdding -= DELTE_ADDING_BARRIERS;
+                }
+                l.isDamaged = false;
+            }
+            speed += DELTE_SPEED;
+            isNewRound = false;
+        }
+    }
+
+    private void newRound(){
+        round++;
+        for (mLayer l : layers){
+            l.isDamaged = true;
+        }
+        lastRound = 0;
+        isNewRound = true;
+    }
+
     public void oneStep(float dx, float dy, float dx2, float dy2) {
+        recalcNewRound();
         if (status != STOPED) {
             add();
             update(dx, dy, dx2, dy2);
             updateExist();
-            count += DELTE_COUNT;
+            recalcParametrs();
         }
     }
 
@@ -86,7 +140,9 @@ public class mScene {
         mBackgroundSprite.initBarrier(res);
         player = new mPlayerSprite(width/2, height - 120 * mSettings.ScaleFactorY, res,
                 (player_id == JAKE) ? R.drawable.jake1 : R.drawable.finn1,
-                (player_id == JAKE) ? R.drawable.jake2 : R.drawable.finn2
+                (player_id == JAKE) ? R.drawable.jake2 : R.drawable.finn2,
+                R.drawable.barrier0, R.drawable.barrier1
+
         );
         live = new mLive(res, SINGLE_PLAY);
     }
@@ -94,9 +150,11 @@ public class mScene {
     public void initDoubleScene() {
         mBarrierSprite.initBarrier(res);
         mBackgroundSprite.initBarrier(res);
-        player = new mPlayerSprite(width/2 - 60 * mSettings.ScaleFactorX, height - 120 * mSettings.ScaleFactorY, res, R.drawable.jake1, R.drawable.jake2);
+        player = new mPlayerSprite(width/2 - 60 * mSettings.ScaleFactorX, height - 120 * mSettings.ScaleFactorY, res,
+                R.drawable.jake1, R.drawable.jake2, R.drawable.barrier0, R.drawable.barrier1);
         live = new mLive(res, mLive.FIRST_PLAYER);
-        player2 = new mPlayerSprite(width/2 + 60 * mSettings.ScaleFactorX, height - 120 * mSettings.ScaleFactorY, res, R.drawable.finn1, R.drawable.finn2);
+        player2 = new mPlayerSprite(width/2 + 60 * mSettings.ScaleFactorX, height - 120 * mSettings.ScaleFactorY, res,
+                R.drawable.finn1, R.drawable.finn2, R.drawable.barrier0, R.drawable.barrier1);
         live2 = new mLive(res, mLive.SECOND_PLAYER);
     }
 
@@ -108,7 +166,7 @@ public class mScene {
     public void addBarrier() {
         if (layers[0].tryToAdd())
         {
-            mBarrierSprite barrierSprite = new mBarrierSprite(res);
+            mBarrierSprite barrierSprite = new mBarrierSprite(res, speed);
             layers[0].add(barrierSprite);
         }
     }
@@ -120,7 +178,7 @@ public class mScene {
 
     public void addBackground() {
         if (layers[1].tryToAdd()) {
-            mBackgroundSprite backgroundSprite = new mBackgroundSprite(res);
+            mBackgroundSprite backgroundSprite = new mBackgroundSprite(res, speed);
             layers[1].add(backgroundSprite);
         }
     }
@@ -141,35 +199,32 @@ public class mScene {
         for (int i = 0; i < LAY_COUNT; i++) {
             layers[i].updateExist();
         }
-        mBasic barrier = player.updateExist(layers[0].data);
+        mBasic barrier = player.updateExist(layers);
         deleteBarrier(barrier);
         live.update();
-        if (this.type == SINGLE_PLAY){
-            if (!player.exist) {
-                player.setY(-10);
-                endTheGame();
-            }
-        } else {
-            player2.updateExist(layers[0].data);
-            mBasic barrier2 = player.updateExist(layers[0].data);
+        if (!player.exist){
+            status = STOPED;
+        }
+        if (this.type == PLAY_TOGETHER){
+            player2.updateExist(layers);
+            mBasic barrier2 = player.updateExist(layers);
             deleteBarrier(barrier2);
             live2.update();
-
-            if (!player2.exist) {
-                //ToDo
-                endTheGame();
-                player2.setY(-10);
-            }
-            if (!player.exist) {
-                endTheGame();
-                player.setY(-10);
+            if (!player2.exist){
+                status = STOPED;
             }
 
         }
 
     }
 
-    public void endTheGame(){
+    public void restart(){
+        speed = 1;
+        for (mLayer l : layers){
+            l.frequencyOfAdding = 5;
+        }
+        isNewRound = false;
+        count = 0;
         for (int i = 0; i < LAY_COUNT; i++) {
             layers[i].restart();
         }
@@ -179,9 +234,7 @@ public class mScene {
             player2.restart();
             live2.update();
         }
-        status = STOPED;
-        //Todo
-        //Нужно вывести кнопку, при нажатии на котору игра возобноситься.
+        status = PLAYED;
     }
 
     public int getWidth() {

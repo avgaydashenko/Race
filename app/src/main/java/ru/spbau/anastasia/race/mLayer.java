@@ -6,24 +6,28 @@ import java.util.Iterator;
 
 public class mLayer {
 
-    public static final int FREQUENCY_OF_ADDING = 5;
+    public float frequencyOfAdding = 5;
     private int lastAdding;
+    protected boolean isDamaged = false;
 
     ArrayList<mBasic> data = new ArrayList<>();
     int level;
 
     public  mLayer(int lev) {
         level = lev;
-        lastAdding = FREQUENCY_OF_ADDING - 1;
+        lastAdding = (int) (frequencyOfAdding - 1);
     }
 
     public boolean tryToAdd(){
-        lastAdding = (lastAdding + 1) % FREQUENCY_OF_ADDING ;
+        lastAdding = (int) ((lastAdding + 1) % frequencyOfAdding);
         return lastAdding == 0;
     }
 
     public synchronized void add(mBasic item) {
-        data.add(item);
+
+        if(!isDamaged){
+            data.add(item);
+        }
     }
 
     public int getSize() {
@@ -51,8 +55,9 @@ public class mLayer {
         }
     }
 
-    public void restart(){
-        data.clear();
+    public void restart()
+    {
+        isDamaged = false;
     }
 
     public synchronized void clear() {
@@ -60,21 +65,13 @@ public class mLayer {
     }
 
     public synchronized void update() {
+        if(isDamaged){
+            return;
+        }
         for (mBasic a : data) {
             if (a != null)
                 a.update();
             }
     }
 
-
-    public synchronized mBasic select(mBasic player) {
-        mBasic tmp = null;
-        for (int i = 0; i < data.size(); i++) {
-            if (data.get(i) != null && data.get(i).isSelected(player)) {
-                tmp = data.get(i);
-                break;
-            }
-        }
-        return tmp;
-    }
 }

@@ -10,17 +10,27 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 
-public class RoadForOne extends Activity {
+public class RoadForOne extends Activity implements mScene.SceneListener {
 
     public static final String TAG =  RoadForOne.class.getSimpleName();
     OnePlayerGameView gameView;
     SceneManager sceneManager;
     SensorManager sensorManager;
     Sensor sensor;
-    ImageButton pause;
+    ImageButton pause, restart;
     View.OnClickListener onPauseListener, onResumeListener;
+
+    Runnable activateRestartButton = new Runnable() {
+        @Override
+        public void run() {
+            restart.setVisibility(View.VISIBLE);
+            pause.setVisibility(View.GONE);
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +53,8 @@ public class RoadForOne extends Activity {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         pause = (ImageButton) findViewById(R.id.pause);
+        restart = (ImageButton) findViewById(R.id.restart);
+
 
         onPauseListener = new View.OnClickListener() {
             @Override
@@ -62,6 +74,9 @@ public class RoadForOne extends Activity {
             }
         };
 
+        scene.sceneListener = this;
+
+        restart.setVisibility(View.GONE);
         pause.setOnClickListener(onPauseListener);
     }
 
@@ -82,5 +97,16 @@ public class RoadForOne extends Activity {
         super.onPause();
         sensorManager.unregisterListener(sceneManager);
         sceneManager.stop();
+    }
+
+    @Override
+    public void onGameOver() {
+        runOnUiThread(activateRestartButton);
+    }
+
+    public void onRestartButtonClick(View view) {
+        sceneManager.scene.restart();
+        restart.setVisibility(View.GONE);
+        pause.setVisibility(View.VISIBLE);
     }
 }

@@ -20,8 +20,8 @@ public class mBarrierSprite extends mSimpleSprite {
     private static float[] rowDX = new float[5];
     private static float[] rowDY = new float[5];
 
-    public mBarrierSprite(Resources res) {
-        super(rowX[row], rowY[row], rowDX[row] * SPEED, rowDY[row] * SPEED, whithBarrier(res));
+    public mBarrierSprite(Resources res, float speed_) {
+        super(rowX[row], rowY[row], rowDX[row] * speed_, rowDY[row] * speed_,  whithBarrier(res));
         this.type = TYPE_BARRIERSPRITE;
     }
 

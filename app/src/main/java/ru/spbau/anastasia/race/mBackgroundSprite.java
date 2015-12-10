@@ -12,15 +12,14 @@ import java.util.Random;
 public class mBackgroundSprite extends mSimpleSprite {
     private static Bitmap[] backgrundSrite  = new Bitmap[7];;
     public static final Random RND = new Random();
-    public static final float SPEED = 1;
     private static int row;
     private static float[] rowX = new float[2];
     private static float[] rowY = new float[2];
     private static float[] rowDX = new float[2];
     private static float[] rowDY = new float[2];
 
-    public mBackgroundSprite(Resources res) {
-        super(rowX[row], rowY[row], rowDX[row] * SPEED, rowDY[row] * SPEED, whithBarrier(res));
+    public mBackgroundSprite(Resources res, float speed_) {
+        super(rowX[row], rowY[row], rowDX[row] * speed_, rowDY[row] * speed_, whithBarrier(res));
         this.type = TYPE_BACKGROUNDSPRITE;
     }
 

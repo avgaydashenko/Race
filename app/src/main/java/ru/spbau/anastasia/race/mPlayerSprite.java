@@ -13,6 +13,15 @@ import java.util.ArrayList;
 public class mPlayerSprite extends mSimpleSprite {
 
     public static final String TAG = "mPlayerSprite";
+    public static final int DAMAGED_TIME = 20;
+    public static final int JUMP_TIME = 20;
+    public static final int DEAD_TIME = 40;
+
+    private int timerDamaged = 0;
+    private int timerJump = 0;
+    private int timerLastDead = 0;
+    public boolean isJumping = false;
+    public boolean isDamaged = false;
 
     public static final float DX = 0;
     public static final float DY = 0;
@@ -21,61 +30,111 @@ public class mPlayerSprite extends mSimpleSprite {
     private int live;
 
     private Bitmap[] bmps;
+    private Bitmap damagedBmp;
+    private Bitmap jumpBmp;
 
-    public mPlayerSprite(float x, float y, Resources res, int id1, int id2) {
+    public mPlayerSprite(float x, float y, Resources res, int id1, int id2, int id3, int id4) {
         super(x, y, DX, DY, res, id1);
         this.type = TYPE_PLAYERSPRITE;
         live = 3;
         bmps = new Bitmap[2];
         bmps[0] = bmp;
         bmps[1] = BitmapFactory.decodeResource(res, id2);
+        jumpBmp = BitmapFactory.decodeResource(res, id3);
+        damagedBmp = BitmapFactory.decodeResource(res, id4);
     }
 
-    public mBasic updateExist(ArrayList<mBasic> data){
-        for (mBasic a : data) {
+    public mBasic updateExist(mLayer[] l){
+        if (timerDamaged == DAMAGED_TIME){
+            for (mLayer line : l) {
+                line.isDamaged = false;
+            }
+            isDamaged = false;
+            if (live == 0){
+                died(l);
+            }
+        }
+        if (isJumping){
+            return null;
+        }
+        for (mBasic a : l[0].data) {
             if (a != null && this.isSelected(a)){
                 live--;
+                isDamaged = true;
+                timerDamaged = 0;
+                for (mLayer line : l) {
+                    line.isDamaged = true;
+                }
                 return a;
-
-            }
-            if (notInFild()){
-                live--;
-            }
-            if (live == 0){
-                exist = false;
             }
         }
         return null;
-    }
-
-    public boolean notInFild(){
-        if ((x < 80 * mSettings.ScaleFactorX) || (x > 60 * mSettings.ScaleFactorX)
-                || (y < 28 / 36 * x - 190) || (y > - 28 / 36 * x + 190)){
-            //return true;
-        }
-        return false;
     }
 
     public int getLive (){
         return live;
     }
 
+    void updateStatus() {
+        if (timerJump <= JUMP_TIME){
+            timerJump++;
+        } else {
+            isJumping = false;
+        }
+        if (timerLastDead <= DEAD_TIME){
+            timerLastDead++;
+        }
+        if (timerDamaged <= DAMAGED_TIME){
+            timerDamaged++;
+        } else {
+            isDamaged = false;
+        }
+    }
+
+    public void startJump(){
+        if (timerLastDead < DEAD_TIME){
+            return;
+        }
+        timerLastDead = 0;
+        timerJump = 0;
+        isJumping = true;
+    }
+
     void update(float dx, float dy) {
-        float sx = x, sy = y;
-        truAddDX(dx);
-        truAddDY(dy);
-        Log.d(TAG,
-                "x changes from " + Float.toString(sx) + " to " + Float.toString(x) + ", " +
-                "y changes from " + Float.toString(sy) + " to " + Float.toString(y)
-        );
-        step = (step + 1) % 2;
-        bmp = bmps[step];
+        if (isJumping) {
+            bmp = jumpBmp;
+        } else if (isDamaged) {
+            bmp = damagedBmp;
+        } else {
+            truAddDX(dx);
+            truAddDY(dy);
+            Log.d(TAG,
+                "x changes from " + Float.toString(dx) + " to " + Float.toString(x) + ", " +
+                        "y changes from " + Float.toString(dy) + " to " + Float.toString(y)
+            );
+            step = (step + 1) % 2;
+            bmp = bmps[step];
+        }
+        src.set(0, 0, bmp.getWidth(), bmp.getHeight());
+        updateStatus();
     }
 
     public void restart(){
         live = 3;
+        isDamaged = false;
+        isJumping = false;
+        timerDamaged = 0;
+        timerJump = 0;
+        exist = true;
     }
 
+    private void died(mLayer[] l){
+        for(mLayer line : l) {
+            line.clear();
+            line.isDamaged = true;
+        }
+        exist = false;
+    }
     private void truAddDX(float dx){
       //  if ((x + dx < 80 * mSettings.ScaleFactorX) && (x + dx > mSettings.CurrentXRes - 100))
             x += dx;
