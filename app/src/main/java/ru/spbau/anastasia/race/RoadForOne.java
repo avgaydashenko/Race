@@ -35,9 +35,8 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        type = getIntent().getExtras().getInt("winter");
-
         super.onCreate(savedInstanceState);
+        type = getIntent().getExtras().getInt("winter");
         Log.d(TAG, "onCreate");
 
         int player_id = getIntent().getExtras().getInt("player");

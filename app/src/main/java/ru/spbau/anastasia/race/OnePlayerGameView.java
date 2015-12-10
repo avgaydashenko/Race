@@ -51,11 +51,13 @@ public class OnePlayerGameView extends View {
 
     public void initFon(int type){
         if (type == GameMenu.IS_CHECKED){
-            fon = BitmapFactory.decodeResource(getResources(), R.drawable.game_road);
+            fon = BitmapFactory.decodeResource(getResources(), R.drawable.winer_road);
             restart = BitmapFactory.decodeResource(getResources(), R.drawable.restart2);
+            scene.isSnow = true;
         } else {
             fon = BitmapFactory.decodeResource(getResources(), R.drawable.game_road);
             restart = BitmapFactory.decodeResource(getResources(), R.drawable.restart);
+            scene.isSnow = false;
         }
     }
 

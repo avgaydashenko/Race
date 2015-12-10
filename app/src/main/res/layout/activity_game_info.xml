@@ -21,12 +21,12 @@
         android:scaleType="fitXY"
         android:src="@drawable/dark_pic_3" />
 
-    <TextView
+    <ru.spbau.anastasia.race.WinterTextView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/game_info"
-        android:id="@+id/textView"
+        android:id="@+id/winterTextView"
         android:layout_gravity="center_vertical"
         android:layout_margin="5dp"
         android:textColor="#ffffff"
@@ -47,18 +47,5 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:onClick="onClickButtonBackGameInfo" />
-
-    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
-        <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay" android:orientation="horizontal"
-            tools:ignore="UselessParent">
-
-        </LinearLayout>
-
-    </FrameLayout>
 
 </FrameLayout>

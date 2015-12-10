@@ -19,26 +19,30 @@ import android.widget.TextView;
 
 public class GameInfo extends Activity {
 
-    TextView t;
+    WinterTextView t;
     ImageView fon;
-
+    int type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_info);
 
-        t = (TextView) findViewById(R.id.textView);
+        t = (WinterTextView) findViewById(R.id.winterTextView);
         t.setMovementMethod(new ScrollingMovementMethod());
         fon = (ImageView) findViewById(R.id.imageGameInfo);
-        int type = getIntent().getExtras().getInt("winter");
+        type = getIntent().getExtras().getInt("winter");
         if (type == GameMenu.IS_CHECKED){
             fon.setImageResource(R.drawable.game_info2);
+            t.setIsWinterInfo(true);
+
         } else {
             fon.setImageResource(R.drawable.game_info);
+            t.setIsWinterInfo(false);
         }
     }
 
-    public void onClickButtonBackGameInfo(View view) {
+
+        public void onClickButtonBackGameInfo(View view) {
         finish();
     }
 

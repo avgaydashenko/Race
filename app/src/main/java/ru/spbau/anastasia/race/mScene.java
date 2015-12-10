@@ -5,6 +5,7 @@ import android.content.res.Resources;
 public class mScene {
     public float speed = 1;
 
+    public boolean isSnow = false;
     public boolean isNewRound = false;
     public static final int TIME_OF_ROUND = 30;
     public static final double DELTE_COUNT = 0.1;
@@ -18,7 +19,6 @@ public class mScene {
     public static final double DELTE_SPEED = 0.1;
     public static final double DELTE_ADDING_BARRIERS = 0.2;
 
-
     public static final int PLAYED= 1;
     public static final int STOPED = 2;
 
@@ -29,7 +29,7 @@ public class mScene {
     public int type;
     public int player_id;
 
-    public static final int LAY_COUNT = 2;
+    public static final int LAY_COUNT = 3;
     mLayer[] layers = new mLayer[LAY_COUNT];
     Resources res;
 
@@ -160,7 +160,9 @@ public class mScene {
 
     public void add() {
         addBarrier();
-        addBackground();
+        if (!isSnow){
+            addBackground();
+        }
     }
 
     public void addBarrier() {
@@ -177,22 +179,12 @@ public class mScene {
     }
 
     public void addBackground() {
-        if (layers[1].tryToAdd()) {
-            mBackgroundSprite backgroundSprite = new mBackgroundSprite(res, speed);
-            layers[1].add(backgroundSprite);
+        for (int i = 1; i < 3; i++) {
+            if (layers[i].tryToAdd()) {
+                mBackgroundSprite backgroundSprite = new mBackgroundSprite(res, speed, i == 1);
+                layers[i].add(backgroundSprite);
+            }
         }
-    }
-
-    public mPlayerSprite getPlayer() {
-        return player;
-    }
-
-    public mLayer getBarrier() {
-        return layers[0];
-    }
-
-    public mLayer getBackground() {
-        return layers[1];
     }
 
     public void updateExist() {
@@ -213,7 +205,6 @@ public class mScene {
             if (!player2.exist){
                 status = STOPED;
             }
-
         }
 
     }

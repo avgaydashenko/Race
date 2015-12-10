@@ -22,7 +22,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/dark_pic_4" />
 
-    <TextView
+    <ru.spbau.anastasia.race.WinterTextView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -39,6 +39,7 @@
         android:scrollbars = "vertical"
         android:textSize="@dimen/abc_dialog_padding_material" />
 
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,18 +50,5 @@
         android:layout_marginBottom="10dp"
         android:layout_marginRight="10dp"
         android:onClick="onClickButtonBackGameAbout" />
-
-    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
-        <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay" android:orientation="horizontal"
-            tools:ignore="UselessParent">
-
-        </LinearLayout>
-
-    </FrameLayout>
 
 </FrameLayout>

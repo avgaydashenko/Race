@@ -14,8 +14,8 @@ public class mPlayerSprite extends mSimpleSprite {
 
     public static final String TAG = "mPlayerSprite";
     public static final int DAMAGED_TIME = 20;
-    public static final int JUMP_TIME = 20;
-    public static final int DEAD_TIME = 40;
+    public static final int JUMP_TIME = 10;
+    public static final int DEAD_TIME = 12;
 
     private int timerDamaged = 0;
     private int timerJump = 0;

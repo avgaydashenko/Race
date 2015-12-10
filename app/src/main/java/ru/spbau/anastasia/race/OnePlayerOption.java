@@ -42,7 +42,7 @@ public class OnePlayerOption extends Activity {
     public void onClickButtonStartOnePlayer(View view) {
         Intent intent = new Intent(this, RoadForOne.class);
         intent.putExtra("player", player_id);
-        intent.putExtra("snow", type);
+        intent.putExtra("winter", type);
         startActivity(intent);
     }
 

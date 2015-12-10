@@ -33,7 +33,7 @@ public class TwoPlayersOption extends Activity {
     }
     public void onClickButtonStartTwoPlayers(View view) {
         Intent intent = new Intent(TwoPlayersOption.this, RoadForTwo.class);
-        intent.putExtra("snow", type);
+        intent.putExtra("winter", type);
         startActivity(intent);
     }
     public void onClickButtonBackTwoPlayerOption(View view) {

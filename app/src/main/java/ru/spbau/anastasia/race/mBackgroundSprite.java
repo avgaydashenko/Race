@@ -10,7 +10,8 @@ import java.util.Random;
  * Created by alex on 22.10.2015.
  */
 public class mBackgroundSprite extends mSimpleSprite {
-    private static Bitmap[] backgrundSrite  = new Bitmap[7];;
+    private boolean isLeft;
+    private static Bitmap[] backgrundSrite  = new Bitmap[2];;
     public static final Random RND = new Random();
     private static int row;
     private static float[] rowX = new float[2];
@@ -18,19 +19,15 @@ public class mBackgroundSprite extends mSimpleSprite {
     private static float[] rowDX = new float[2];
     private static float[] rowDY = new float[2];
 
-    public mBackgroundSprite(Resources res, float speed_) {
-        super(rowX[row], rowY[row], rowDX[row] * speed_, rowDY[row] * speed_, whithBarrier(res));
+    public mBackgroundSprite(Resources res, float speed_, boolean isLeft_){
+        super(rowX[row], rowY[row], rowDX[row] * speed_, rowDY[row] * speed_, whithBarrier(res, isLeft_));
+        isLeft = isLeft_;
         this.type = TYPE_BACKGROUNDSPRITE;
     }
 
     public static void initBarrier(Resources res){
         backgrundSrite[0] = BitmapFactory.decodeResource(res, R.drawable.background1);
         backgrundSrite[1] = BitmapFactory.decodeResource(res, R.drawable.background2);
-        backgrundSrite[2] = BitmapFactory.decodeResource(res, R.drawable.background3);
-        backgrundSrite[3] = BitmapFactory.decodeResource(res, R.drawable.background4);
-        backgrundSrite[4] = BitmapFactory.decodeResource(res, R.drawable.background5);
-        backgrundSrite[5] = BitmapFactory.decodeResource(res, R.drawable.background6);
-        backgrundSrite[6] = BitmapFactory.decodeResource(res, R.drawable.background7);
         for(int i = 0; i < 2; i++){
             rowX[i] = mSettings.ScaleFactorX * (330 + i * 140 );
             rowY[i] = 80 * mSettings.ScaleFactorY;
@@ -38,9 +35,13 @@ public class mBackgroundSprite extends mSimpleSprite {
             rowDX[i] = (-37 + i * 68) * mSettings.ScaleFactorX;
         }
     }
-    private static Bitmap whithBarrier(Resources res){
-        row = RND.nextInt(2);
-        return backgrundSrite[RND.nextInt(7)];
+    private static Bitmap whithBarrier(Resources res, boolean isLeft_){
+        if (isLeft_){
+            row = 0;
+        } else {
+            row = 1;
+        }
+        return backgrundSrite[row];
     }
 
     private void updateExist(){

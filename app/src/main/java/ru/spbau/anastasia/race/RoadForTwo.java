@@ -37,9 +37,8 @@ public class RoadForTwo extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        type = getIntent().getExtras().getInt("winter");
-
         super.onCreate(savedInstanceState);
+        type = getIntent().getExtras().getInt("winter");
         Log.d(TAG, "onCreate");
 
         setContentView(R.layout.activity_road_for_two);
