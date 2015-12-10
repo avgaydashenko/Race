@@ -7,9 +7,10 @@ public class mScene {
 
     public int numOfTheme = 0;
     public boolean isNewRound = false;
+    public boolean isSleeping = false;
     public static final int TIME_OF_ROUND = 30;
     public static final double DELTE_COUNT = 0.1;
-    public static final double PAUSE_ON_NEW_ROUND = 30;
+    public static final double PAUSE_ON_SLEEP = 30;
     public double count = 0;
     public int round = 0;
     private int lastRound = 0;
@@ -66,16 +67,21 @@ public class mScene {
 
     public void oneStep(float dx, float dy) {
         recalcNewRound();
-        if (status != STOPED && !isNewRound) {
-            add();
-            update(dx, dy);
+        if (status != STOPED) {
+            if (!isNewRound){
+                player.updateStatus(isSleeping);
+            }
+            if (!isSleeping) {
+                add();
+                update(dx, dy);
+                count += DELTE_COUNT;
+            }
             updateExist();
             recalcParametrs();
         }
     }
 
     private void recalcParametrs(){
-        count += DELTE_COUNT;
         if (status == STOPED && sceneListener != null) {
             sceneListener.onGameOver();
         }
@@ -86,10 +92,10 @@ public class mScene {
             newRound();
             count++;
         }
-        if (lastRound < PAUSE_ON_NEW_ROUND){
+        if (lastRound < PAUSE_ON_SLEEP){
             lastRound++;
         }
-        if (lastRound == PAUSE_ON_NEW_ROUND && isNewRound){
+        if (lastRound == PAUSE_ON_SLEEP && isNewRound){
             for (mLayer l : layers){
                 if (l.frequencyOfAdding > 2) {
                     l.frequencyOfAdding -= DELTE_ADDING_BARRIERS;
@@ -98,6 +104,7 @@ public class mScene {
             }
             speed += DELTE_SPEED;
             isNewRound = false;
+            isSleeping = false;
         }
     }
 
@@ -108,13 +115,21 @@ public class mScene {
         }
         lastRound = 0;
         isNewRound = true;
+        isSleeping = true;
     }
 
     public void oneStep(float dx, float dy, float dx2, float dy2) {
         recalcNewRound();
         if (status != STOPED) {
-            add();
-            update(dx, dy, dx2, dy2);
+            if (!isNewRound){
+                player.updateStatus(isSleeping);
+                player2.updateStatus(isSleeping);
+            }
+            if (!isSleeping) {
+                add();
+                update(dx, dy, dx2, dy2);
+                count += DELTE_COUNT;
+            }
             updateExist();
             recalcParametrs();
         }
@@ -190,20 +205,14 @@ public class mScene {
         for (int i = 0; i < LAY_COUNT; i++) {
             layers[i].updateExist();
         }
-        mBasic barrier = player.updateExist(layers);
+        mBasic barrier = player.updateExist(this);
         deleteBarrier(barrier);
         live.update();
-        if (!player.exist){
-            status = STOPED;
-        }
         if (this.type == PLAY_TOGETHER){
-            player2.updateExist(layers);
-            mBasic barrier2 = player.updateExist(layers);
+            player2.updateExist(this);
+            mBasic barrier2 = player.updateExist(this);
             deleteBarrier(barrier2);
             live2.update();
-            if (!player2.exist){
-                status = STOPED;
-            }
         }
 
     }
@@ -214,6 +223,7 @@ public class mScene {
             l.frequencyOfAdding = 5;
         }
         isNewRound = false;
+        isSleeping = false;
         count = 0;
         for (int i = 0; i < LAY_COUNT; i++) {
             layers[i].restart();

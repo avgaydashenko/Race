@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class OnePlayerGameView extends View {
     protected mScene scene;
-    protected Paint mainPaint;
+    protected Paint mainPaint, textPaint;
     protected Bitmap fon;
     protected Bitmap restart;
 
@@ -33,24 +33,28 @@ public class OnePlayerGameView extends View {
     public OnePlayerGameView(Context context) {
         super(context);
         init();
-        mainPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
     public OnePlayerGameView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
-        mainPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
     private void init() {
         mSettings.GenerateSettings(getWidth(), getHeight());
         fon = BitmapFactory.decodeResource(getResources(), R.drawable.game_road);
         restart = BitmapFactory.decodeResource(getResources(), R.drawable.restart);
+        mainPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        textPaint = new Paint();
+        textPaint.setTextAlign(Paint.Align.CENTER);
+        textPaint.setTextSize(120f);
+        textPaint.setStyle(Paint.Style.STROKE);
+
     }
 
     public void initFon(int numOfTheme){
         if (numOfTheme == GameMenu.IS_CHECKED){
-            fon = BitmapFactory.decodeResource(getResources(), R.drawable.winer_road);
+            fon = BitmapFactory.decodeResource(getResources(), R.drawable.winter_road);
             restart = BitmapFactory.decodeResource(getResources(), R.drawable.restart2);
         } else {
             fon = BitmapFactory.decodeResource(getResources(), R.drawable.game_road);
@@ -95,13 +99,11 @@ public class OnePlayerGameView extends View {
                 scene.player.draw(canvas, mainPaint);
                 scene.live.draw(canvas, mainPaint);
                 if (scene.isNewRound){
-                    mainPaint.setTextSize(40);
                     int x = (int) ((canvas.getWidth() / 2) - ((mainPaint.descent() + mainPaint.ascent()) / 2));
-                    canvas.drawText("New Round:  " + scene.round, x, mSettings.CurrentYRes / 2, mainPaint);
+                    canvas.drawText("New Round:  " + scene.round, x, mSettings.CurrentYRes / 2, textPaint);
                 } else {
-                    mainPaint.setTextSize(40);
                     int x = (int) ((canvas.getWidth() / 2) - ((mainPaint.descent() + mainPaint.ascent()) / 2));
-                    canvas.drawText(String.valueOf((int) scene.count), x, mSettings.CurrentXRes / 9, mainPaint);
+                    canvas.drawText(String.valueOf((int) scene.count), x, mSettings.CurrentXRes / 9, textPaint);
                 }
             } else {
                 canvas.drawBitmap(restart, 0, 0, mainPaint);

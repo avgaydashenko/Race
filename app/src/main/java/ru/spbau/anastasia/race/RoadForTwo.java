@@ -20,8 +20,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 
-public class RoadForTwo extends Activity {
-    public static final String TAG =  RoadForOne.class.getSimpleName();
+public class RoadForTwo extends Activity implements mScene.SceneListener {
 
     TwoPlayerGameView gameView;
     SceneManager sceneManager;
@@ -33,13 +32,17 @@ public class RoadForTwo extends Activity {
 
     View.OnClickListener onPauseListener, onResumeListener;
 
-
+    Runnable activateRestartButton = new Runnable() {
+        @Override
+        public void run() {
+            pause.setVisibility(View.GONE);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         numOfTheme = getIntent().getExtras().getInt("winter");
-        Log.d(TAG, "onCreate");
 
         setContentView(R.layout.activity_road_for_two);
         gameView = (TwoPlayerGameView)  findViewById(R.id.game_view);
@@ -74,6 +77,7 @@ public class RoadForTwo extends Activity {
             }
         };
 
+        scene.sceneListener = this;
         pause.setOnClickListener(onPauseListener);
         gameView.initFon(numOfTheme);
     }
@@ -92,6 +96,12 @@ public class RoadForTwo extends Activity {
         sensorManager.unregisterListener(sceneManager);
         sceneManager.stop();
     }
+
+    @Override
+    public void onGameOver() {
+        runOnUiThread(activateRestartButton);
+    }
+    public void onRestartButtonClick(View view) {}
 
     public void onClickButtonBackRoadForTwo(View view) {
         finish();

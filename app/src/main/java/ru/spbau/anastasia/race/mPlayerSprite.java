@@ -31,9 +31,13 @@ public class mPlayerSprite extends mSimpleSprite {
     private Bitmap[] bmps;
     private Bitmap damagedBmp;
     private Bitmap jumpBmp;
+    private float startX;
+    private float startY;
 
     public mPlayerSprite(float x, float y, Resources res, int id1, int id2, int id3, int id4, float height_) {
         super(x, y, DX, DY, res, id1, height_);
+        startX = x;
+        startY = y;
         this.type = TYPE_PLAYERSPRITE;
         live = 3;
         bmps = new Bitmap[2];
@@ -43,27 +47,23 @@ public class mPlayerSprite extends mSimpleSprite {
         damagedBmp = BitmapFactory.decodeResource(res, id4);
     }
 
-    public mBasic updateExist(mLayer[] l){
+    public mBasic updateExist(mScene scene){
         if (timerDamaged == DAMAGED_TIME){
-            for (mLayer line : l) {
-                line.isDamaged = false;
-            }
             isDamaged = false;
             if (live == 0){
-                died(l);
+                died(scene);
             }
+            scene.isSleeping = false;
         }
         if (isJumping){
             return null;
         }
-        for (mBasic a : l[0].data) {
+        for (mBasic a : scene.layers[0].data) {
             if (a != null && this.isSelected(a)){
                 live--;
                 isDamaged = true;
                 timerDamaged = 0;
-                for (mLayer line : l) {
-                    line.isDamaged = true;
-                }
+                scene.isSleeping = true;
                 return a;
             }
         }
@@ -74,7 +74,7 @@ public class mPlayerSprite extends mSimpleSprite {
         return live;
     }
 
-    void updateStatus() {
+    void updateStatus(boolean isSleeping) {
         if (timerJump <= JUMP_TIME){
             timerJump++;
         } else {
@@ -88,6 +88,17 @@ public class mPlayerSprite extends mSimpleSprite {
         } else {
             isDamaged = false;
         }
+
+        if (isJumping) {
+            bmp = jumpBmp;
+        } else if (isDamaged) {
+            bmp = damagedBmp;
+        } else {
+            bmp = bmps[step];
+            if (!isSleeping){
+                step = (step + 1) % 2;
+            }
+        }
     }
 
     public void startJump(){
@@ -100,25 +111,16 @@ public class mPlayerSprite extends mSimpleSprite {
     }
 
     void update(float dx, float dy) {
-        if (isJumping) {
-            bmp = jumpBmp;
-        } else if (isDamaged) {
-            bmp = damagedBmp;
-        } else {
+        if (!isJumping && !isDamaged) {
             truAddDX(dx);
             truAddDY(dy);
-            Log.d(TAG,
-                "x changes from " + Float.toString(dx) + " to " + Float.toString(x) + ", " +
-                        "y changes from " + Float.toString(dy) + " to " + Float.toString(y)
-            );
-            step = (step + 1) % 2;
-            bmp = bmps[step];
         }
         src.set(0, 0, bmp.getWidth(), bmp.getHeight());
-        updateStatus();
     }
 
     public void restart(){
+        x = startX;
+        y = startY;
         live = 3;
         isDamaged = false;
         isJumping = false;
@@ -127,11 +129,12 @@ public class mPlayerSprite extends mSimpleSprite {
         exist = true;
     }
 
-    private void died(mLayer[] l){
-        for(mLayer line : l) {
+    private void died(mScene scene){
+        for(mLayer line : scene.layers) {
             line.clear();
             line.isDamaged = true;
         }
+        scene.status = scene.STOPED;
         exist = false;
     }
     private void truAddDX(float dx){

@@ -23,7 +23,7 @@ public class GameMenu extends Activity {
     public static final int IS_CHECKED = 1;
     public static final int NOT_IS_CHECKED = 0;
     private int numOfTheme = 0;
-    public static final int NUM_OF_THEME = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +35,7 @@ public class GameMenu extends Activity {
     }
 
     public void onClickButtonOnePlayerOption(View view) {
-        Intent intent = new Intent(GameMenu.this, OnePlayerOption.class);
-        if (numOfTheme == IS_CHECKED){
-            intent.putExtra("winter", IS_CHECKED);
-        } else {
-            intent.putExtra("winter", NOT_IS_CHECKED);
-        }
-        startActivity(intent);
+        startActivity(new Intent(GameMenu.this, OnePlayerOption.class));
     }
 
     public void onClickWinter (View view){
@@ -55,32 +49,22 @@ public class GameMenu extends Activity {
     }
 
     public void onClickButtonTwoPlayersOption(View view) {
-        Intent intent = new Intent(GameMenu.this, TwoPlayersOption.class);
-        if (numOfTheme == IS_CHECKED){
-            intent.putExtra("winter", IS_CHECKED);
-        } else {
-            intent.putExtra("winter", NOT_IS_CHECKED);
-        }
-        startActivity(intent);
+        startActivity(new Intent(GameMenu.this, TwoPlayersOption.class));
     }
 
     public void onClickButtonGameInfo(View view) {
-        Intent intent = new Intent(GameMenu.this, GameInfo.class);
-        if (numOfTheme == IS_CHECKED){
-            intent.putExtra("winter", IS_CHECKED);
-        } else {
-            intent.putExtra("winter", NOT_IS_CHECKED);
-        }
-        startActivity(intent);
+        startActivity(new Intent(GameMenu.this, GameInfo.class));
     }
 
     public void onClickButtonGameAbout(View view) {
-        Intent intent = new Intent(GameMenu.this, GameAbout.class);
-        if (numOfTheme == IS_CHECKED){
-            intent.putExtra("winter", IS_CHECKED);
-        } else {
-            intent.putExtra("winter", NOT_IS_CHECKED);
-        }
-        startActivity(intent);
+        startActivity(new Intent(GameMenu.this, GameAbout.class));
     }
+
+    @Override
+    public void startActivity(Intent intent) {
+        intent.putExtra("winter", numOfTheme);
+        super.startActivity(intent);
+    }
+
+
 }

@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 public class RoadForOne extends Activity implements mScene.SceneListener {
 
-    public static final String TAG =  RoadForOne.class.getSimpleName();
     OnePlayerGameView gameView;
     SceneManager sceneManager;
     SensorManager sensorManager;
@@ -37,7 +36,6 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         numOfTheme = getIntent().getExtras().getInt("winter");
-        Log.d(TAG, "onCreate");
 
         int player_id = getIntent().getExtras().getInt("player");
         setContentView(R.layout.activity_road_for_one);
