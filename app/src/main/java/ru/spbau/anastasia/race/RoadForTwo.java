@@ -29,6 +29,7 @@ public class RoadForTwo extends Activity {
     Sensor sensor;
     ImageButton pause;
     mScene scene;
+    int type;
 
     View.OnClickListener onPauseListener, onResumeListener;
 
@@ -36,6 +37,8 @@ public class RoadForTwo extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        type = getIntent().getExtras().getInt("winter");
+
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
 
@@ -58,7 +61,7 @@ public class RoadForTwo extends Activity {
             @Override
             public void onClick(View v) {
                 scene.stop();
-                pause.setImageResource(R.drawable.back);
+                pause.setImageResource(R.drawable.play);
                 pause.setOnClickListener(onResumeListener);
             }
         };
@@ -73,6 +76,7 @@ public class RoadForTwo extends Activity {
         };
 
         pause.setOnClickListener(onPauseListener);
+        gameView.initFon(type);
     }
 
     @Override

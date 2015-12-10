@@ -13,12 +13,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 public class GameInfo extends Activity {
 
     TextView t;
+    ImageView fon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,13 @@ public class GameInfo extends Activity {
 
         t = (TextView) findViewById(R.id.textView);
         t.setMovementMethod(new ScrollingMovementMethod());
+        fon = (ImageView) findViewById(R.id.imageGameInfo);
+        int type = getIntent().getExtras().getInt("winter");
+        if (type == GameMenu.IS_CHECKED){
+            fon.setImageResource(R.drawable.game_info2);
+        } else {
+            fon.setImageResource(R.drawable.game_info);
+        }
     }
 
     public void onClickButtonBackGameInfo(View view) {

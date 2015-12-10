@@ -49,6 +49,16 @@ public class OnePlayerGameView extends View {
         restart = BitmapFactory.decodeResource(getResources(), R.drawable.restart);
     }
 
+    public void initFon(int type){
+        if (type == GameMenu.IS_CHECKED){
+            fon = BitmapFactory.decodeResource(getResources(), R.drawable.game_road);
+            restart = BitmapFactory.decodeResource(getResources(), R.drawable.restart2);
+        } else {
+            fon = BitmapFactory.decodeResource(getResources(), R.drawable.game_road);
+            restart = BitmapFactory.decodeResource(getResources(), R.drawable.restart);
+        }
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);

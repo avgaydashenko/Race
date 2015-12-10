@@ -48,7 +48,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/restart"
         android:layout_gravity="center_horizontal|top"
-        android:src="@drawable/back"
-        android:onClick="onRestartButtonClick" />
+        android:src="@drawable/start"
+        android:onClick="onRestartButtonClick"
+        android:background="@null" />
 
 </FrameLayout>

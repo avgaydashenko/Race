@@ -22,6 +22,7 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
     Sensor sensor;
     ImageButton pause, restart;
     View.OnClickListener onPauseListener, onResumeListener;
+    int type;
 
     Runnable activateRestartButton = new Runnable() {
         @Override
@@ -34,6 +35,8 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        type = getIntent().getExtras().getInt("winter");
+
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
 
@@ -60,7 +63,7 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
             @Override
             public void onClick(View v) {
                 scene.stop();
-                pause.setImageResource(R.drawable.back);
+                pause.setImageResource(R.drawable.play);
                 pause.setOnClickListener(onResumeListener);
             }
         };
@@ -78,6 +81,8 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
 
         restart.setVisibility(View.GONE);
         pause.setOnClickListener(onPauseListener);
+
+        gameView.initFon(type);
     }
 
     public void onBackButtonClickRoadForOne(View view) {

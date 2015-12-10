@@ -141,9 +141,9 @@ public class mScene {
         player = new mPlayerSprite(width/2, height - 120 * mSettings.ScaleFactorY, res,
                 (player_id == JAKE) ? R.drawable.jake1 : R.drawable.finn1,
                 (player_id == JAKE) ? R.drawable.jake2 : R.drawable.finn2,
-                R.drawable.barrier0, R.drawable.barrier1
+                (player_id == JAKE) ? R.drawable.jake3 : R.drawable.finn3,
+                (player_id == JAKE) ? R.drawable.jake4 : R.drawable.finn4);
 
-        );
         live = new mLive(res, SINGLE_PLAY);
     }
 
@@ -151,10 +151,10 @@ public class mScene {
         mBarrierSprite.initBarrier(res);
         mBackgroundSprite.initBarrier(res);
         player = new mPlayerSprite(width/2 - 60 * mSettings.ScaleFactorX, height - 120 * mSettings.ScaleFactorY, res,
-                R.drawable.jake1, R.drawable.jake2, R.drawable.barrier0, R.drawable.barrier1);
+                R.drawable.jake1, R.drawable.jake2, R.drawable.jake3, R.drawable.jake4);
         live = new mLive(res, mLive.FIRST_PLAYER);
         player2 = new mPlayerSprite(width/2 + 60 * mSettings.ScaleFactorX, height - 120 * mSettings.ScaleFactorY, res,
-                R.drawable.finn1, R.drawable.finn2, R.drawable.barrier0, R.drawable.barrier1);
+                R.drawable.finn1, R.drawable.finn2, R.drawable.finn3, R.drawable.finn4);
         live2 = new mLive(res, mLive.SECOND_PLAYER);
     }
 
