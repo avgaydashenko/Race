@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class mPlayerSprite extends mSimpleSprite {
 
-    public static final String TAG = "mPlayerSprite";
     public static final int DAMAGED_TIME = 20;
     public static final int JUMP_TIME = 10;
     public static final int DEAD_TIME = 12;
@@ -139,23 +138,11 @@ public class mPlayerSprite extends mSimpleSprite {
         x += dx;
         if ( y < 1.62 * mSettings.CurrentYRes * x / mSettings.CurrentXRes - 0.82 * mSettings.CurrentYRes)
             x -= dx;
-        Log.d(TAG, "truAddDX params " +
-                Float.toString(x) + " " +
-                Float.toString(dx) + " " +
-                Float.toString(mSettings.ScaleFactorX) + " " +
-                Integer.toString(mSettings.CurrentXRes)
-        );
     }
 
     private void truAddDY(float dy){
         if ((y + dy > mSettings.CurrentXRes / 6) && (y + dy < mSettings.CurrentYRes * 7 / 8))
             y += dy;
-        Log.d(TAG, "truAddDY params " +
-                Float.toString(y) + " " +
-                Float.toString(dy) + " " +
-                Float.toString(mSettings.ScaleFactorY) + " " +
-                Integer.toString(mSettings.CurrentYRes)
-        );
     }
 
     @Override

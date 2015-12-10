@@ -11,7 +11,6 @@ import java.util.TimerTask;
 
 public class SceneManager implements SensorEventListener {
 
-    private static final String TAG = "SceneManager";
     public static final int FPS = 10;
 
     final mScene scene;
@@ -49,14 +48,8 @@ public class SceneManager implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-
         dx = (float)(-Math.sin(Math.toRadians(event.values[1])) * 50);
         dy = (float)(+Math.sin(Math.toRadians(event.values[2])) * 50);
-
-        Log.d(TAG,
-                "dx = " + Float.toString(dx) + ", " +
-                "dy = " + Float.toString(dy)
-        );
     }
 
     @Override

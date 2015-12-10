@@ -28,7 +28,6 @@ public class OnePlayerGameView extends View {
     protected Bitmap fon;
     protected Bitmap restart;
 
-    private static final String TAG = "OnePlayerGameView";
     boolean initialized = false;
 
     public OnePlayerGameView(Context context) {
@@ -73,14 +72,12 @@ public class OnePlayerGameView extends View {
 
         scene.initScene();
         scene.start();
-        invalidate();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Log.d(TAG, "onDraw started");
         synchronized (scene) {
             if (scene == null) {
                 return;
@@ -92,21 +89,24 @@ public class OnePlayerGameView extends View {
                     if (l != null) {
                         for (mBasic tmp : l.data) {
                             tmp.draw(canvas, mainPaint);
-                            Log.d(TAG, String.valueOf(tmp.getX()));
                         }
                     }
                 }
                 scene.player.draw(canvas, mainPaint);
                 scene.live.draw(canvas, mainPaint);
                 if (scene.isNewRound){
-                    canvas.drawText("New Round:  " + scene.round, mSettings.CurrentXRes / 2, mSettings.CurrentYRes / 2, mainPaint);
+                    mainPaint.setTextSize(40);
+                    int x = (int) ((canvas.getWidth() / 2) - ((mainPaint.descent() + mainPaint.ascent()) / 2));
+                    canvas.drawText("New Round:  " + scene.round, x, mSettings.CurrentYRes / 2, mainPaint);
+                } else {
+                    mainPaint.setTextSize(40);
+                    int x = (int) ((canvas.getWidth() / 2) - ((mainPaint.descent() + mainPaint.ascent()) / 2));
+                    canvas.drawText(String.valueOf((int) scene.count), x, mSettings.CurrentXRes / 9, mainPaint);
                 }
             } else {
                 canvas.drawBitmap(restart, 0, 0, mainPaint);
             }
-            canvas.drawText(String.valueOf((int) scene.count), mSettings.CurrentXRes / 2, 50, mainPaint);
         }
-        Log.d(TAG, "onDraw finished");
         invalidate();
     }
 

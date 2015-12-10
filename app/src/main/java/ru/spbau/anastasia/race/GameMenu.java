@@ -23,6 +23,7 @@ public class GameMenu extends Activity {
     public static final int IS_CHECKED = 1;
     public static final int NOT_IS_CHECKED = 0;
     private int numOfTheme = 0;
+    public static final int NUM_OF_THEME = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

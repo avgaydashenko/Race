@@ -9,7 +9,7 @@ public class mScene {
     public boolean isNewRound = false;
     public static final int TIME_OF_ROUND = 30;
     public static final double DELTE_COUNT = 0.1;
-    public static final double PAUSE_ON_NEW_ROUND = 10;
+    public static final double PAUSE_ON_NEW_ROUND = 30;
     public double count = 0;
     public int round = 0;
     private int lastRound = 0;
