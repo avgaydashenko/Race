@@ -18,7 +18,7 @@
         android:layout_gravity="center"
         android:layout_marginRight="50dp"
         android:background="@null"
-        android:src="@drawable/choose_finn"
+        android:src="@drawable/chosen_finn"
         android:onClick="onFinnChosen" />
 
     <ImageButton

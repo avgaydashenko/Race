@@ -1,10 +1,18 @@
 package ru.spbau.anastasia.race;
 
+import ru.spbau.anastasia.race.util.SystemUiHider;
+
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.MenuItem;
+import android.support.v4.app.NavUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,11 +26,11 @@ public class GameAbout extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(android.R.layout.activity_game_about);
+        setContentView(R.layout.activity_game_about);
 
-        t = (TextView) findViewById(android.R.id.gameAbout);
+        t = (TextView) findViewById(R.id.gameAbout);
         t.setMovementMethod(new ScrollingMovementMethod());
-        fon = (ImageView) findViewById(android.R.id.imageGameAbout);
+        fon = (ImageView) findViewById(R.id.imageGameAbout);
         int type = getIntent().getExtras().getInt("winter");
         if (type == GameMenu.IS_CHECKED){
             fon.setImageResource(R.drawable.game_rules2);
