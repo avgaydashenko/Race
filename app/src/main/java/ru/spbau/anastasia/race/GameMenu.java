@@ -22,7 +22,7 @@ public class GameMenu extends Activity {
     private ImageView fon;
     public static final int IS_CHECKED = 1;
     public static final int NOT_IS_CHECKED = 0;
-    private int type = 0;
+    private int numOfTheme = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +35,7 @@ public class GameMenu extends Activity {
 
     public void onClickButtonOnePlayerOption(View view) {
         Intent intent = new Intent(GameMenu.this, OnePlayerOption.class);
-        if (type == IS_CHECKED){
+        if (numOfTheme == IS_CHECKED){
             intent.putExtra("winter", IS_CHECKED);
         } else {
             intent.putExtra("winter", NOT_IS_CHECKED);
@@ -46,16 +46,16 @@ public class GameMenu extends Activity {
     public void onClickWinter (View view){
         if (winter.isChecked()){
             fon.setImageResource(R.drawable.game_menu2);
-            type = IS_CHECKED;
+            numOfTheme = IS_CHECKED;
         } else {
             fon.setImageResource(R.drawable.game_menu);
-            type = NOT_IS_CHECKED;
+            numOfTheme = NOT_IS_CHECKED;
         }
     }
 
     public void onClickButtonTwoPlayersOption(View view) {
         Intent intent = new Intent(GameMenu.this, TwoPlayersOption.class);
-        if (type == IS_CHECKED){
+        if (numOfTheme == IS_CHECKED){
             intent.putExtra("winter", IS_CHECKED);
         } else {
             intent.putExtra("winter", NOT_IS_CHECKED);
@@ -65,7 +65,7 @@ public class GameMenu extends Activity {
 
     public void onClickButtonGameInfo(View view) {
         Intent intent = new Intent(GameMenu.this, GameInfo.class);
-        if (type == IS_CHECKED){
+        if (numOfTheme == IS_CHECKED){
             intent.putExtra("winter", IS_CHECKED);
         } else {
             intent.putExtra("winter", NOT_IS_CHECKED);
@@ -75,7 +75,7 @@ public class GameMenu extends Activity {
 
     public void onClickButtonGameAbout(View view) {
         Intent intent = new Intent(GameMenu.this, GameAbout.class);
-        if (type == IS_CHECKED){
+        if (numOfTheme == IS_CHECKED){
             intent.putExtra("winter", IS_CHECKED);
         } else {
             intent.putExtra("winter", NOT_IS_CHECKED);

@@ -11,16 +11,23 @@ import android.util.Log;
 public abstract class mSimpleSprite extends mBasic{
 
 	public static final String TAG = mSimpleSprite.class.getSimpleName();
-	public static final int SIZE_OF_BARRIER = 40;
-	public static final int SIZE_OF_DELTA_BARRIER = 5;
-	public static final int SIZE_OF_BACKGROUND = 70;
-	public static final int SIZE_OF_DELTA_BACKGROUND = 4;
+	public static final int SIZE_OF_BARRIER = 20;
+	public static final int SIZE_OF_DELTA_BARRIER = 80;
+	public static final int SIZE_OF_BACKGROUND = 8;
+	public static final int SIZE_OF_DELTA_BACKGROUND = 100;
 
-	boolean selected = false;
+	public float sizeOfBarrier;
+	public float delteOfSizeOfBarrier;
+	public float sizeOfBackgroun;
+	public float delteOfSizeOfBackgroun;
 
 	Rect src, dst;
 
-	public mSimpleSprite(float x, float y, float dx, float dy, Bitmap bmp) {
+	public mSimpleSprite(float x, float y, float dx, float dy, Bitmap bmp, float height_) {
+		sizeOfBarrier = height_ / SIZE_OF_BARRIER;
+		sizeOfBackgroun = height_ / SIZE_OF_BACKGROUND;
+		delteOfSizeOfBackgroun = height_ / SIZE_OF_DELTA_BACKGROUND;
+		delteOfSizeOfBarrier = height_ / SIZE_OF_DELTA_BARRIER;
 		this.x = x;
 		this.y = y;
 		this.dx = dx;
@@ -32,8 +39,8 @@ public abstract class mSimpleSprite extends mBasic{
 		initLog();
 	}
 
-	public mSimpleSprite(float x, float y, float dx, float dy, Resources res, int id) {
-		this(x, y, dx, dy, BitmapFactory.decodeResource(res, id));
+	public mSimpleSprite(float x, float y, float dx, float dy, Resources res, int id, float height_) {
+		this(x, y, dx, dy, BitmapFactory.decodeResource(res, id), height_);
 	}
 
 	private void initLog() {
@@ -46,54 +53,25 @@ public abstract class mSimpleSprite extends mBasic{
 
 	abstract void update();
 
-	private boolean intersect( float x1, float y1, float x2, float y2){
-		return(
-				(
-						(
-								( x>=x1 && x<=x2 )||( x + width>=x1 && x + width<=x2  )
-						) && (
-								( y>=y1 && y<=y2 )||( y + height>=y1 && y + height<=y2 )
-						)
-				)||(
-						(
-								( x1>=x && x1<=x + width )||( x2>=x && x2<=x + width  )
-						) && (
-								( y1>=y && y1<=y + height )||( y2>=y && y2<=y + height )
-						)
-				)
-		)||(
-				(
-						(
-								( x>=x1 && x<=x2 )||( x + width >= x1 && x + width<=x2  )
-						) && (
-								( y1>=y && y1<=y + height )||( y2>=y && y2<=y + height )
-						)
-				)||(
-						(
-								( x1>=x && x1<=x + width )||( x2>=x && x2<=x + width  )
-						) && (
-								( y>=y1 && y<=y2 )||( y + height>=y1 && y + height<=y2 )
-						)
-				)
-		);
+	private boolean intersect( float x1, float y1, float dx, float dy){
+		Rect a = new Rect((int) x1 - 10, (int) (y1 + dy) + 10, (int) (x1 + dx) + 10, (int) y1 - 10);
+		Rect b = new Rect((int) x - 10, (int) (y + height) + 10, (int) (x + width) + 10, (int) y - 10);
+		return a.intersect(b);
 	}
 
 	public boolean isSelected(mBasic player) {
 		return intersect(player.x, player.y, player.getWidth(), player.getHeight());
 	}
-	
-	public boolean isSelected() {
-		return selected;
-	}
+
 
 	private void recalcParametrs(){
 		switch (type) {
 			case TYPE_BACKGROUNDSPRITE:
-				height = y * mSettings.ScaleFactorY / SIZE_OF_DELTA_BACKGROUND + SIZE_OF_BACKGROUND;
-				width = height * mSettings.ScaleFactorX / 4;
+				height = y / delteOfSizeOfBackgroun + sizeOfBackgroun;
+				width = height / 4;
 				break;
 			default:
-				height = y * mSettings.ScaleFactorY / SIZE_OF_DELTA_BARRIER + SIZE_OF_BARRIER;
+				height = y / delteOfSizeOfBarrier + sizeOfBarrier;
 				width = height * mSettings.ScaleFactorX / 4;
 				break;
 		}

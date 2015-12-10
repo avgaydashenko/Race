@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class mLayer {
-
+    public int numOfTheme = 0;
     public float frequencyOfAdding = 5;
     private int lastAdding;
     protected boolean isDamaged = false;
@@ -13,9 +13,10 @@ public class mLayer {
     ArrayList<mBasic> data = new ArrayList<>();
     int level;
 
-    public  mLayer(int lev) {
+    public  mLayer(int lev, int numOfTheme_) {
         level = lev;
         lastAdding = (int) (frequencyOfAdding - 1);
+        numOfTheme = numOfTheme_;
     }
 
     public boolean tryToAdd(){
@@ -24,7 +25,6 @@ public class mLayer {
     }
 
     public synchronized void add(mBasic item) {
-
         if(!isDamaged){
             data.add(item);
         }

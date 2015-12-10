@@ -29,7 +29,7 @@ public class RoadForTwo extends Activity {
     Sensor sensor;
     ImageButton pause;
     mScene scene;
-    int type;
+    int numOfTheme;
 
     View.OnClickListener onPauseListener, onResumeListener;
 
@@ -38,13 +38,13 @@ public class RoadForTwo extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        type = getIntent().getExtras().getInt("winter");
+        numOfTheme = getIntent().getExtras().getInt("winter");
         Log.d(TAG, "onCreate");
 
         setContentView(R.layout.activity_road_for_two);
         gameView = (TwoPlayerGameView)  findViewById(R.id.game_view);
 
-        scene = new mScene(getResources(), mScene.PLAY_TOGETHER);
+        scene = new mScene(getResources(), mScene.PLAY_TOGETHER, numOfTheme);
         scene.width = gameView.getWidth();
         scene.height = gameView.getHeight();
         scene.player_id = mScene.FINN;
@@ -75,7 +75,7 @@ public class RoadForTwo extends Activity {
         };
 
         pause.setOnClickListener(onPauseListener);
-        gameView.initFon(type);
+        gameView.initFon(numOfTheme);
     }
 
     @Override

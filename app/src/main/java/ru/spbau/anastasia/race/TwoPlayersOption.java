@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TwoPlayersOption extends Activity {
-    int type;
+    int numOfTheme;
     ImageView fon;
 
     @Override
@@ -24,8 +24,8 @@ public class TwoPlayersOption extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two_players_option);
         fon = (ImageView) findViewById(R.id.imageTwoPlayersOption);
-        type = getIntent().getExtras().getInt("winter");
-        if (type == GameMenu.IS_CHECKED){
+        numOfTheme = getIntent().getExtras().getInt("winter");
+        if (numOfTheme == GameMenu.IS_CHECKED){
             fon.setImageResource(R.drawable.option_for_twojpg);
         } else {
             fon.setImageResource(R.drawable.players_option);
@@ -33,7 +33,7 @@ public class TwoPlayersOption extends Activity {
     }
     public void onClickButtonStartTwoPlayers(View view) {
         Intent intent = new Intent(TwoPlayersOption.this, RoadForTwo.class);
-        intent.putExtra("winter", type);
+        intent.putExtra("winter", numOfTheme);
         startActivity(intent);
     }
     public void onClickButtonBackTwoPlayerOption(View view) {

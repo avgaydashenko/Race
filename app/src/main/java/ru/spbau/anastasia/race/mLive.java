@@ -16,8 +16,8 @@ public class mLive extends mSimpleSprite {
     public static final int FIRST_PLAYER = 1;
     public static final int SECOND_PLAYER = 2;
 
-    public mLive(Resources res, int type_) {
-        super(0, 10, 0, 0, init(res));
+    public mLive(Resources res, int type_, float height_) {
+        super(0, 10, 0, 0, init(res), height_);
         type_of_game = type_;
         numOfLive = 3;
         recalcX();

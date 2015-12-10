@@ -33,8 +33,8 @@ public class mPlayerSprite extends mSimpleSprite {
     private Bitmap damagedBmp;
     private Bitmap jumpBmp;
 
-    public mPlayerSprite(float x, float y, Resources res, int id1, int id2, int id3, int id4) {
-        super(x, y, DX, DY, res, id1);
+    public mPlayerSprite(float x, float y, Resources res, int id1, int id2, int id3, int id4, float height_) {
+        super(x, y, DX, DY, res, id1, height_);
         this.type = TYPE_PLAYERSPRITE;
         live = 3;
         bmps = new Bitmap[2];
@@ -136,8 +136,9 @@ public class mPlayerSprite extends mSimpleSprite {
         exist = false;
     }
     private void truAddDX(float dx){
-      //  if ((x + dx < 80 * mSettings.ScaleFactorX) && (x + dx > mSettings.CurrentXRes - 100))
-            x += dx;
+        x += dx;
+        if ( y < 1.62 * mSettings.CurrentYRes * x / mSettings.CurrentXRes - 0.82 * mSettings.CurrentYRes)
+            x -= dx;
         Log.d(TAG, "truAddDX params " +
                 Float.toString(x) + " " +
                 Float.toString(dx) + " " +
@@ -147,7 +148,7 @@ public class mPlayerSprite extends mSimpleSprite {
     }
 
     private void truAddDY(float dy){
-        if ((y + dy > 80 * mSettings.ScaleFactorY) && (y + dy < mSettings.CurrentYRes - 100))
+        if ((y + dy > mSettings.CurrentXRes / 6) && (y + dy < mSettings.CurrentYRes * 7 / 8))
             y += dy;
         Log.d(TAG, "truAddDY params " +
                 Float.toString(y) + " " +

@@ -5,7 +5,7 @@ import android.content.res.Resources;
 public class mScene {
     public float speed = 1;
 
-    public boolean isSnow = false;
+    public int numOfTheme = 0;
     public boolean isNewRound = false;
     public static final int TIME_OF_ROUND = 30;
     public static final double DELTE_COUNT = 0.1;
@@ -46,13 +46,14 @@ public class mScene {
 
     public int width = 0, height = 0;
 
-    public mScene(Resources res, int type_) {
+    public mScene(Resources res, int type_, int numOfTheme_) {
         this.res = res;
         for (int i = 0; i < LAY_COUNT; i++) {
-            layers[i] = new mLayer(i);
+            layers[i] = new mLayer(i, numOfTheme);
         }
         type = type_;
         status = STOPED;
+        numOfTheme = numOfTheme_;
     }
 
     public void start() {
@@ -142,33 +143,31 @@ public class mScene {
                 (player_id == JAKE) ? R.drawable.jake1 : R.drawable.finn1,
                 (player_id == JAKE) ? R.drawable.jake2 : R.drawable.finn2,
                 (player_id == JAKE) ? R.drawable.jake3 : R.drawable.finn3,
-                (player_id == JAKE) ? R.drawable.jake4 : R.drawable.finn4);
+                (player_id == JAKE) ? R.drawable.jake4 : R.drawable.finn4, height);
 
-        live = new mLive(res, SINGLE_PLAY);
+        live = new mLive(res, SINGLE_PLAY, height);
     }
 
     public void initDoubleScene() {
         mBarrierSprite.initBarrier(res);
         mBackgroundSprite.initBarrier(res);
         player = new mPlayerSprite(width/2 - 60 * mSettings.ScaleFactorX, height - 120 * mSettings.ScaleFactorY, res,
-                R.drawable.jake1, R.drawable.jake2, R.drawable.jake3, R.drawable.jake4);
-        live = new mLive(res, mLive.FIRST_PLAYER);
+                R.drawable.jake1, R.drawable.jake2, R.drawable.jake3, R.drawable.jake4, height);
+        live = new mLive(res, mLive.FIRST_PLAYER, height);
         player2 = new mPlayerSprite(width/2 + 60 * mSettings.ScaleFactorX, height - 120 * mSettings.ScaleFactorY, res,
-                R.drawable.finn1, R.drawable.finn2, R.drawable.finn3, R.drawable.finn4);
-        live2 = new mLive(res, mLive.SECOND_PLAYER);
+                R.drawable.finn1, R.drawable.finn2, R.drawable.finn3, R.drawable.finn4, height);
+        live2 = new mLive(res, mLive.SECOND_PLAYER, height);
     }
 
     public void add() {
         addBarrier();
-        if (!isSnow){
-            addBackground();
-        }
+        addBackground();
     }
 
     public void addBarrier() {
         if (layers[0].tryToAdd())
         {
-            mBarrierSprite barrierSprite = new mBarrierSprite(res, speed);
+            mBarrierSprite barrierSprite = new mBarrierSprite(res, speed, numOfTheme, height);
             layers[0].add(barrierSprite);
         }
     }
@@ -181,7 +180,7 @@ public class mScene {
     public void addBackground() {
         for (int i = 1; i < 3; i++) {
             if (layers[i].tryToAdd()) {
-                mBackgroundSprite backgroundSprite = new mBackgroundSprite(res, speed, i == 1);
+                mBackgroundSprite backgroundSprite = new mBackgroundSprite(res, speed, i == 1, numOfTheme, height);
                 layers[i].add(backgroundSprite);
             }
         }

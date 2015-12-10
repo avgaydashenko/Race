@@ -18,7 +18,7 @@ public class OnePlayerOption extends Activity {
     ImageButton jacke;
 
     int player_id;
-    int type;
+    int numOfTheme;
     TextView t;
 
     @Override
@@ -29,8 +29,8 @@ public class OnePlayerOption extends Activity {
         t = (TextView) findViewById(R.id.choose_text);
         chooseCharacter(R.string.finn, 0);
         fon = (ImageView) findViewById(R.id.imagePlayersOption);
-        type = getIntent().getExtras().getInt("winter");
-        if (type == GameMenu.IS_CHECKED){
+        numOfTheme = getIntent().getExtras().getInt("winter");
+        if (numOfTheme == GameMenu.IS_CHECKED){
             fon.setImageResource(R.drawable.option_for_one);
         } else {
             fon.setImageResource(R.drawable.players_option);
@@ -42,7 +42,7 @@ public class OnePlayerOption extends Activity {
     public void onClickButtonStartOnePlayer(View view) {
         Intent intent = new Intent(this, RoadForOne.class);
         intent.putExtra("player", player_id);
-        intent.putExtra("winter", type);
+        intent.putExtra("winter", numOfTheme);
         startActivity(intent);
     }
 
