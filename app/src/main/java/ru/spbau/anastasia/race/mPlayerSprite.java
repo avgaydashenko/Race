@@ -75,10 +75,12 @@ public class mPlayerSprite extends mSimpleSprite {
     }
 
     void updateStatus(boolean isSleeping) {
-        if (timerJump <= JUMP_TIME){
+        if (timerJump < JUMP_TIME){
             timerJump++;
-        } else {
+        } else if (timerJump == JUMP_TIME) {
             isJumping = false;
+            y += mSettings.CurrentYRes / 30;
+            timerJump++;
         }
         if (timerLastDead <= DEAD_TIME){
             timerLastDead++;
@@ -108,6 +110,7 @@ public class mPlayerSprite extends mSimpleSprite {
         timerLastDead = 0;
         timerJump = 0;
         isJumping = true;
+        y -= mSettings.CurrentYRes / 30;
     }
 
     void update(float dx, float dy) {

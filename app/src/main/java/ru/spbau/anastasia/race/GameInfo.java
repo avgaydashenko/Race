@@ -36,7 +36,7 @@ public class GameInfo extends Activity {
             t.setIsWinterInfo(true);
 
         } else {
-            fon.setImageResource(R.drawable.game_info);
+            fon.setImageResource(R.drawable.dark_pic_4);
             t.setIsWinterInfo(false);
         }
     }

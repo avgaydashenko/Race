@@ -36,7 +36,7 @@ public class GameAbout extends Activity {
             fon.setImageResource(R.drawable.game_rules2);
             t.setText(R.string.game_about2);
         } else {
-            fon.setImageResource(R.drawable.game_about);
+            fon.setImageResource(R.drawable.dark_pic_3);
             t.setText(R.string.game_about);
         }
     }
