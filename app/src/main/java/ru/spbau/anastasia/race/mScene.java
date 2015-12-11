@@ -135,9 +135,10 @@ public class mScene {
             }
             updateExist();
             recalcParametrs();
+            if (file != null) return fileNew;
+            return new FileForSent(player.dx, player.dy, player.isJumping);
         }
-        if (file != null) return fileNew;
-        return new FileForSent(player.dx, player.dy, player.isJumping);
+        return null;
     }
 
     public FileForSent oneStepClient(float dx, float dy, FileForSent file) {
@@ -157,8 +158,9 @@ public class mScene {
             }
             updateExist();
             recalcParametrs();
+            return new FileForSent(player2.dx, player2.dy, player2.isJumping);
         }
-        return new FileForSent(player2.dx, player2.dy, player2.isJumping);
+        return null;
     }
 
     public FileForSent addServer(){

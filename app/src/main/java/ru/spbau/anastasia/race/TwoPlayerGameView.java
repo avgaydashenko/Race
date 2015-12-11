@@ -34,13 +34,12 @@ public class TwoPlayerGameView extends OnePlayerGameView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Log.d(TAG, "onDraw started");
-
         synchronized (scene){
-            scene.player2.draw(canvas, mainPaint);
-            scene.live2.draw(canvas, mainPaint);
+            if (scene.status == mScene.PLAYED){
+                scene.player2.draw(canvas, mainPaint);
+                scene.live2.draw(canvas, mainPaint);
+            }
         }
-        Log.d(TAG, "onDraw finished");
         invalidate();
     }
 }
