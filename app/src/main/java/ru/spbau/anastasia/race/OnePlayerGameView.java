@@ -90,6 +90,7 @@ public class OnePlayerGameView extends View {
                 canvas.drawBitmap(fon, 0, 0, mainPaint);
 
                 for (mLayer l : scene.layers) {
+
                     if (l != null) {
                         for (mBasic tmp : l.data) {
                             tmp.draw(canvas, mainPaint);
