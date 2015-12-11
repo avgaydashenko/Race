@@ -30,6 +30,13 @@ public class mLayer {
         }
     }
 
+    public FileForSent addServer(mBasic item, float dx, float dy, boolean isJumping){
+        if(!isDamaged) {
+            data.add(item);
+        }
+        return  item.toFileForServer(dx, dy, isJumping);
+    }
+
     public int getSize() {
         return data.size();
     }

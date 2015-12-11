@@ -4,6 +4,7 @@ import android.content.res.Resources;
 
 public class mScene {
     public float speed = 1;
+    public boolean isServer;
 
     public int numOfTheme = 0;
     public boolean isNewRound = false;
@@ -118,7 +119,28 @@ public class mScene {
         isSleeping = true;
     }
 
-    public void oneStep(float dx, float dy, float dx2, float dy2) {
+    public FileForSent oneStepServer(float dx, float dy, FileForSent file) {
+        recalcNewRound();
+        FileForSent fileNew = null;
+        if (status != STOPED) {
+            if (!isNewRound){
+                player.updateStatus(isSleeping);
+                player2.updateStatus(isSleeping);
+            }
+            if (!isSleeping) {
+                player2.isJumping = file.getIsJumping();
+                fileNew = addServer();
+                update(dx, dy, file.getDX(), file.getDY());
+                count += DELTE_COUNT;
+            }
+            updateExist();
+            recalcParametrs();
+        }
+        if (file != null) return fileNew;
+        return new FileForSent(player.dx, player.dy, player.isJumping);
+    }
+
+    public FileForSent oneStepClient(float dx, float dy, FileForSent file) {
         recalcNewRound();
         if (status != STOPED) {
             if (!isNewRound){
@@ -126,14 +148,45 @@ public class mScene {
                 player2.updateStatus(isSleeping);
             }
             if (!isSleeping) {
-                add();
-                update(dx, dy, dx2, dy2);
+                player2.isJumping = file.getIsJumping();
+                if (file != null){
+                    addClient(file);
+                    update(dx, dy, file.getDX(), file.getDY());
+                }
                 count += DELTE_COUNT;
             }
             updateExist();
             recalcParametrs();
         }
+        return new FileForSent(player2.dx, player2.dy, player2.isJumping);
     }
+
+    public FileForSent addServer(){
+        addBackground();
+        return addBarrierServer();
+    }
+
+    public void addClient(FileForSent file){
+        addBackground();
+        addBarrierClient(file);
+    }
+
+    public FileForSent addBarrierServer(){
+        if (layers[0].tryToAdd())
+        {
+            mBarrierSprite barrierSprite = new mBarrierSprite(res, speed, numOfTheme, height);
+            return layers[0].addServer(barrierSprite, player.dx, player.dy, player.isJumping);
+        }
+        return null;
+    }
+
+    public void addBarrierClient(FileForSent file){
+        if (layers[0].tryToAdd())        {
+            mBarrierSprite barrierSprite = new mBarrierSprite(file, res, speed, numOfTheme, height);
+            layers[0].add(barrierSprite);
+        }
+    }
+
 
     public void setWH(int w, int h) {
         width = w;
@@ -209,8 +262,7 @@ public class mScene {
         deleteBarrier(barrier);
         live.update();
         if (this.type == PLAY_TOGETHER){
-            player2.updateExist(this);
-            mBasic barrier2 = player.updateExist(this);
+            mBasic barrier2 = player2.updateExist(this);
             deleteBarrier(barrier2);
             live2.update();
         }

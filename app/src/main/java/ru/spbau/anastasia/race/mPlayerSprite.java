@@ -55,7 +55,7 @@ public class mPlayerSprite extends mSimpleSprite {
             }
             scene.isSleeping = false;
         }
-        if (isJumping){
+        if (isJumping || isDamaged){
             return null;
         }
         for (mBasic a : scene.layers[0].data) {
@@ -77,7 +77,7 @@ public class mPlayerSprite extends mSimpleSprite {
     void updateStatus(boolean isSleeping) {
         if (timerJump < JUMP_TIME){
             timerJump++;
-        } else if (timerJump == JUMP_TIME) {
+        } else if (timerJump == JUMP_TIME && isJumping) {
             isJumping = false;
             y += mSettings.CurrentYRes / 30;
             timerJump++;

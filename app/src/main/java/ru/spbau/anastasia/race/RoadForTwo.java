@@ -29,6 +29,7 @@ public class RoadForTwo extends Activity implements mScene.SceneListener {
     ImageButton pause;
     mScene scene;
     int numOfTheme;
+    private boolean isServer;
 
     View.OnClickListener onPauseListener, onResumeListener;
 
@@ -43,6 +44,7 @@ public class RoadForTwo extends Activity implements mScene.SceneListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         numOfTheme = getIntent().getExtras().getInt("winter");
+        isServer = getIntent().getExtras().getBoolean("isServer");
 
         setContentView(R.layout.activity_road_for_two);
         gameView = (TwoPlayerGameView)  findViewById(R.id.game_view);
@@ -51,6 +53,7 @@ public class RoadForTwo extends Activity implements mScene.SceneListener {
         scene.width = gameView.getWidth();
         scene.height = gameView.getHeight();
         scene.player_id = mScene.FINN;
+        scene.isServer = isServer;
         sceneManager = new SceneManager(scene);
         gameView.scene = scene;
 

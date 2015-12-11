@@ -23,7 +23,11 @@ public class SceneManager implements SensorEventListener {
                 if(scene.type == mScene.SINGLE_PLAY) {
                     scene.oneStep(dx, dy);
                 } else {
-                    scene.oneStep(dx, dy, 0, 0);
+                    if (scene.isServer) {
+                        scene.oneStepServer(dx, dy, FileForSent.genClient());
+                    } else {
+                        scene.oneStepClient(dx, dy, FileForSent.genClient());
+                    }
                 }
             }
         }

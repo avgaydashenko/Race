@@ -12,12 +12,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TwoPlayersOption extends Activity {
     int numOfTheme;
     ImageView fon;
+    private CheckBox scaner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +32,13 @@ public class TwoPlayersOption extends Activity {
         } else {
             fon.setImageResource(R.drawable.players_option);
         }
+        scaner = (CheckBox) findViewById(R.id.checkBoxServer);
     }
+
+
     public void onClickButtonStartTwoPlayers(View view) {
         Intent intent = new Intent(TwoPlayersOption.this, RoadForTwo.class);
+        intent.putExtra("isServer", scaner.isChecked());
         intent.putExtra("winter", numOfTheme);
         startActivity(intent);
     }
