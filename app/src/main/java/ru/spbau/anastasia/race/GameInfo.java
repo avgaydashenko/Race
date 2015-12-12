@@ -30,7 +30,7 @@ public class GameInfo extends Activity {
         t = (WinterTextView) findViewById(R.id.winterTextView);
         t.setMovementMethod(new ScrollingMovementMethod());
         fon = (ImageView) findViewById(R.id.imageGameInfo);
-        numOfTheme = getIntent().getExtras().getInt("winter");
+        numOfTheme = getIntent().getExtras().getInt("theme");
         if (numOfTheme == GameMenu.IS_CHECKED){
             fon.setImageResource(R.drawable.game_info2);
             t.setIsWinterInfo(true);
@@ -42,7 +42,7 @@ public class GameInfo extends Activity {
     }
 
 
-        public void onClickButtonBackGameInfo(View view) {
+    public void onClickButtonBackGameInfo(View view) {
         finish();
     }
 

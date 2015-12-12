@@ -67,7 +67,8 @@
         android:src="@drawable/sound"
         android:layout_marginTop="10dp"
         android:background="@null"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:onClick="onClickSound" />
 
     <CheckBox
         android:layout_width="wrap_content"

@@ -5,6 +5,7 @@ import android.content.res.Resources;
 public class mScene {
     public float speed = 1;
     public boolean isServer;
+    public Sound sound;
 
     public int numOfTheme = 0;
     public boolean isNewRound = false;
@@ -48,13 +49,14 @@ public class mScene {
 
     public int width = 0, height = 0;
 
-    public mScene(Resources res, int type_, int numOfTheme_) {
+    public mScene(Resources res, int type_, int numOfTheme_, Sound sound_) {
         this.res = res;
         for (int i = 0; i < LAY_COUNT; i++) {
             layers[i] = new mLayer(i, numOfTheme);
         }
         type = type_;
         status = STOPED;
+        sound = sound_;
         numOfTheme = numOfTheme_;
     }
 

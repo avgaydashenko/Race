@@ -1,6 +1,8 @@
 package ru.spbau.anastasia.race;
 
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by alex on 11.12.2015.

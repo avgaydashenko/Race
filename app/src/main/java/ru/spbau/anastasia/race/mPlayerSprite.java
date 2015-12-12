@@ -52,6 +52,7 @@ public class mPlayerSprite extends mSimpleSprite {
             isDamaged = false;
             if (live == 0){
                 died(scene);
+                scene.sound.play(Sound.DIE);
             }
             scene.isSleeping = false;
         }
@@ -63,6 +64,7 @@ public class mPlayerSprite extends mSimpleSprite {
                 live--;
                 isDamaged = true;
                 timerDamaged = 0;
+                scene.sound.play(Sound.HERT);
                 scene.isSleeping = true;
                 return a;
             }
@@ -103,13 +105,16 @@ public class mPlayerSprite extends mSimpleSprite {
         }
     }
 
-    public void startJump(){
+    public void startJump(Sound sound, boolean isStop){
         if (timerLastDead < DEAD_TIME){
             return;
         }
         timerLastDead = 0;
         timerJump = 0;
         isJumping = true;
+        if (!isStop){
+            sound.play(Sound.JUMP);
+        }
         y -= mSettings.CurrentYRes / 30;
     }
 

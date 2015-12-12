@@ -36,10 +36,10 @@ public class SceneManager implements SensorEventListener {
     SceneTask task;
     Timer timer;
 
-    public SceneManager(mScene scene) {
-        this.scene = scene;
-        this.task = new SceneTask();
-        this.timer = new Timer();
+    public SceneManager(mScene scene_) {
+        scene = scene_;
+        task = new SceneTask();
+        timer = new Timer();
     }
 
     public void start() {

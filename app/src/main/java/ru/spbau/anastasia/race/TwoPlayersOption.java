@@ -19,6 +19,7 @@ import android.widget.TextView;
 public class TwoPlayersOption extends Activity {
     int numOfTheme;
     ImageView fon;
+    private  boolean isSound;
     private CheckBox scaner;
 
     @Override
@@ -26,7 +27,8 @@ public class TwoPlayersOption extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two_players_option);
         fon = (ImageView) findViewById(R.id.imageTwoPlayersOption);
-        numOfTheme = getIntent().getExtras().getInt("winter");
+        numOfTheme = getIntent().getExtras().getInt("theme");
+        isSound = getIntent().getExtras().getBoolean("sound");
         if (numOfTheme == GameMenu.IS_CHECKED){
             fon.setImageResource(R.drawable.option_for_twojpg);
         } else {
@@ -39,7 +41,8 @@ public class TwoPlayersOption extends Activity {
     public void onClickButtonStartTwoPlayers(View view) {
         Intent intent = new Intent(TwoPlayersOption.this, RoadForTwo.class);
         intent.putExtra("isServer", scaner.isChecked());
-        intent.putExtra("winter", numOfTheme);
+        intent.putExtra("theme", numOfTheme);
+        intent.putExtra("sound", isSound);
         startActivity(intent);
     }
     public void onClickButtonBackTwoPlayerOption(View view) {

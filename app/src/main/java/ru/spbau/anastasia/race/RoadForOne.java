@@ -22,7 +22,8 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
     ImageButton pause, restart;
     View.OnClickListener onPauseListener, onResumeListener;
     int numOfTheme;
-
+    private Sound sound;
+    private boolean isSound;
     Runnable activateRestartButton = new Runnable() {
         @Override
         public void run() {
@@ -35,14 +36,18 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        numOfTheme = getIntent().getExtras().getInt("winter");
+        numOfTheme = getIntent().getExtras().getInt("theme");
 
         int player_id = getIntent().getExtras().getInt("player");
         setContentView(R.layout.activity_road_for_one);
 
         gameView = (OnePlayerGameView)  findViewById(R.id.game_view);
+        isSound = getIntent().getExtras().getBoolean("sound");
 
-        final mScene scene = new mScene(getResources(), mScene.SINGLE_PLAY, numOfTheme);
+        sound = new Sound(getAssets(), numOfTheme, 0);
+        sound.isStoped = !isSound;
+
+        final mScene scene = new mScene(getResources(), mScene.SINGLE_PLAY, numOfTheme, sound);
         scene.width = gameView.getWidth();
         scene.height = gameView.getHeight();
         scene.player_id = player_id;

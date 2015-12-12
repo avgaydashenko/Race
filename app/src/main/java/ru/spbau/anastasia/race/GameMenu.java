@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Switch;
@@ -19,11 +20,14 @@ import android.widget.Switch;
 public class GameMenu extends Activity {
 
     private CheckBox winter;
+    private ImageButton soundButton;
     private ImageView fon;
     public static final int IS_CHECKED = 1;
     public static final int NOT_IS_CHECKED = 0;
+    public static final int MENU_ACTIVITY = 100;
     private int numOfTheme = 0;
-
+    private boolean isSound;
+    private Sound sound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +35,11 @@ public class GameMenu extends Activity {
         setContentView(R.layout.activity_game_menu);
         winter = (CheckBox) findViewById(R.id.winter);
         fon = (ImageView) findViewById(R.id.imageGameMenu);
-
+        soundButton = (ImageButton) findViewById(R.id.buttonSound);
+        isSound = true;
+        numOfTheme = NOT_IS_CHECKED;
+        sound = new Sound (getAssets(),numOfTheme, MENU_ACTIVITY);
+        sound.isStoped = !isSound;
     }
 
     public void onClickButtonOnePlayerOption(View view) {
@@ -45,6 +53,19 @@ public class GameMenu extends Activity {
         } else {
             fon.setImageResource(R.drawable.game_menu);
             numOfTheme = NOT_IS_CHECKED;
+        }
+        sound.isStoped = isSound;
+        sound.theme = numOfTheme;
+    }
+
+    public void onClickSound (View view){
+
+        if (isSound){
+            soundButton.setImageResource(R.drawable.no_sound);
+            isSound = !isSound;
+        } else {
+            soundButton.setImageResource(R.drawable.sound);
+            isSound = !isSound;
         }
     }
 
@@ -63,6 +84,7 @@ public class GameMenu extends Activity {
     @Override
     public void startActivity(Intent intent) {
         intent.putExtra("winter", numOfTheme);
+        intent.putExtra("sound", isSound);
         super.startActivity(intent);
     }
 

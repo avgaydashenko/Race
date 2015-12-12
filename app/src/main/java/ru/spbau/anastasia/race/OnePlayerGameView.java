@@ -120,7 +120,7 @@ public class OnePlayerGameView extends View {
 
         synchronized (scene) {
             if (!scene.player.isDamaged){
-                scene.player.startJump();
+                scene.player.startJump(scene.sound, scene.status == mScene.STOPED);
             }
         }
         return true;
