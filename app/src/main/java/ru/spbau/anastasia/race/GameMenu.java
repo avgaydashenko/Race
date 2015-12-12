@@ -54,7 +54,6 @@ public class GameMenu extends Activity {
             fon.setImageResource(R.drawable.game_menu);
             numOfTheme = NOT_IS_CHECKED;
         }
-        sound.isStoped = isSound;
         sound.theme = numOfTheme;
     }
 
@@ -67,6 +66,7 @@ public class GameMenu extends Activity {
             soundButton.setImageResource(R.drawable.sound);
             isSound = !isSound;
         }
+        sound.isStoped = !isSound;
     }
 
     public void onClickButtonTwoPlayersOption(View view) {
