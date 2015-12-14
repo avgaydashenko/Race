@@ -83,7 +83,7 @@ public class GameMenu extends Activity {
 
     @Override
     public void startActivity(Intent intent) {
-        intent.putExtra("winter", numOfTheme);
+        intent.putExtra("theme", numOfTheme);
         intent.putExtra("sound", isSound);
         super.startActivity(intent);
     }

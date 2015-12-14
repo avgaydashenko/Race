@@ -32,7 +32,7 @@ public class GameAbout extends Activity {
         t.setMovementMethod(new ScrollingMovementMethod());
         fon = (ImageView) findViewById(R.id.imageGameAbout);
         int numOfTheme = getIntent().getExtras().getInt("theme");
-        if (numOfTheme == GameMenu.IS_CHECKED){
+        if (numOfTheme == GameMenu.IS_CHECKED) {
             fon.setImageResource(R.drawable.game_rules2);
             t.setText(R.string.game_about2);
         } else {
