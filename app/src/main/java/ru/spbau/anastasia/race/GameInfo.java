@@ -9,10 +9,8 @@ import android.widget.TextView;
 
 public class GameInfo extends Activity {
     
-    TextView rulesTextView;
-    ImageView backgroundImage;
-    
-    int numOfTheme;
+    private TextView rulesTextView;
+    private ImageView backgroundImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +21,7 @@ public class GameInfo extends Activity {
         rulesTextView.setMovementMethod(new ScrollingMovementMethod());
 
         backgroundImage = (ImageView) findViewById(R.id.imageGameInfo);
-        numOfTheme = getIntent().getExtras().getInt("theme");
+        int numOfTheme = getIntent().getExtras().getInt("theme");
 
         if (numOfTheme == GameMenu.IS_CHECKED) {
             backgroundImage.setImageResource(R.drawable.game_info2);
