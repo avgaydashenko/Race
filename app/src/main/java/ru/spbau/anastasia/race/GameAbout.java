@@ -33,7 +33,7 @@ public class GameAbout extends Activity {
         fon = (ImageView) findViewById(R.id.imageGameAbout);
         int numOfTheme = getIntent().getExtras().getInt("theme");
         if (numOfTheme == GameMenu.IS_CHECKED) {
-            fon.setImageResource(R.drawable.game_rules2);
+            fon.setImageResource(R.drawable.game_info2);
             t.setText(R.string.game_about2);
         } else {
             fon.setImageResource(R.drawable.dark_pic_3);

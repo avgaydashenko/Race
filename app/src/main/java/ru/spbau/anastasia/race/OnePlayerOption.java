@@ -20,14 +20,12 @@ public class OnePlayerOption extends Activity {
 
     int player_id;
     int numOfTheme;
-    TextView t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_one_player_option);
-        t = (TextView) findViewById(R.id.choose_text);
         chooseCharacter(R.string.finn, 0);
         fon = (ImageView) findViewById(R.id.imagePlayersOption);
         numOfTheme = getIntent().getExtras().getInt("theme");
@@ -54,7 +52,6 @@ public class OnePlayerOption extends Activity {
     }
 
     protected void chooseCharacter(int string_id, int character) {
-        t.setText(getResources().getString(R.string.choose_information) + getResources().getString(string_id));
         this.player_id = character;
     }
 
