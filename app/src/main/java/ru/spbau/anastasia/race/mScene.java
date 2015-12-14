@@ -252,7 +252,7 @@ public class mScene {
     public void addBackground() {
         for (int i = 1; i < 3; i++) {
             if (layers[i].tryToAdd()) {
-                mBackgroundSprite backgroundSprite = new mBackgroundSprite(res, speed, i == 1, numOfTheme, height);
+                mBackgroundSprite backgroundSprite = new mBackgroundSprite(speed, i == 1, numOfTheme, height);
                 layers[i].add(backgroundSprite);
             }
         }

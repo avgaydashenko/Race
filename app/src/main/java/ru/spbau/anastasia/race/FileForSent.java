@@ -1,15 +1,11 @@
 package ru.spbau.anastasia.race;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
-/**
- * Created by alex on 11.12.2015.
- */
 public class FileForSent {
 
     public static final Random RND = new Random();
+
     private static float dx, dy;
     private static int row = 0, numOfImage = 0;
     private boolean isJumping;
