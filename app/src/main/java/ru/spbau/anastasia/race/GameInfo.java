@@ -18,14 +18,15 @@ import android.widget.TextView;
 
 
 public class GameInfo extends Activity {
-
+    TextView t;
     ImageView fon;
     int numOfTheme;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_info);
-
+        t = (TextView) findViewById(R.id.textView);
+        t.setMovementMethod(new ScrollingMovementMethod());
         fon = (ImageView) findViewById(R.id.imageGameInfo);
         numOfTheme = getIntent().getExtras().getInt("theme");
         if (numOfTheme == GameMenu.IS_CHECKED){

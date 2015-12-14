@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 
 public class GameAbout extends Activity {
-
+    TextView t;
     ImageView fon;
 
     @Override
@@ -27,6 +27,8 @@ public class GameAbout extends Activity {
 
         setContentView(R.layout.activity_game_about);
 
+        t = (TextView) findViewById(R.id.textView);
+        t.setMovementMethod(new ScrollingMovementMethod());
         fon = (ImageView) findViewById(R.id.imageGameAbout);
         int numOfTheme = getIntent().getExtras().getInt("theme");
         if (numOfTheme == GameMenu.IS_CHECKED) {

@@ -22,11 +22,10 @@
         android:src="@drawable/dark_pic_3" />
 
     <TextView
-        android:layout_width="525dp"
+        android:layout_width="395dp"
         android:layout_height="fill_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/game_info"
-        android:id="@+id/winterTextView"
         android:layout_gravity="center_vertical"
         android:layout_margin="5dp"
         android:textStyle="bold"
@@ -35,7 +34,8 @@
         android:elegantTextHeight="true"
         android:nestedScrollingEnabled="true"
         android:layout_marginRight="25dp"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:id="@+id/textView" />
 
     <ImageButton
         android:layout_width="wrap_content"
