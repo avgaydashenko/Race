@@ -1,48 +1,41 @@
 package ru.spbau.anastasia.race;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class mLayer {
+
     public int numOfTheme = 0;
     public float frequencyOfAdding = 5;
+
     private int lastAdding;
+
     protected boolean isDamaged = false;
+    protected ArrayList<mBasic> data = new ArrayList<>();
+    protected int level;
 
-    ArrayList<mBasic> data = new ArrayList<>();
-    int level;
-
-    public  mLayer(int lev, int numOfTheme_) {
+    public mLayer(int lev, int numOfTheme_) {
         level = lev;
         lastAdding = (int) (frequencyOfAdding - 1);
         numOfTheme = numOfTheme_;
     }
 
-    public boolean tryToAdd(){
-        lastAdding = (int) ((lastAdding + 1) % frequencyOfAdding);
+    public boolean tryToAdd() {
+        lastAdding = (int)((lastAdding + 1) % frequencyOfAdding);
         return lastAdding == 0;
     }
 
     public synchronized void add(mBasic item) {
-        if(!isDamaged){
+        if (!isDamaged) {
             data.add(item);
         }
     }
 
-    public FileForSent addServer(mBasic item, float dx, float dy, boolean isJumping){
-        if(!isDamaged) {
+    public FileForSent addServer(mBasic item, float dx, float dy, boolean isJumping) {
+        if (!isDamaged) {
             data.add(item);
         }
-        return  item.toFileForServer(dx, dy, isJumping);
-    }
-
-    public int getSize() {
-        return data.size();
-    }
-
-    public mBasic get(int i) {
-        return data.get(i);
+        return item.toFileForServer(dx, dy, isJumping);
     }
 
     public synchronized void updateExist(){
@@ -55,15 +48,13 @@ public class mLayer {
         }
     }
 
-    public synchronized void delete(mBasic barrier){
-        if (barrier != null)
-        {
+    public synchronized void delete(mBasic barrier) {
+        if (barrier != null) {
             data.remove(barrier);
         }
     }
 
-    public void restart()
-    {
+    public void restart() {
         isDamaged = false;
     }
 
@@ -72,13 +63,13 @@ public class mLayer {
     }
 
     public synchronized void update() {
-        if(isDamaged){
+        if (isDamaged) {
             return;
         }
         for (mBasic a : data) {
-            if (a != null)
+            if (a != null) {
                 a.update();
             }
+        }
     }
-
 }

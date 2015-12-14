@@ -4,8 +4,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import java.util.Random;
-
 public class mBackgroundSprite extends mSimpleSprite {
 
     private static Bitmap[][] backgroundSprite = new Bitmap[2][2];

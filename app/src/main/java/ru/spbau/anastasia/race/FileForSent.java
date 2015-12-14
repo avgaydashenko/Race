@@ -25,13 +25,7 @@ public class FileForSent {
     }
 
     public static FileForSent genClient() {
-        FileForSent file = new FileForSent(0, 0, RND.nextInt(5), RND.nextInt(5), false);
-        return file;
-    }
-
-    public static FileForSent genServer() {
-        FileForSent file = new FileForSent(0, 0, false);
-        return file;
+        return new FileForSent(0, 0, RND.nextInt(5), RND.nextInt(5), false);
     }
 
     public float getDX(){
