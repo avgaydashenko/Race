@@ -21,7 +21,7 @@ public class Sound {
     public static final int HERT = 1;
     public static final int DIE = 2;
     public static final int JUMP = 3;
-    private int mDie, mHert, mJump, mTheme, mThemeWiner;
+    private int mDie, mHert, mJump, mTheme;
     private SoundPool mSoundPool;
     private AssetManager mAssetManager;
     private int mStreamID;
@@ -33,11 +33,7 @@ public class Sound {
         public void run() {
             if (isStoped)
                 return;
-            if (theme == GameMenu.NOT_IS_CHECKED){
-                playSound(mTheme);
-            } else {
-                playSound(mThemeWiner);
-            }
+            playSound(mTheme);
         }
     }
 
@@ -60,11 +56,14 @@ public class Sound {
         }
         isStoped = false;
         mAssetManager = asset;
-        mDie = loadSound("die.ogg");
-        mHert = loadSound("hert.ogg");
-        mJump = loadSound("jump.ogg");
-        mTheme =  loadSound("play.ogg");
-        mThemeWiner =  loadSound("winterPlay.ogg");
+        mDie = loadSound("lose.mp3");
+        mHert = loadSound("crash.mp3");
+        if (theme == GameMenu.NOT_IS_CHECKED){
+            mJump = loadSound("jump.mp3");
+        } else {
+            mJump = loadSound("jump_in_snow.mp3");
+        }
+        mTheme = loadSound("race.mp3");
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
