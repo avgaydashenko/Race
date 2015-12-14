@@ -25,6 +25,15 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/buttonStart"
+        android:layout_gravity="center_horizontal|bottom"
+        android:src="@drawable/start"
+        android:onClick="onClickButtonStartOnePlayer"
+        android:layout_marginBottom="20dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/buttonChooseFinn"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginRight="100dp"

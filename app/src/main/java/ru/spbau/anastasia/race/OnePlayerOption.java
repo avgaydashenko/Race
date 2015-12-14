@@ -26,6 +26,7 @@ public class OnePlayerOption extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_one_player_option);
+        chooseCharacter(R.string.finn, 0);
         fon = (ImageView) findViewById(R.id.imagePlayersOption);
         numOfTheme = getIntent().getExtras().getInt("theme");
         isSound = getIntent().getExtras().getBoolean("sound");
@@ -36,13 +37,9 @@ public class OnePlayerOption extends Activity {
         }
         finn = (ImageButton) findViewById(R.id.buttonChooseFinn);
         jacke = (ImageButton) findViewById(R.id.buttonChooseJacke);
-        finn.setImageResource(R.drawable.choose_finn);
-        jacke.setImageResource(R.drawable.choose_jake);
-
-
     }
 
-    public void startOnePlayer() {
+    public void onClickButtonStartOnePlayer(View view) {
         Intent intent = new Intent(this, RoadForOne.class);
         intent.putExtra("player", player_id);
         intent.putExtra("theme", numOfTheme);
@@ -62,13 +59,11 @@ public class OnePlayerOption extends Activity {
         chooseCharacter(R.string.finn, 0);
         finn.setImageResource(R.drawable.chosen_finn);
         jacke.setImageResource(R.drawable.choose_jake);
-        startOnePlayer();
     }
 
     public void onJakeChosen(View view) {
         chooseCharacter(R.string.jake, 1);
         finn.setImageResource(R.drawable.choose_finn);
         jacke.setImageResource(R.drawable.chosen_jake);
-        startOnePlayer();
     }
 }
