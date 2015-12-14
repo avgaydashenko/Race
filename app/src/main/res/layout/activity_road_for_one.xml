@@ -47,9 +47,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/restart"
-        android:layout_gravity="center_horizontal|top"
-        android:src="@drawable/start"
+        android:layout_gravity="left|bottom"
+        android:src="@drawable/play"
         android:onClick="onRestartButtonClick"
-        android:background="@null" />
+        android:background="@null"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp" />
 
 </FrameLayout>

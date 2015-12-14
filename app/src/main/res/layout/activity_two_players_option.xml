@@ -26,7 +26,6 @@
             android:id="@+id/buttonConnect"
             android:layout_gravity="center_horizontal|top"
             android:src="@drawable/connect"
-            android:background="@null"
             android:layout_marginTop="50dp" />
 
         <ImageButton
@@ -36,7 +35,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:src="@drawable/start"
-            android:background="@null"
             android:onClick="onClickButtonStartTwoPlayers" />
 
         <ImageButton

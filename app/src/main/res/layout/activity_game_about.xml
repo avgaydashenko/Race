@@ -22,23 +22,6 @@
         android:scaleType="fitXY"
         android:src="@drawable/dark_pic_4" />
 
-    <ru.spbau.anastasia.race.WinterTextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/game_about"
-        android:id="@+id/gameAbout"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_margin="5dp"
-        android:autoText="false"
-        android:textColor="#ffffff"
-        android:textColorHighlight="#ffffff"
-        android:textStyle="bold"
-
-        android:maxLines = "12"
-        android:scrollbars = "vertical"
-        android:textSize="@dimen/abc_dialog_padding_material" />
-
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -50,5 +33,22 @@
         android:layout_marginBottom="10dp"
         android:layout_marginRight="10dp"
         android:onClick="onClickButtonBackGameAbout" />
+
+    <ru.spbau.anastasia.race.WinterTextView
+        android:layout_width="533dp"
+        android:layout_height="fill_parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/game_about"
+        android:id="@+id/gameAbout"
+        android:layout_gravity="left|center_vertical"
+        android:layout_margin="5dp"
+        android:autoText="false"
+        android:textColor="#ffffff"
+        android:textColorHighlight="#ffffff"
+        android:textStyle="bold"
+
+        android:maxLines = "12"
+        android:scrollbars = "vertical"
+        android:textSize="@dimen/abc_dialog_padding_material" />
 
 </FrameLayout>

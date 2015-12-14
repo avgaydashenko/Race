@@ -22,7 +22,7 @@
         android:src="@drawable/dark_pic_3" />
 
     <ru.spbau.anastasia.race.WinterTextView
-        android:layout_width="fill_parent"
+        android:layout_width="525dp"
         android:layout_height="fill_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/game_info"
