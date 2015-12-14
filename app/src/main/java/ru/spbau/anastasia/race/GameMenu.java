@@ -53,10 +53,11 @@ public class GameMenu extends Activity {
     }
 
     public void onClickSound(View view) {
-        if (isSound)
+        if (isSound) {
             soundButton.setImageResource(R.drawable.no_sound);
-        else
+        } else {
             soundButton.setImageResource(R.drawable.sound);
+        }
 
         isSound = !isSound;
         sound.isStoped = !isSound;

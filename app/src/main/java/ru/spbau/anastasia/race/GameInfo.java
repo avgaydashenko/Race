@@ -1,44 +1,38 @@
 package ru.spbau.anastasia.race;
 
-import ru.spbau.anastasia.race.util.SystemUiHider;
-
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 public class GameInfo extends Activity {
-    TextView t;
-    ImageView fon;
+    
+    TextView rulesTextView;
+    ImageView backgroundImage;
+    
     int numOfTheme;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_info);
-        t = (TextView) findViewById(R.id.textView);
-        t.setMovementMethod(new ScrollingMovementMethod());
-        fon = (ImageView) findViewById(R.id.imageGameInfo);
+
+        rulesTextView = (TextView) findViewById(R.id.textView);
+        rulesTextView.setMovementMethod(new ScrollingMovementMethod());
+
+        backgroundImage = (ImageView) findViewById(R.id.imageGameInfo);
         numOfTheme = getIntent().getExtras().getInt("theme");
-        if (numOfTheme == GameMenu.IS_CHECKED){
-            fon.setImageResource(R.drawable.game_info2);
+
+        if (numOfTheme == GameMenu.IS_CHECKED) {
+            backgroundImage.setImageResource(R.drawable.game_info2);
         } else {
-            fon.setImageResource(R.drawable.dark_pic_4);
+            backgroundImage.setImageResource(R.drawable.dark_pic_4);
         }
     }
-
 
     public void onClickButtonBackGameInfo(View view) {
         finish();
     }
-
 }
