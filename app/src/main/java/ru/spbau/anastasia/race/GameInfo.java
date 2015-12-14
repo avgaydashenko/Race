@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 public class GameInfo extends Activity {
 
-    WinterTextView t;
     ImageView fon;
     int numOfTheme;
     @Override
@@ -27,17 +26,12 @@ public class GameInfo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_info);
 
-        t = (WinterTextView) findViewById(R.id.winterTextView);
-        t.setMovementMethod(new ScrollingMovementMethod());
         fon = (ImageView) findViewById(R.id.imageGameInfo);
         numOfTheme = getIntent().getExtras().getInt("theme");
         if (numOfTheme == GameMenu.IS_CHECKED){
             fon.setImageResource(R.drawable.game_info2);
-            t.setIsWinterInfo(true);
-
         } else {
             fon.setImageResource(R.drawable.dark_pic_4);
-            t.setIsWinterInfo(false);
         }
     }
 

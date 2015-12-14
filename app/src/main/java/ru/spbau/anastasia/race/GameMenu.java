@@ -38,7 +38,7 @@ public class GameMenu extends Activity {
         soundButton = (ImageButton) findViewById(R.id.buttonSound);
         isSound = true;
         numOfTheme = NOT_IS_CHECKED;
-        sound = new Sound (getAssets(),numOfTheme, MENU_ACTIVITY);
+        sound = new Sound (getAssets(), numOfTheme, MENU_ACTIVITY);
         sound.isStoped = !isSound;
     }
 

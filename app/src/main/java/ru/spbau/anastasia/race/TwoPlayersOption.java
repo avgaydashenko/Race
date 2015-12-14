@@ -30,7 +30,7 @@ public class TwoPlayersOption extends Activity {
         numOfTheme = getIntent().getExtras().getInt("theme");
         isSound = getIntent().getExtras().getBoolean("sound");
         if (numOfTheme == GameMenu.IS_CHECKED){
-            fon.setImageResource(R.drawable.option_for_twojpg);
+            fon.setImageResource(R.drawable.players_option2);
         } else {
             fon.setImageResource(R.drawable.players_option);
         }
