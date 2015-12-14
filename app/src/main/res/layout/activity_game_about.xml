@@ -34,7 +34,7 @@
         android:layout_marginRight="10dp"
         android:onClick="onClickButtonBackGameAbout" />
 
-    <ru.spbau.anastasia.race.WinterTextView
+    <TextView
         android:layout_width="533dp"
         android:layout_height="fill_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -43,12 +43,10 @@
         android:layout_gravity="left|center_vertical"
         android:layout_margin="5dp"
         android:autoText="false"
-        android:textColor="#ffffff"
-        android:textColorHighlight="#ffffff"
         android:textStyle="bold"
-
         android:maxLines = "12"
         android:scrollbars = "vertical"
-        android:textSize="@dimen/abc_dialog_padding_material" />
+        android:textSize="@dimen/abc_dialog_padding_material"
+        android:textColor="#ffffff" />
 
 </FrameLayout>
