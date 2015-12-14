@@ -1,37 +1,20 @@
 package ru.spbau.anastasia.race;
 
-import ru.spbau.anastasia.race.util.SystemUiHider;
-
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.AndroidCharacter;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
-import android.widget.Button;
 import android.widget.ImageButton;
-
 
 public class RoadForTwo extends Activity implements mScene.SceneListener {
 
-    TwoPlayerGameView gameView;
-    SceneManager sceneManager;
-    SensorManager sensorManager;
-    Sensor sensor;
-    ImageButton pause;
-    mScene scene;
-    int numOfTheme;
-    private boolean isServer;
-    private Sound sound;
-    private boolean isSound;
+    private SceneManager sceneManager;
+    private SensorManager sensorManager;
+    private Sensor sensor;
+    private ImageButton pause;
+    private mScene scene;
 
     View.OnClickListener onPauseListener, onResumeListener;
 
@@ -45,15 +28,15 @@ public class RoadForTwo extends Activity implements mScene.SceneListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        numOfTheme = getIntent().getExtras().getInt("theme");
-        isServer = getIntent().getExtras().getBoolean("isServer");
+        int numOfTheme = getIntent().getExtras().getInt("theme");
+        boolean isServer = getIntent().getExtras().getBoolean("isServer");
 
         setContentView(R.layout.activity_road_for_two);
-        gameView = (TwoPlayerGameView)  findViewById(R.id.game_view);
-        isSound = getIntent().getExtras().getBoolean("sound");
+        TwoPlayerGameView gameView = (TwoPlayerGameView) findViewById(R.id.game_view);
+        boolean isSound = getIntent().getExtras().getBoolean("sound");
 
-        sound = new Sound(getAssets(), numOfTheme, 0);
-        sound.isStoped = !isSound;
+        Sound sound = new Sound(getAssets(), numOfTheme, 0);
+        sound.isStopped = !isSound;
         scene = new mScene(getResources(), mScene.PLAY_TOGETHER, numOfTheme, sound);
         scene.width = gameView.getWidth();
         scene.height = gameView.getHeight();
@@ -109,6 +92,7 @@ public class RoadForTwo extends Activity implements mScene.SceneListener {
     public void onGameOver() {
         runOnUiThread(activateRestartButton);
     }
+
     public void onRestartButtonClick(View view) {}
 
     public void onClickButtonBackRoadForTwo(View view) {

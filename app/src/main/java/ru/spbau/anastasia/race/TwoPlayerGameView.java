@@ -1,20 +1,10 @@
 package ru.spbau.anastasia.race;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 
-/**
- * Created by alex on 08.12.2015.
- */
 public class TwoPlayerGameView extends OnePlayerGameView {
-
-    private static final String TAG = "TwoPlayerGameView";
 
     public TwoPlayerGameView(Context context) {
         super(context);
@@ -27,7 +17,6 @@ public class TwoPlayerGameView extends OnePlayerGameView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
     }
 
     @Override

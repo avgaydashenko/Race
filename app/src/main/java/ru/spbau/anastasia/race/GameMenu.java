@@ -34,7 +34,7 @@ public class GameMenu extends Activity {
         isSound = true;
         numOfTheme = NOT_IS_CHECKED;
         sound = new Sound(getAssets(), numOfTheme, MENU_ACTIVITY);
-        sound.isStoped = !isSound;
+        sound.isStopped = !isSound;
     }
 
     public void onClickButtonOnePlayerOption(View view) {
@@ -60,7 +60,7 @@ public class GameMenu extends Activity {
         }
 
         isSound = !isSound;
-        sound.isStoped = !isSound;
+        sound.isStopped = !isSound;
     }
 
     public void onClickButtonTwoPlayersOption(View view) {

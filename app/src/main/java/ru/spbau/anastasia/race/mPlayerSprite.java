@@ -55,7 +55,7 @@ public class mPlayerSprite extends mSimpleSprite {
             isDamaged = false;
             if (live == 0) {
                 died(scene);
-                scene.sound.play(Sound.DIE);
+                scene.sound.play(Sound.LOSE);
             }
             scene.isSleeping = false;
         }
@@ -69,7 +69,7 @@ public class mPlayerSprite extends mSimpleSprite {
                 live--;
                 isDamaged = true;
                 timerDamaged = 0;
-                scene.sound.play(Sound.HERT);
+                scene.sound.play(Sound.CRASH);
                 scene.isSleeping = true;
                 return a;
             }

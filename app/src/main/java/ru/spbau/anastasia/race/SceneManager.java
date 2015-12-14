@@ -1,10 +1,8 @@
 package ru.spbau.anastasia.race;
 
-
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.util.Log;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,14 +11,18 @@ public class SceneManager implements SensorEventListener {
 
     public static final int FPS = 10;
 
-    final mScene scene;
-    float dx, dy;
+    protected final mScene scene;
 
-    class SceneTask extends TimerTask {
+    private float dx, dy;
+
+    private SceneTask task;
+    private Timer timer;
+
+    private class SceneTask extends TimerTask {
         @Override
         public void run() {
             synchronized (scene){
-                if(scene.type == mScene.SINGLE_PLAY) {
+                if (scene.type == mScene.SINGLE_PLAY) {
                     scene.oneStep(dx, dy);
                 } else {
                     if (scene.isServer) {
@@ -33,8 +35,6 @@ public class SceneManager implements SensorEventListener {
         }
     }
 
-    SceneTask task;
-    Timer timer;
 
     public SceneManager(mScene scene_) {
         scene = scene_;
@@ -57,7 +57,5 @@ public class SceneManager implements SensorEventListener {
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-    }
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 }

@@ -5,26 +5,18 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
-
 
 public class RoadForOne extends Activity implements mScene.SceneListener {
 
-    OnePlayerGameView gameView;
-    SceneManager sceneManager;
-    SensorManager sensorManager;
-    Sensor sensor;
-    ImageButton pause, restart;
-    View.OnClickListener onPauseListener, onResumeListener;
-    int numOfTheme;
-    private Sound sound;
-    private boolean isSound;
-    Runnable activateRestartButton = new Runnable() {
+    private SceneManager sceneManager;
+    private SensorManager sensorManager;
+    private Sensor sensor;
+    private ImageButton pause, restart;
+    private View.OnClickListener onPauseListener, onResumeListener;
+
+    private Runnable activateRestartButton = new Runnable() {
         @Override
         public void run() {
             restart.setVisibility(View.VISIBLE);
@@ -32,20 +24,19 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
         }
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        numOfTheme = getIntent().getExtras().getInt("theme");
+        int numOfTheme = getIntent().getExtras().getInt("theme");
 
         int player_id = getIntent().getExtras().getInt("player");
         setContentView(R.layout.activity_road_for_one);
 
-        gameView = (OnePlayerGameView)  findViewById(R.id.game_view);
-        isSound = getIntent().getExtras().getBoolean("sound");
+        OnePlayerGameView gameView = (OnePlayerGameView) findViewById(R.id.game_view);
+        boolean isSound = getIntent().getExtras().getBoolean("sound");
 
-        sound = new Sound(getAssets(), numOfTheme, 0);
-        sound.isStoped = !isSound;
+        Sound sound = new Sound(getAssets(), numOfTheme, 0);
+        sound.isStopped = !isSound;
 
         final mScene scene = new mScene(getResources(), mScene.SINGLE_PLAY, numOfTheme, sound);
         scene.width = gameView.getWidth();
@@ -90,7 +81,6 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
     public void onBackButtonClickRoadForOne(View view) {
         finish();
     }
-
 
     @Override
     protected void onResume() {
