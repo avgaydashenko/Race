@@ -21,14 +21,16 @@ public class SceneManager implements SensorEventListener {
     private class SceneTask extends TimerTask {
         @Override
         public void run() {
-            synchronized (scene){
-                if (scene.type == mScene.SINGLE_PLAY) {
-                    scene.oneStep(dx, dy);
-                } else {
-                    if (scene.isServer) {
-                        scene.oneStepServer(dx, dy, FileForSent.genClient());
+            synchronized (scene) {
+                if (scene.status != mScene.STOPED) {
+                    if (scene.type == mScene.SINGLE_PLAY) {
+                        scene.oneStep(dx, dy);
                     } else {
-                        scene.oneStepClient(dx, dy, FileForSent.genClient());
+                        if (scene.isServer) {
+                            scene.oneStepServer(dx, dy, FileForSent.genClient());
+                        } else {
+                            scene.oneStepClient(dx, dy, FileForSent.genClient());
+                        }
                     }
                 }
             }

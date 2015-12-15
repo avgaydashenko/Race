@@ -27,7 +27,7 @@ public class Sound {
     public boolean isStopped;
     public int theme;
 
-    class SceneTask extends TimerTask {
+    private class SceneTask extends TimerTask {
         @Override
         public void run() {
             if (isStopped) {

@@ -36,6 +36,14 @@ public class TwoPlayersOption extends Activity {
         startActivity(intent);
     }
 
+    public void onClickButtonConnect(View view) {
+        Intent intent = new Intent(TwoPlayersOption.this, ConnectionGame.class);
+        intent.putExtra("isServer", scanner.isChecked());
+        intent.putExtra("theme", numOfTheme);
+        intent.putExtra("sound", isSound);
+        startActivity(intent);
+    }
+
     public void onClickButtonBackTwoPlayerOption(View view) {
         finish();
     }
