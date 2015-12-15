@@ -81,7 +81,7 @@ public class ConnectionGame extends Activity {
         listView.setOnItemClickListener(onDeviceClick);
 
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        registerReceiver(mReceiver, filter);// todo Не забудьте снять регистрацию в onDestroy
+        registerReceiver(mReceiver, filter); // TODO Не забудь снять регистрацию в onDestroy
     }
 
     private void isChecked() {

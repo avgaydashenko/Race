@@ -25,7 +25,7 @@ public class TwoPlayersOption extends Activity {
         } else {
             fon.setImageResource(R.drawable.two_players_option);
         }
-        scanner = (CheckBox) findViewById(R.id.checkBoxServer);
+        scanner = (CheckBox)findViewById(R.id.checkBoxServer);
     }
 
     public void onClickButtonStartTwoPlayers(View view) {
