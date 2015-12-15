@@ -21,9 +21,9 @@ public class TwoPlayersOption extends Activity {
         numOfTheme = getIntent().getExtras().getInt("theme");
         isSound = getIntent().getExtras().getBoolean("sound");
         if (numOfTheme == GameMenu.IS_CHECKED){
-            fon.setImageResource(R.drawable.players_option2);
+            fon.setImageResource(R.drawable.two_players_option2);
         } else {
-            fon.setImageResource(R.drawable.players_option);
+            fon.setImageResource(R.drawable.two_players_option);
         }
         scanner = (CheckBox) findViewById(R.id.checkBoxServer);
     }

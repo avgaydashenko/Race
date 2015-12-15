@@ -9,7 +9,7 @@
         android:id="@+id/imagePlayersOption"
         android:layout_gravity="center"
         android:scaleType="fitXY"
-        android:src="@drawable/players_option" />
+        android:src="@drawable/one_player_option" />
 
     <ImageButton
         android:layout_width="wrap_content"

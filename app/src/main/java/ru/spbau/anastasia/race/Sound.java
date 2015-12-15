@@ -14,7 +14,7 @@ import java.util.TimerTask;
 
 public class Sound {
 
-    public static final int MUSIC_TIME = 1000;
+    public static final int MUSIC_TIME = 1000000000;
     public static final int CRASH = 1;
     public static final int LOSE = 2;
     public static final int JUMP = 3;

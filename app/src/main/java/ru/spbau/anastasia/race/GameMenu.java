@@ -43,10 +43,10 @@ public class GameMenu extends Activity {
 
     public void onClickChooseWinterTheme(View view) {
         if (chooseWinterTheme.isChecked()) {
-            backgroundImage.setImageResource(R.drawable.game_menu2);
+            backgroundImage.setImageResource(R.drawable.menu2);
             numOfTheme = IS_CHECKED;
         } else {
-            backgroundImage.setImageResource(R.drawable.game_menu);
+            backgroundImage.setImageResource(R.drawable.menu);
             numOfTheme = NOT_IS_CHECKED;
         }
         sound.theme = numOfTheme;

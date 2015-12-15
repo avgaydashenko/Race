@@ -21,9 +21,9 @@ public class GameAbout extends Activity {
         int numOfTheme = getIntent().getExtras().getInt("theme");
 
         if (numOfTheme == GameMenu.IS_CHECKED) {
-            backGroundImage.setImageResource(R.drawable.game_info2);
+            backGroundImage.setImageResource(R.drawable.game_about2);
         } else {
-            backGroundImage.setImageResource(R.drawable.dark_pic_3);
+            backGroundImage.setImageResource(R.drawable.game_about);
         }
     }
 

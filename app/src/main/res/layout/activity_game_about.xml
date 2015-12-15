@@ -28,7 +28,7 @@
         android:id="@+id/imageGameAbout"
         android:layout_gravity="center"
         android:scaleType="fitXY"
-        android:src="@drawable/dark_pic_4" />
+        android:src="@drawable/game_about" />
 
 
     <ImageButton

@@ -28,7 +28,7 @@
         android:id="@+id/imageGameInfo"
         android:layout_gravity="center"
         android:scaleType="fitXY"
-        android:src="@drawable/dark_pic_3" />
+        android:src="@drawable/info" />
 
     <TextView
         android:layout_width="395dp"

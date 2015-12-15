@@ -29,9 +29,9 @@ public class OnePlayerOption extends Activity {
         isSound = getIntent().getExtras().getBoolean("sound");
 
         if (numOfTheme == GameMenu.IS_CHECKED) {
-            fon.setImageResource(R.drawable.players_option2);
+            fon.setImageResource(R.drawable.one_player_option2);
         } else {
-            fon.setImageResource(R.drawable.players_option);
+            fon.setImageResource(R.drawable.one_player_option);
         }
 
         finn = (ImageButton) findViewById(R.id.buttonChooseFinn);
