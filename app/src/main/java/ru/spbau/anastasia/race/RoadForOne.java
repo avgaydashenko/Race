@@ -15,6 +15,7 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
     private Sensor sensor;
     private ImageButton pause, restart;
     private View.OnClickListener onPauseListener, onResumeListener;
+    private OnePlayerGameView gameView;
 
     private Runnable activateRestartButton = new Runnable() {
         @Override
@@ -32,7 +33,7 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
         int player_id = getIntent().getExtras().getInt("player");
         setContentView(R.layout.activity_road_for_one);
 
-        OnePlayerGameView gameView = (OnePlayerGameView) findViewById(R.id.game_view);
+        gameView = (OnePlayerGameView) findViewById(R.id.game_view);
         boolean isSound = getIntent().getExtras().getBoolean("sound");
 
         Sound sound = new Sound(getAssets(), numOfTheme, 0);
@@ -98,6 +99,7 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
 
     @Override
     public void onGameOver() {
+        gameView.scene.dead = true;
         runOnUiThread(activateRestartButton);
     }
 

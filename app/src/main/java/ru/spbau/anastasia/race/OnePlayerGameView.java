@@ -1,6 +1,9 @@
 package ru.spbau.anastasia.race;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -8,6 +11,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class OnePlayerGameView extends View {
 
@@ -97,6 +101,34 @@ public class OnePlayerGameView extends View {
 
             } else {
                 canvas.drawBitmap(restart, 0, 0, mainPaint);
+
+                if (scene.dead) {
+                    double newScore = (int)scene.count;
+
+                    DataBaseHelper mDatabaseHelper = new DataBaseHelper(getContext(), "best_scores.db", null, 1);
+                    SQLiteDatabase mSqLiteDatabase = mDatabaseHelper.getWritableDatabase();
+
+                    Cursor cursor = mSqLiteDatabase.query("Scores", new String[]{DataBaseHelper.SCORE_COLUMN},
+                            null, null, null, null, null) ;
+
+                    cursor.moveToLast();
+
+                    int bestScore = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.SCORE_COLUMN));
+
+                    cursor.close();
+
+                    if (newScore > bestScore) {
+                        ContentValues newValues = new ContentValues();
+                        newValues.put(DataBaseHelper.SCORE_COLUMN, newScore);
+                        mSqLiteDatabase.insert("Scores", null, newValues);
+                    }
+
+                    Toast toast = Toast.makeText(getContext(), "Your score: " +
+                            newScore + "; last best score: " + bestScore, Toast.LENGTH_SHORT);
+                    toast.show();
+
+                    scene.dead = false;
+                }
             }
         }
 

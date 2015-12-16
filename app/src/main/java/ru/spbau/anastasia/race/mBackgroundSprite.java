@@ -24,9 +24,9 @@ public class mBackgroundSprite extends mSimpleSprite {
     public static void initBarrier(Resources res) {
 
         backgroundSprite[0][0] = BitmapFactory.decodeResource(res, R.drawable.background1);
-        backgroundSprite[0][1] = BitmapFactory.decodeResource(res, R.drawable.background2);
-        backgroundSprite[1][0] = BitmapFactory.decodeResource(res, R.drawable.background3);
-        backgroundSprite[1][1] = BitmapFactory.decodeResource(res, R.drawable.background4);
+        backgroundSprite[0][1] = BitmapFactory.decodeResource(res, R.drawable.background1);
+        backgroundSprite[1][0] = BitmapFactory.decodeResource(res, R.drawable.background1);
+        backgroundSprite[1][1] = BitmapFactory.decodeResource(res, R.drawable.background1);
 
         for (int i = 0; i < 2; i++) {
             rowX[i] = mSettings.ScaleFactorX * (330 + i * 140);

@@ -20,24 +20,18 @@ public class TwoPlayersOption extends Activity {
         ImageView fon = (ImageView) findViewById(R.id.imageTwoPlayersOption);
         numOfTheme = getIntent().getExtras().getInt("theme");
         isSound = getIntent().getExtras().getBoolean("sound");
+
         if (numOfTheme == GameMenu.IS_CHECKED){
             fon.setImageResource(R.drawable.two_players_option2);
         } else {
             fon.setImageResource(R.drawable.two_players_option);
         }
-        scanner = (CheckBox)findViewById(R.id.checkBoxServer);
+
+        scanner = (CheckBox) findViewById(R.id.checkBoxServer);
     }
 
     public void onClickButtonStartTwoPlayers(View view) {
         Intent intent = new Intent(TwoPlayersOption.this, RoadForTwo.class);
-        intent.putExtra("isServer", scanner.isChecked());
-        intent.putExtra("theme", numOfTheme);
-        intent.putExtra("sound", isSound);
-        startActivity(intent);
-    }
-
-    public void onClickButtonConnect(View view) {
-        Intent intent = new Intent(TwoPlayersOption.this, ConnectionGame.class);
         intent.putExtra("isServer", scanner.isChecked());
         intent.putExtra("theme", numOfTheme);
         intent.putExtra("sound", isSound);

@@ -14,7 +14,7 @@ import java.util.TimerTask;
 
 public class Sound {
 
-    public static final int MUSIC_TIME = 1000000000;
+    public static final int MUSIC_TIME = 90000;
     public static final int CRASH = 1;
     public static final int LOSE = 2;
     public static final int JUMP = 3;
@@ -27,7 +27,7 @@ public class Sound {
     public boolean isStopped;
     public int theme;
 
-    private class SceneTask extends TimerTask {
+    class SceneTask extends TimerTask {
         @Override
         public void run() {
             if (isStopped) {
@@ -98,7 +98,6 @@ public class Sound {
                 playSound(mCrash);
                 break;
         }
-
     }
 
     private int playSound(int sound) {

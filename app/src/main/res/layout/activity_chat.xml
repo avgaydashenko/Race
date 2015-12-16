@@ -18,20 +18,18 @@
         android:orientation="vertical"
         android:layout_gravity="center">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageTwoPlayersOption"
+            android:layout_gravity="center_horizontal" />
+
         <Button
             android:id="@+id/send"
             android:text="@string/send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
-            android:src="@drawable/live"
-            android:nestedScrollingEnabled="false"
-            android:onClick="onClickButtonReconnection" />
 
         <ListView
             android:id="@+id/messages"
@@ -44,14 +42,30 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/buttonStart"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/start"
+            android:onClick="onClickButtonStartTwoPlayers" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/back"
             android:src="@drawable/back"
             android:layout_marginRight="10dp"
             android:background="@null"
             android:layout_marginBottom="10dp"
             android:nestedScrollingEnabled="false"
-            android:onClick="onClickButtonBackTwoPlayerOption"
-            android:layout_gravity="right" />
+            android:onClick="onClickButtonBackTwoPlayerOption" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/recount"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/live"
+            android:nestedScrollingEnabled="false"
+            android:onClick="onClickButtonReconnection" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,7 +79,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content" />
-
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

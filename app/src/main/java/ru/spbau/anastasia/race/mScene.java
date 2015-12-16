@@ -18,6 +18,7 @@ public class mScene {
 
     public double count = 0;
     public int round = 0;
+    public boolean dead = false;
 
     private int lastRound = 0;
 
