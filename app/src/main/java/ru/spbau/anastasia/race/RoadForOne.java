@@ -77,6 +77,8 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
         pause.setOnClickListener(onPauseListener);
 
         gameView.initFon(numOfTheme);
+
+        sensorManager.registerListener(sceneManager, sensor, SensorManager.SENSOR_DELAY_GAME);
     }
 
     public void onBackButtonClickRoadForOne(View view) {
