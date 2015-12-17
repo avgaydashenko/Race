@@ -188,7 +188,7 @@ public class mScene {
     public synchronized FileForSent addBarrierServer(float dx, float dy) {
         if (layers[0].tryToAdd()) {
             mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height);
-            return layers[0].addServer(dx, dy, barrierSprite, barrierSprite.row, barrierSprite.numOfImage, player.isJumping);
+            return layers[0].addServer(dx, dy, barrierSprite, barrierSprite.row, barrierSprite.numOfImage, player.isJumping, true);
         } else {
             return null;
         }

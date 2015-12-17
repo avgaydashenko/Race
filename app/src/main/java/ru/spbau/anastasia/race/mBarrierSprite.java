@@ -82,6 +82,6 @@ public class mBarrierSprite extends mSimpleSprite {
 
     @Override
     public FileForSent toFileForServer(float dx, float dy, boolean isJumping) {
-        return new FileForSent(dx, dy, row, numOfImage, isJumping);
+        return new FileForSent(dx, dy, row, numOfImage, isJumping, true);
     }
 }
