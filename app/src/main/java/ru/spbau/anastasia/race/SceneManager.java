@@ -14,7 +14,7 @@ public class SceneManager implements SensorEventListener {
 
     protected final mScene scene;
 
-    private float dx, dy;
+    public float dx, dy;
 
     private SceneTask task;
     private Timer timer;

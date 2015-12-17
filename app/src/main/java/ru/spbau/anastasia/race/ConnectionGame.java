@@ -361,8 +361,17 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
                             Thread.sleep(1000/(SceneManager.FPS));
                         }
                     } catch (InterruptedException ignor) { }
+                    byte[] bytes1 = new byte[0];
                     FileForSent comeIn = new FileForSent(bytes);
-                    byte[] bytes1 = sceneManager.forTwoPlayer(comeIn);
+                    if (scene.isServer) {
+                        if (comeIn.row != -1) {
+                            bytes1 = sceneManager.forTwoPlayer(comeIn);
+                        } else {
+                            bytes1 = new FileForSent(sceneManager.dx, sceneManager.dy, scene.player.isJumping).toMsg();
+                        }
+                    } else {
+                        bytes1 = sceneManager.forTwoPlayer(comeIn);
+                    }
                     Log.d("tag", bytes1.toString());
                     btService.write(bytes1);
                     sinchron();

@@ -31,11 +31,9 @@ public class mLayer {
         }
     }
 
-    public FileForSent addServer(float dx, float dy, mBasic item, int row, int numOfImg, boolean isJumping, boolean added_) {
-        if (added_) {
-            data.add(item);
-        }
-        return new FileForSent(dx, dy, row, numOfImg, isJumping, added_);
+    public FileForSent addServer(float dx, float dy, mBasic item, int row, int numOfImg, boolean isJumping) {
+        data.add(item);
+        return new FileForSent(dx, dy, row, numOfImg, isJumping);
     }
 
     public synchronized void updateExist(){

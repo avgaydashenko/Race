@@ -6,18 +6,16 @@ import java.util.Random;
 public class FileForSent {
 
     public static final Random RND = new Random();
-    public boolean added = false;
     private float dx, dy;
-    private int row = 0, numOfImage = 0;
+    public int row = -1, numOfImage = -1;
     private boolean isJumping;
 
-    public FileForSent(float dx_, float dy_, int row_, int numOfImage_, boolean isJumping_, boolean added_) {
+    public FileForSent(float dx_, float dy_, int row_, int numOfImage_, boolean isJumping_) {
         dx = dx_;
         dy = dy_;
         row = row_;
         numOfImage = numOfImage_;
         isJumping = isJumping_;
-        added = added_;
     }
 
     public FileForSent(float dx_, float dy_, boolean isJumping_) {
@@ -80,7 +78,7 @@ public class FileForSent {
     }
 
     public static FileForSent genServer() {
-        return new FileForSent(0, 0, RND.nextInt(5), RND.nextInt(5), false, true);
+        return new FileForSent(0, 0, RND.nextInt(5), RND.nextInt(5), false);
     }
 
     public float getDX(){
