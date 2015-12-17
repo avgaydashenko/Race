@@ -134,19 +134,16 @@ public class mScene {
         FileForSent fileNew = null;
 
         if (status != STOPED) {
-
             if (!isNewRound){
                 player.updateStatus(isSleeping);
                 player2.updateStatus(isSleeping);
             }
-
             if (!isSleeping) {
                 player2.isJumping = file.getIsJumping();
                 fileNew = addServer(dx, dy);
                 update(dx, dy, file.getDX(), file.getDY());
                 count += DELTA_COUNT;
             }
-
             updateExist();
             recalcParametrs();
             if (file != null) {
@@ -154,7 +151,6 @@ public class mScene {
             }
             return new FileForSent(player.dx, player.dy, player.isJumping);
         }
-
         return null;
     }
 
@@ -162,12 +158,10 @@ public class mScene {
         recalcNewRound();
 
         if (status != STOPED) {
-
             if (!isNewRound) {
                 player.updateStatus(isSleeping);
                 player2.updateStatus(isSleeping);
             }
-
             if (!isSleeping) {
                 player2.isJumping = file.getIsJumping();
                 addClient(file);
@@ -176,9 +170,8 @@ public class mScene {
             }
             updateExist();
             recalcParametrs();
-            return new FileForSent(player2.dx, player2.dy, player2.isJumping);
+            return new FileForSent(player.dx, player.dy, player.isJumping);
         }
-
         return null;
     }
 

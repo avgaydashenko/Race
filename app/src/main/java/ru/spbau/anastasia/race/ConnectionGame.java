@@ -204,7 +204,7 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
     @Override
     protected void onStop() {
         super.onStop();
-        if(isBegin){
+        if(btService.isBegin){
             btService.write(STOP_MESSAGE.getBytes());
         }
     }
@@ -353,12 +353,14 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
                 synchronized (scene) {
                     scene.playerStatus = bytes;
                     FileForSent file = new FileForSent(scene.playerStatus);
+                    sinchron();
                     try {
-                        Thread.sleep(1000/SceneManager.FPS);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                        if (isBegin){
+                            Thread.sleep(1000/(SceneManager.FPS));
+                        }
+                    } catch (InterruptedException ignor) { }
                     btService.write(sceneManager.forTwoPlayer(file));
+                    sinchron();
                 }
             } else {
                     arrayAdapter.add(btService.getBluetoothSocket().getRemoteDevice().getName() + ": " +
