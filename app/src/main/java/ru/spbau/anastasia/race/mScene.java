@@ -129,7 +129,7 @@ public class mScene {
         isSleeping = true;
     }
 
-    public synchronized FileForSent oneStepServer(float dx, float dy, FileForSent file) {
+    public synchronized FileForSent oneStepClient(float dx, float dy, FileForSent file) {
         recalcNewRound();
         FileForSent fileNew = null;
 
@@ -140,7 +140,7 @@ public class mScene {
             }
             if (!isSleeping) {
                 player2.isJumping = file.getIsJumping();
-                fileNew = addServer(dx, dy);
+                fileNew = addClient(dx, dy);
                 update(dx, dy, file.getDX(), file.getDY());
                 count += DELTA_COUNT;
             }
@@ -154,7 +154,7 @@ public class mScene {
         return null;
     }
 
-    public synchronized FileForSent oneStepClient(float dx, float dy, FileForSent file) {
+    public synchronized FileForSent oneStepServer(float dx, float dy, FileForSent file) {
         recalcNewRound();
 
         if (status != STOPED) {
@@ -164,7 +164,7 @@ public class mScene {
             }
             if (!isSleeping) {
                 player2.isJumping = file.getIsJumping();
-                addClient(file);
+                addServer(file);
                 update(dx, dy, file.getDX(), file.getDY());
                 count += DELTA_COUNT;
             }
@@ -175,17 +175,17 @@ public class mScene {
         return null;
     }
 
-    public synchronized FileForSent addServer(float dx, float dy) {
+    public synchronized FileForSent addClient(float dx, float dy) {
         addBackground();
-        return addBarrierServer(dx, dy);
+        return addBarrierClient(dx, dy);
     }
 
-    public synchronized void addClient(FileForSent file) {
+    public synchronized void addServer(FileForSent file) {
         addBackground();
-        addBarrierClient(file);
+        addBarrierServer(file);
     }
 
-    public synchronized FileForSent addBarrierServer(float dx, float dy) {
+    public synchronized FileForSent addBarrierClient(float dx, float dy) {
         if (layers[0].tryToAdd()) {
             mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height);
             return layers[0].addServer(dx, dy, barrierSprite, barrierSprite.row, barrierSprite.numOfImage, player.isJumping);
@@ -194,7 +194,7 @@ public class mScene {
         }
     }
 
-    public synchronized void addBarrierClient(FileForSent file) {
+    public synchronized void addBarrierServer(FileForSent file) {
         if (layers[0].tryToAdd()) {
             mBarrierSprite barrierSprite = new mBarrierSprite(file, speed, numOfTheme, height);
             layers[0].add(barrierSprite);
