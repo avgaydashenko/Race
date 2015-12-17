@@ -35,7 +35,7 @@ public class SceneManager implements SensorEventListener {
 
             byte [] bytes;
             if (scene.isServer) {
-                bytes = FileForSent.genClient().toMsg();
+                bytes = FileForSent.genServer().toMsg();
                 try {
                     bytes = scene.oneStepServer(dx, dy, msg).toMsg();
                 } catch (NullPointerException ignored) { }

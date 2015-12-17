@@ -33,7 +33,6 @@ public class DeviceChooser extends Activity {
 
     private ArrayAdapter<String> arrayAdapter;
 
-    private MenuItem progressBar;
     private int devicesFound;
 
     @Override
@@ -112,8 +111,6 @@ public class DeviceChooser extends Activity {
         public void onClick(View v) {
             arrayAdapter.clear();
             btService.getBluetoothAdapter().startDiscovery();
-
-            progressBar.setVisible(true);
             devicesFound = 0;
         }
     };
@@ -140,7 +137,6 @@ public class DeviceChooser extends Activity {
                 arrayAdapter.add(device.getName() + "\n" + device.getAddress());
                 ++devicesFound;
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(intent.getAction())) {
-                progressBar.setVisible(false);
                 makeToast(Integer.toString(devicesFound) +
                         " " + getString(R.string.n_devices_found_suffix));
             }
@@ -154,9 +150,7 @@ public class DeviceChooser extends Activity {
         if (btService.getBluetoothAdapter() != null) {
             btService.getBluetoothAdapter().cancelDiscovery();
         }
-
         unregisterReceiver(broadcastReceiver);
-
         unbindService(serviceConnection);
     }
 }

@@ -7,7 +7,7 @@ public class mScene {
     public float speed = 1;
     public boolean isServer;
     public Sound sound;
-    byte[] playerStatus = FileForSent.genClient().toMsg();
+    byte[] playerStatus = FileForSent.genServer().toMsg();
 
     public int numOfTheme = 0;
     public boolean isNewRound = false;
@@ -67,15 +67,15 @@ public class mScene {
         numOfTheme = numOfTheme_;
     }
 
-    public void start() {
+    public synchronized void start() {
         status = PLAYED;
     }
 
-    public void stop() {
+    public synchronized void stop() {
         status = STOPED;
     }
 
-    public void oneStep(float dx, float dy) {
+    public synchronized void oneStep(float dx, float dy) {
         recalcNewRound();
 
         if (status != STOPED) {
@@ -92,13 +92,13 @@ public class mScene {
         }
     }
 
-    private void recalcParametrs() {
+    private synchronized void recalcParametrs() {
         if (status == STOPED && sceneListener != null) {
             sceneListener.onGameOver();
         }
     }
 
-    private void recalcNewRound () {
+    private synchronized void recalcNewRound () {
         if ((int)count % TIME_OF_ROUND == 0 && count > TIME_OF_ROUND) {
             newRound();
             count++;
@@ -119,7 +119,7 @@ public class mScene {
         }
     }
 
-    private void newRound() {
+    private synchronized void newRound() {
         round++;
         for (mLayer l : layers) {
             l.isDamaged = true;
@@ -129,7 +129,7 @@ public class mScene {
         isSleeping = true;
     }
 
-    public FileForSent oneStepServer(float dx, float dy, FileForSent file) {
+    public synchronized FileForSent oneStepServer(float dx, float dy, FileForSent file) {
         recalcNewRound();
         FileForSent fileNew = null;
 
@@ -142,7 +142,7 @@ public class mScene {
 
             if (!isSleeping) {
                 player2.isJumping = file.getIsJumping();
-                fileNew = addServer();
+                fileNew = addServer(dx, dy);
                 update(dx, dy, file.getDX(), file.getDY());
                 count += DELTA_COUNT;
             }
@@ -158,7 +158,7 @@ public class mScene {
         return null;
     }
 
-    public FileForSent oneStepClient(float dx, float dy, FileForSent file) {
+    public synchronized FileForSent oneStepClient(float dx, float dy, FileForSent file) {
         recalcNewRound();
 
         if (status != STOPED) {
@@ -182,37 +182,38 @@ public class mScene {
         return null;
     }
 
-    public FileForSent addServer() {
+    public synchronized FileForSent addServer(float dx, float dy) {
         addBackground();
-        return addBarrierServer();
+        return addBarrierServer(dx, dy);
     }
 
-    public void addClient(FileForSent file) {
+    public synchronized void addClient(FileForSent file) {
         addBackground();
         addBarrierClient(file);
     }
 
-    public FileForSent addBarrierServer() {
+    public synchronized FileForSent addBarrierServer(float dx, float dy) {
         if (layers[0].tryToAdd()) {
             mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height);
-            return layers[0].addServer(barrierSprite, player.dx, player.dy, player.isJumping);
+            return layers[0].addServer(dx, dy, barrierSprite, barrierSprite.row, barrierSprite.numOfImage, player.isJumping);
+        } else {
+            return null;
         }
-        return null;
     }
 
-    public void addBarrierClient(FileForSent file) {
+    public synchronized void addBarrierClient(FileForSent file) {
         if (layers[0].tryToAdd()) {
             mBarrierSprite barrierSprite = new mBarrierSprite(file, speed, numOfTheme, height);
             layers[0].add(barrierSprite);
         }
     }
 
-    public void setWH(int w, int h) {
+    public synchronized void setWH(int w, int h) {
         width = w;
         height = h;
     }
 
-    public void initScene() {
+    public synchronized void initScene() {
         switch (type) {
             case SINGLE_PLAY :
                 initSingleScene();
@@ -223,7 +224,7 @@ public class mScene {
         }
     }
 
-    public void initSingleScene() {
+    public synchronized void initSingleScene() {
         mBarrierSprite.initBarrier(res);
         mBackgroundSprite.initBarrier(res);
 
@@ -236,26 +237,39 @@ public class mScene {
         live = new mLive(res, SINGLE_PLAY, height);
     }
 
-    public void initDoubleScene() {
+    public synchronized void initDoubleScene() {
         mBarrierSprite.initBarrier(res);
         mBackgroundSprite.initBarrier(res);
-        player = new mPlayerSprite(width/2 - 60 * mSettings.ScaleFactorX,
-                height - 120 * mSettings.ScaleFactorY, res, R.drawable.jake1, R.drawable.jake2,
-                R.drawable.jake3, R.drawable.jake4, height);
-        live = new mLive(res, mLive.FIRST_PLAYER, height);
+        if (isServer){
+            player = new mPlayerSprite(width/2 - 60 * mSettings.ScaleFactorX,
+                    height - 120 * mSettings.ScaleFactorY, res, R.drawable.jake1, R.drawable.jake2,
+                    R.drawable.jake3, R.drawable.jake4, height);
+            live = new mLive(res, mLive.FIRST_PLAYER, height);
 
-        player2 = new mPlayerSprite(width/2 + 60 * mSettings.ScaleFactorX,
-                height - 120 * mSettings.ScaleFactorY, res, R.drawable.finn1, R.drawable.finn2,
-                R.drawable.finn3, R.drawable.finn4, height);
-        live2 = new mLive(res, mLive.SECOND_PLAYER, height);
+            player2 = new mPlayerSprite(width/2 + 60 * mSettings.ScaleFactorX,
+                    height - 120 * mSettings.ScaleFactorY, res, R.drawable.finn1, R.drawable.finn2,
+                    R.drawable.finn3, R.drawable.finn4, height);
+            live2 = new mLive(res, mLive.SECOND_PLAYER, height);
+        } else {
+            player2 = new mPlayerSprite(width/2 - 60 * mSettings.ScaleFactorX,
+                    height - 120 * mSettings.ScaleFactorY, res, R.drawable.jake1, R.drawable.jake2,
+                    R.drawable.jake3, R.drawable.jake4, height);
+            live2 = new mLive(res, mLive.FIRST_PLAYER, height);
+
+            player = new mPlayerSprite(width/2 + 60 * mSettings.ScaleFactorX,
+                    height - 120 * mSettings.ScaleFactorY, res, R.drawable.finn1, R.drawable.finn2,
+                    R.drawable.finn3, R.drawable.finn4, height);
+            live = new mLive(res, mLive.SECOND_PLAYER, height);
+        }
+
     }
 
-    public void add() {
+    public synchronized void add() {
         addBarrier();
         addBackground();
     }
 
-    public void addBarrier() {
+    public synchronized void addBarrier() {
         if (layers[0].tryToAdd()) {
             mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height);
             layers[0].add(barrierSprite);
@@ -263,11 +277,11 @@ public class mScene {
     }
 
 
-    public void deleteBarrier(mBasic item) {
+    public synchronized void deleteBarrier(mBasic item) {
         layers[0].delete(item);
     }
 
-    public void addBackground() {
+    public synchronized void addBackground() {
         for (int i = 1; i < 3; i++) {
             if (layers[i].tryToAdd()) {
                 mBackgroundSprite backgroundSprite = new mBackgroundSprite(speed, i == 1, numOfTheme, height);
@@ -276,7 +290,7 @@ public class mScene {
         }
     }
 
-    public void updateExist() {
+    public synchronized void updateExist() {
         for (int i = 0; i < LAY_COUNT; i++) {
             layers[i].updateExist();
         }
@@ -291,7 +305,7 @@ public class mScene {
         }
     }
 
-    public void restart() {
+    public synchronized void restart() {
         speed = 1;
         for (mLayer l : layers) {
             l.frequencyOfAdding = 5;
@@ -311,7 +325,7 @@ public class mScene {
         status = PLAYED;
     }
 
-    public void update(float dx, float dy) {
+    public synchronized void update(float dx, float dy) {
         for (mLayer l : layers) {
             l.update();
         }
@@ -319,7 +333,7 @@ public class mScene {
         live.update(player);
     }
 
-    public void update(float dx, float dy, float dx2, float dy2) {
+    public synchronized void update(float dx, float dy, float dx2, float dy2) {
         update(dx, dy);
         if(type == PLAY_TOGETHER){
             player2.update(dx2, dy2);

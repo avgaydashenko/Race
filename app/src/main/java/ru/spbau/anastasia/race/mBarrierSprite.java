@@ -9,12 +9,12 @@ import java.util.Random;
 public class mBarrierSprite extends mSimpleSprite {
 
     private static Bitmap [][] barriersSprite = new Bitmap[2][6];
-    private static int row;
+    public static int row;
     private static float[] rowX = new float[5];
     private static float[] rowY = new float[5];
     private static float[] rowDX = new float[5];
     private static float[] rowDY = new float[5];
-    private static int numOfImage;
+    public static int numOfImage;
 
     public static final Random RND = new Random();
 

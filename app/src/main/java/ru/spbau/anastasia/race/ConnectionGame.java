@@ -39,6 +39,8 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
     private boolean isPlayed;
     private int numOfTheme;
     private boolean isSound;
+    private boolean isBegin;
+
 
     private ImageButton pause;
     private SceneManager sceneManager;
@@ -70,6 +72,9 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connection_game);
 
+        numOfTheme = getIntent().getExtras().getInt("theme");
+        isSound = getIntent().getExtras().getBoolean("sound");
+
         arrayAdapter = new ArrayAdapter<>(this, R.layout.message);
         ((ListView) findViewById(R.id.messages)).setAdapter(arrayAdapter);
         editText = (EditText) findViewById(R.id.edit_text);
@@ -95,16 +100,24 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
 
 
     public void onClickButtonStartPlay(View view) {
-        toPlayForTwo();
+        try {
+            toPlayForTwo();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         btService.write(START_MESSAGE.getBytes());
+        sinchron();
+    }
+
+    private void sinchron(){
+        sensorManager.unregisterListener(sceneManager);
+        sceneManager.stop();
+        sensorManager.registerListener(sceneManager, sensor, SensorManager.SENSOR_DELAY_GAME);
     }
 
     private void toPlayForTwo() throws InterruptedException {
         isPlayed = true;
-
-        int numOfTheme = getIntent().getExtras().getInt("theme");
         TwoPlayerGameView gameView = (TwoPlayerGameView) findViewById(R.id.game_view);
-        boolean isSound = getIntent().getExtras().getBoolean("sound");
 
         Sound sound = new Sound(getAssets(), numOfTheme, 0);
         sound.isStopped = !isSound;
@@ -116,8 +129,6 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
             scene.isServer = btService.isServer;
             scene.type = mScene.PLAY_TOGETHER;
             sceneManager = new SceneManager(scene);
-            gameView.scene = scene;
-
             sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 
@@ -125,19 +136,22 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
 
             scene.sceneListener = this;
             pause.setOnClickListener(onPauseListener);
-            gameView.initFon(numOfTheme);
 
+            bindService(new Intent(this, BluetoothService.class), connection, Context.BIND_AUTO_CREATE);
+
+            FrameLayout f = (FrameLayout) findViewById(R.id.gave_layout);
+            f.setVisibility(View.VISIBLE);
+            LinearLayout l = (LinearLayout) findViewById(R.id.game_liner);
+            l.setVisibility(View.GONE);
+
+            FileForSent file = new FileForSent(scene.playerStatus);
+            Thread.sleep(1000);
+            btService.write(sceneManager.forTwoPlayer(file));
         }
-        bindService(new Intent(this, BluetoothService.class), connection, Context.BIND_AUTO_CREATE);
-
-        FrameLayout f = (FrameLayout) findViewById(R.id.gave_layout);
-        f.setVisibility(View.VISIBLE);
-        LinearLayout l = (LinearLayout) findViewById(R.id.game_liner);
-        l.setVisibility(View.GONE);
-
-        FileForSent file = new FileForSent(scene.playerStatus);
-        wait(100);
-        btService.write(sceneManager.forTwoPlayer(file));
+        synchronized (scene) {
+            gameView.initFon(numOfTheme);
+            gameView.scene = scene;
+        }
     }
 
     public void onClickButtonPause(View view) {
@@ -190,7 +204,7 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
     @Override
     protected void onStop() {
         super.onStop();
-        if(btService.isBegin){
+        if(isBegin){
             btService.write(STOP_MESSAGE.getBytes());
         }
     }
@@ -223,7 +237,7 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
                 @Override
                 public void process(int bytes, byte[] buffer) {
                     handler.obtainMessage(HANDLER_MESSAGE_GET, bytes, -1, buffer)
-                                .sendToTarget();
+                            .sendToTarget();
                 }
             });
 
@@ -239,6 +253,7 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
             if (!btService.getBluetoothAdapter().isEnabled()) {
                 startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),
                         REQUEST_ENABLE_BT);
+                isBegin = true;
             } else if (!btService.isConnected()) {
                 startActivityForResult(new Intent(ConnectionGame.this, DeviceChooser.class),
                         REQUEST_CONNECT);
@@ -306,41 +321,48 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
                 arrayAdapter.clear();
             }
 
-            if (isPlayed) {
+            boolean startFlag = true;
+            boolean pauseFlag = true;
+            boolean resumFlag = true;
+            for (int i = 0; i < 5; i++){
+                if (bytes[i] !=
+                        START_MESSAGE.getBytes()[i]){
+                    startFlag = false;
+                }
+                if (bytes[i] != PAUSE_MESSAGE.getBytes()[i]){
+                    pauseFlag = false;
+                }
+                if (bytes[i] != RESUM_MESSAGE.getBytes()[i]){
+                    resumFlag = false;
+                }
+            }
+            if (startFlag){
+                try {
+                    toPlayForTwo();
+                    sinchron();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else if (pauseFlag) {
+                pauseClick();
+            } else if (resumFlag) {
+                resumClick();
+            }
+
+                if (isPlayed) {
                 synchronized (scene) {
                     scene.playerStatus = bytes;
                     FileForSent file = new FileForSent(scene.playerStatus);
-                    btService.write(sceneManager.forTwoPlayer(file));
-                }
-            } else {
-                boolean startFlag = true;
-                boolean pauseFlag = true;
-                boolean resumFlag = true;
-                for (int i = 0; i < 5; i++){
-                    if (bytes[i] != START_MESSAGE.getBytes()[i]){
-                        startFlag = false;
-                    }
-                    if (bytes[i] != PAUSE_MESSAGE.getBytes()[i]){
-                        pauseFlag = false;
-                    }
-                    if (bytes[i] != RESUM_MESSAGE.getBytes()[i]){
-                        resumFlag = false;
-                    }
-                }
-                if (startFlag){
                     try {
-                        toPlayForTwo();
+                        Thread.sleep(1000/SceneManager.FPS);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                } else if (pauseFlag) {
-                    pauseClick();
-                } else if (resumFlag) {
-                    resumClick();
-                } else {
+                    btService.write(sceneManager.forTwoPlayer(file));
+                }
+            } else {
                     arrayAdapter.add(btService.getBluetoothSocket().getRemoteDevice().getName() + ": " +
                             new String((byte[]) msg.obj, 0, msg.arg1));
-                }
             }
         }
     };

@@ -31,11 +31,11 @@ public class mLayer {
         }
     }
 
-    public FileForSent addServer(mBasic item, float dx, float dy, boolean isJumping) {
+    public FileForSent addServer(float dx, float dy, mBasic item, int row, int numOfImg, boolean isJumping) {
         if (!isDamaged) {
             data.add(item);
         }
-        return item.toFileForServer(dx, dy, isJumping);
+        return new FileForSent(dx, dy, row, numOfImg, isJumping);
     }
 
     public synchronized void updateExist(){

@@ -41,8 +41,7 @@
     <string name="finn"> Finn</string>
     <string name="jake"> Jake</string>
     <string name="game_about">ABOUT:\n\nThe game is developed as coursework project of SPbAU second year bachelors.\n\nThe source code of the program you can find here:\nhttps://github.com/avgaydashenko/Race\n\nAuthors:\nAnastasia Gaydashenko, Alexandra Malysheva</string>
-    <string name="game_about2">ABOUT:\n\nThe game is developed as coursework project of SPbAU second year bachelors.\n\nThe source code of the program you can find here:\nhttps://github.com/avgaydashenko/Race\n\nAuthors:\nAnastasia Gaydashenko, Alexandra Malysheva\n\n\n\n\n\n\n\n</string>
-    <string name="game_info">RULES:\n\nThe player has three lives. He loses one if he bumps into a barrier. Player can score points during the game, the best result is saved.\n\nSingle player game: Player can choose a character to play. The game ends if the player runs out of lives.\n\nA game with a friend: To play with a friend you must connect to the device using Bluetooth. The game ends when one player runs out of life. He is a loser.</string>
+    <string name="game_info">RULES:\n\nThe player has three lives. He loses one if he bumps into a barrier. Player can score points during the game, the best result will be shown.\n\nSingle player game: Player can choose a character to play. The game ends if the player runs out of lives.\n\nA game with a friend: To play with a friend you must connect to the device using Bluetooth. The game ends when one player runs out of life. He is a loser.</string>
 
     <string name="title_activity_connection_game">ConnectionGame</string>
 
