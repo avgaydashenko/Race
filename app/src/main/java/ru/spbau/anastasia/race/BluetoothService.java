@@ -171,7 +171,6 @@ public class BluetoothService extends Service {
 
         }
 
-        isBegin = true;
         connectedThread = new ConnectedThread();
         connectedThread.start();
     }

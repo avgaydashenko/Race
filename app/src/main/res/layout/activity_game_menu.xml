@@ -36,7 +36,7 @@
         android:id="@+id/buttonTwoPlayers"
         android:layout_gravity="center"
         android:src="@drawable/two_players"
-        android:onClick="onClickButtonTwoPlayersOption" />
+        android:onClick="onClickButtonTConnection" />
 
     <ImageButton
         android:layout_width="wrap_content"

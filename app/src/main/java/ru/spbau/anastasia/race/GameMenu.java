@@ -81,8 +81,8 @@ public class GameMenu extends Activity {
         sound.isStopped = !isSound;
     }
 
-    public void onClickButtonTwoPlayersOption(View view) {
-        startActivity(new Intent(GameMenu.this, TwoPlayersOption.class));
+    public void onClickButtonTConnection(View view) {
+        startActivity(new Intent(GameMenu.this, ConnectionGame.class));
     }
 
     public void onClickButtonGameInfo(View view) {

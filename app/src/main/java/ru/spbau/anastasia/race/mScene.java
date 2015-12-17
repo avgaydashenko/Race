@@ -7,6 +7,7 @@ public class mScene {
     public float speed = 1;
     public boolean isServer;
     public Sound sound;
+    byte[] playerStatus = FileForSent.genClient().toMsg();
 
     public int numOfTheme = 0;
     public boolean isNewRound = false;

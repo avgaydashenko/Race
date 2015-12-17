@@ -4,6 +4,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,17 +25,29 @@ public class SceneManager implements SensorEventListener {
             synchronized (scene){
                 if (scene.type == mScene.SINGLE_PLAY) {
                     scene.oneStep(dx, dy);
-                } else {
-                    if (scene.isServer) {
-                        scene.oneStepServer(dx, dy, FileForSent.genClient());
-                    } else {
-                        scene.oneStepClient(dx, dy, FileForSent.genClient());
-                    }
                 }
             }
         }
     }
 
+    public byte [] forTwoPlayer(FileForSent msg){
+        synchronized (scene) {
+
+            byte [] bytes;
+            if (scene.isServer) {
+                bytes = FileForSent.genClient().toMsg();
+                try {
+                    bytes = scene.oneStepServer(dx, dy, msg).toMsg();
+                } catch (NullPointerException ignored) { }
+            } else {
+                bytes = new byte[5];
+                try {
+                    bytes = scene.oneStepClient(dx, dy, msg).toMsg();;
+                } catch (NullPointerException ignored) { }
+            }
+            return bytes;
+        }
+    }
 
     public SceneManager(mScene scene_) {
         scene = scene_;

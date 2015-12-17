@@ -24,6 +24,28 @@ public class FileForSent {
         isJumping = isJumping_;
     }
 
+    public FileForSent(byte [] bytes) {
+        dx = bytes[0];
+        dy = bytes[1];
+        row = bytes[2];
+        numOfImage = bytes[3];
+        isJumping = bytes[4] != 0;
+    }
+
+    public byte [] toMsg() {
+        byte [] bytes = new byte[5];
+        bytes[0] = (byte) dx;
+        bytes[1] = (byte) dy;
+        bytes[2] = (byte) row;
+        bytes[3] = (byte) numOfImage;
+        if (isJumping){
+            bytes[4] = 1;
+        } else  {
+            bytes[4] = 0;
+        }
+        return bytes;
+    }
+
     public static FileForSent genClient() {
         return new FileForSent(0, 0, RND.nextInt(5), RND.nextInt(5), false);
     }

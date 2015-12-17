@@ -86,13 +86,6 @@ public class DeviceChooser extends Activity {
         }
     };
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.device_chooser, menu);
-        progressBar = menu.findItem(R.id.menu_item_progress_bar);
-        return true;
-    }
-
     private void initBt() {
         Set<BluetoothDevice> paired = btService.getBluetoothAdapter().getBondedDevices();
         for (BluetoothDevice device : paired) {
