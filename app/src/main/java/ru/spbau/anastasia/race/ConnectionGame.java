@@ -16,6 +16,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -359,6 +361,8 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
                             Thread.sleep(1000/(SceneManager.FPS));
                         }
                     } catch (InterruptedException ignor) { }
+                    byte[] bytes1 = sceneManager.forTwoPlayer(file);
+                    Log.d("tag", bytes1.toString());
                     btService.write(sceneManager.forTwoPlayer(file));
                     sinchron();
                 }

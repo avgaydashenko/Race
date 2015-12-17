@@ -3,6 +3,7 @@ package ru.spbau.anastasia.race;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import java.util.Random;
 
@@ -21,6 +22,8 @@ public class mBarrierSprite extends mSimpleSprite {
     public mBarrierSprite(float speed_, int numOfTheme_, float height_) {
         super(rowX[row], rowY[row], rowDX[row] * speed_, rowDY[row] * speed_,
                 withBarrier(numOfTheme_), height_);
+
+        Log.d("server", "row: " + row + "; numOfImage");
         this.type = TYPE_BARRIERSPRITE;
     }
 
@@ -28,6 +31,8 @@ public class mBarrierSprite extends mSimpleSprite {
                           float height_) {
         super(rowX[file.getRow()], rowY[file.getRow()], rowDX[file.getRow()] * speed_,
                 rowDY[file.getRow()] * speed_,  withBarrierSent(file, numOfTheme_), height_);
+
+        Log.d("client", "row: " + row + "; numOfImage");
         this.type = TYPE_BARRIERSPRITE;
     }
 
