@@ -9,6 +9,7 @@ public class mScene {
     public Sound sound;
     byte[] playerStatus = FileForSent.genServer().toMsg();
 
+    public mBarrierSprite lastBarrier;
     public int numOfTheme = 0;
     public boolean isNewRound = false;
     public boolean isSleeping = false;
@@ -188,6 +189,7 @@ public class mScene {
     public synchronized FileForSent addBarrierClient(float dx, float dy) {
         if (layers[0].tryToAdd()) {
             mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height);
+            lastBarrier = barrierSprite;
             return layers[0].addServer(dx, dy, barrierSprite, barrierSprite.row, barrierSprite.numOfImage, player.isJumping);
         } else {
             return null;
