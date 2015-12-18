@@ -25,10 +25,6 @@ public abstract class mBasic {
 	
 	abstract void draw(Canvas c, Paint p);
 
-	public FileForSent toFileForServer(float dx, float dy, boolean isJumping) {
-		return null;
-	}
-
 	public float getWidth() {
 		return width;
 	}

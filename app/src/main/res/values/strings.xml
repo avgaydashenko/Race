@@ -47,4 +47,6 @@
 
     <string name="title_activity_device_chooser">DeviceChooser</string>
 
+    <string name="title_activity_choose">Choose</string>
+
 </resources>

@@ -2,8 +2,11 @@ package ru.spbau.anastasia.race;
 
 import android.content.res.Resources;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 public class mScene {
-    public int num = 1;
+    public static int num = 0;
 
     public float speed = 1;
     public boolean isServer;
@@ -25,6 +28,7 @@ public class mScene {
 
     private int lastRound = 0;
 
+    public static int[] coordinates;
     public static final int SINGLE_PLAY = 1;
     public static final int PLAY_TOGETHER = 2;
     public static final double DELTE_SPEED = 0.1;
@@ -67,6 +71,11 @@ public class mScene {
         status = STOPED;
         sound = sound_;
         numOfTheme = numOfTheme_;
+
+        coordinates = new int[100];
+        for (int i = 0; i < 100; i++) {
+            coordinates[i] = (i^3  + i^2 * 2 + i * 4  - 3) % 5;
+        }
     }
 
     public synchronized void start() {
@@ -164,10 +173,10 @@ public class mScene {
     public synchronized void addBarrierForTwo() {
         if (layers[0].tryToAdd()) {
             num++;
-            if (num > 150){
-                num = 1;
+            if (num >= 50){
+                num = 0;
             }
-            mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height, num);
+            mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height, coordinates[2 * num], coordinates[2 * num + 1]);
             lastBarrier = barrierSprite;
             layers[0].add(barrierSprite);
         }
@@ -237,10 +246,10 @@ public class mScene {
     public synchronized void addBarrier() {
         if (layers[0].tryToAdd()) {
             num++;
-            if (num > 150){
-                num = 1;
+            if (num >= 50){
+                num = 0;
             }
-            mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height, num);
+            mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height, coordinates[2 * num], coordinates[2 * num + 1]);
             layers[0].add(barrierSprite);
         }
     }
@@ -251,10 +260,12 @@ public class mScene {
     }
 
     public synchronized void addBackground() {
-        for (int i = 1; i < 3; i++) {
-            if (layers[i].tryToAdd()) {
-                mBackgroundSprite backgroundSprite = new mBackgroundSprite(speed, i == 1, numOfTheme, height);
-                layers[i].add(backgroundSprite);
+        if (numOfTheme != 1) {
+            for (int i = 1; i < 3; i++) {
+                if (layers[i].tryToAdd()) {
+                    mBackgroundSprite backgroundSprite = new mBackgroundSprite(speed, i == 1, numOfTheme, height);
+                    layers[i].add(backgroundSprite);
+                }
             }
         }
     }
@@ -267,7 +278,7 @@ public class mScene {
         deleteBarrier(barrier);
         live.update();
 
-        if (this.type == PLAY_TOGETHER) {
+        if (type == PLAY_TOGETHER) {
             mBasic barrier2 = player2.updateExist(this);
             deleteBarrier(barrier2);
             live2.update();

@@ -4,16 +4,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class SceneManager implements SensorEventListener {
 
     public static final int FPS = 10;
-
     protected final mScene scene;
-
     public float dx, dy;
 
     private SceneTask task;

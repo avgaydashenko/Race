@@ -1,5 +1,8 @@
 package ru.spbau.anastasia.race;
 
+import ru.spbau.anastasia.race.util.SystemUiHider;
+
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -9,11 +12,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.os.IBinder;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Handler;
+import android.os.IBinder;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,7 +28,7 @@ import android.widget.Toast;
 import java.util.Set;
 import java.util.concurrent.FutureTask;
 
-public class DeviceChooser extends Activity {
+public class Choose extends Activity {
 
     private BluetoothService btService;
 
@@ -38,7 +41,7 @@ public class DeviceChooser extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_device_chooser);
+        setContentView(R.layout.activity_choose);
 
         Button enableDiscoverable = (Button) findViewById(R.id.enable_discoverable);
         enableDiscoverable.setOnClickListener(onEnableDiscoverable);
@@ -68,8 +71,8 @@ public class DeviceChooser extends Activity {
                     FutureTask task = new FutureTask(new Runnable() {
                         @Override
                         public void run() {
-                            DeviceChooser.this.setResult(RESULT_OK);
-                            DeviceChooser.this.finish();
+                            Choose.this.setResult(RESULT_OK);
+                            Choose.this.finish();
                         }
                     }, 1);
                     runOnUiThread(task);

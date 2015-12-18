@@ -19,10 +19,12 @@ public class mBarrierSprite extends mSimpleSprite {
 
     public static final Random RND = new Random();
 
-    public mBarrierSprite(float speed_, int numOfTheme_, float height_, int num) {
-        super(rowX[row], rowY[row], rowDX[row] * speed_, rowDY[row] * speed_,
-                withBarrier(numOfTheme_, num), height_);
+    public mBarrierSprite(float speed_, int numOfTheme_, float height_, int row_, int numOfImage_) {
+        super(rowX[row_], rowY[row_], rowDX[row_] * speed_, rowDY[row_] * speed_,
+                withBarrier(numOfTheme_, numOfImage_), height_);
 
+        row = row_;
+        numOfImage = numOfImage_;
         Log.d("server", "row: " + row + "; numOfImage");
         this.type = TYPE_BARRIERSPRITE;
     }

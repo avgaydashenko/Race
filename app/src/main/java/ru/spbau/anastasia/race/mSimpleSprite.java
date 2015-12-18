@@ -11,7 +11,7 @@ import android.util.Log;
 public abstract class mSimpleSprite extends mBasic{
 
 	public static final String TAG = mSimpleSprite.class.getSimpleName();
-	public static final int SIZE_OF_BARRIER = 20;
+	public static final int SIZE_OF_BARRIER = 30;
 	public static final int SIZE_OF_DELTA_BARRIER = 80;
 	public static final int SIZE_OF_BACKGROUND = 8;
 	public static final int SIZE_OF_DELTA_BACKGROUND = 100;

@@ -62,8 +62,16 @@ public class ConnectionGame extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connection_game);
 
-        numOfTheme = getIntent().getExtras().getInt("theme");
         isSound = getIntent().getExtras().getBoolean("sound");
+
+        ImageView backgroundImage = (ImageView) findViewById(R.id.ConnectionView);
+        numOfTheme = getIntent().getExtras().getInt("theme");
+
+        if (numOfTheme == GameMenu.IS_CHECKED) {
+            backgroundImage.setImageResource(R.drawable.connection_game);
+        } else {
+            backgroundImage.setImageResource(R.drawable.connection_game2);
+        }
 
         arrayAdapter = new ArrayAdapter<>(this, R.layout.message);
         ((ListView) findViewById(R.id.messages)).setAdapter(arrayAdapter);
@@ -84,7 +92,7 @@ public class ConnectionGame extends Activity {
     }
 
     private void toDeviceChooser() {
-        startActivityForResult(new Intent(ConnectionGame.this, DeviceChooser.class),
+        startActivityForResult(new Intent(ConnectionGame.this, Choose.class),
                 REQUEST_CONNECT);
     }
 
@@ -126,7 +134,7 @@ public class ConnectionGame extends Activity {
 
             FrameLayout f = (FrameLayout) findViewById(R.id.gave_layout);
             f.setVisibility(View.VISIBLE);
-            LinearLayout l = (LinearLayout) findViewById(R.id.game_liner);
+            FrameLayout l = (FrameLayout) findViewById(R.id.message_frame);
             l.setVisibility(View.GONE);
 
             FileForSent file = new FileForSent(scene.playerStatus);
@@ -215,7 +223,7 @@ public class ConnectionGame extends Activity {
                 startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),
                         REQUEST_ENABLE_BT);
             } else if (!btService.isConnected()) {
-                startActivityForResult(new Intent(ConnectionGame.this, DeviceChooser.class),
+                startActivityForResult(new Intent(ConnectionGame.this, Choose.class),
                         REQUEST_CONNECT);
             }
         }
@@ -242,7 +250,7 @@ public class ConnectionGame extends Activity {
                 switch (resultCode) {
                     case RESULT_OK:
                         if (!btService.isConnected()) {
-                            startActivityForResult(new Intent(ConnectionGame.this, DeviceChooser.class),
+                            startActivityForResult(new Intent(ConnectionGame.this, Choose.class),
                                     REQUEST_CONNECT);
                         }
                         break;
