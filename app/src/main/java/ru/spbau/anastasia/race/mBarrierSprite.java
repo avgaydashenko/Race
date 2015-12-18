@@ -10,7 +10,7 @@ import java.util.Random;
 public class mBarrierSprite extends mSimpleSprite {
 
     private static Bitmap [][] barriersSprite = new Bitmap[2][6];
-    public static int row;
+    public static int row = 1;
     private static float[] rowX = new float[5];
     private static float[] rowY = new float[5];
     private static float[] rowDX = new float[5];
@@ -19,20 +19,11 @@ public class mBarrierSprite extends mSimpleSprite {
 
     public static final Random RND = new Random();
 
-    public mBarrierSprite(float speed_, int numOfTheme_, float height_) {
+    public mBarrierSprite(float speed_, int numOfTheme_, float height_, int num) {
         super(rowX[row], rowY[row], rowDX[row] * speed_, rowDY[row] * speed_,
-                withBarrier(numOfTheme_), height_);
+                withBarrier(numOfTheme_, num), height_);
 
         Log.d("server", "row: " + row + "; numOfImage");
-        this.type = TYPE_BARRIERSPRITE;
-    }
-
-    public mBarrierSprite(FileForSent file, float speed_, int numOfTheme_,
-                          float height_) {
-        super(rowX[file.getRow()], rowY[file.getRow()], rowDX[file.getRow()] * speed_,
-                rowDY[file.getRow()] * speed_,  withBarrierSent(file, numOfTheme_), height_);
-
-        Log.d("client", "row: " + row + "; numOfImage");
         this.type = TYPE_BARRIERSPRITE;
     }
 
@@ -57,15 +48,10 @@ public class mBarrierSprite extends mSimpleSprite {
         }
     }
 
-    private static Bitmap withBarrier(int numOfTheme) {
-        row = RND.nextInt(5);
-        numOfImage = RND.nextInt(6);
+    private static Bitmap withBarrier(int numOfTheme, int num) {
+        row = num % 5;
+        numOfImage = num % 5;
         return barriersSprite[numOfTheme][numOfImage];
-    }
-
-    private static Bitmap withBarrierSent(FileForSent file, int numOfTheme) {
-        row = file.getRow();
-        return barriersSprite[numOfTheme][file.getNumOfImage()];
     }
 
     private void updateExist() {
@@ -78,10 +64,5 @@ public class mBarrierSprite extends mSimpleSprite {
         x = x + dx;
         y = y + dy;
         updateExist();
-    }
-
-    @Override
-    public FileForSent toFileForServer(float dx, float dy, boolean isJumping) {
-        return new FileForSent(dx, dy, row, numOfImage, isJumping);
     }
 }

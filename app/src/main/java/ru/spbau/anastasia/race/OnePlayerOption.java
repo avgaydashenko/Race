@@ -23,10 +23,9 @@ public class OnePlayerOption extends Activity {
 
         chooseCharacter(0);
 
-        ImageView fon = (ImageView) findViewById(R.id.imagePlayersOption);
-
         numOfTheme = getIntent().getExtras().getInt("theme");
         isSound = getIntent().getExtras().getBoolean("sound");
+        ImageView fon = (ImageView) findViewById(R.id.imagePlayersOption);
 
         if (numOfTheme == GameMenu.IS_CHECKED) {
             fon.setImageResource(R.drawable.one_player_option2);

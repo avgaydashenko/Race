@@ -33,18 +33,10 @@ public class SceneManager implements SensorEventListener {
     public byte [] forTwoPlayer(FileForSent msg){
         synchronized (scene) {
 
-            byte [] bytes;
-            if (scene.isServer) {
-                bytes = FileForSent.genServer().toMsg();
-                try {
-                    bytes = scene.oneStepServer(dx, dy, msg).toMsg();
-                } catch (NullPointerException ignored) { }
-            } else {
-                bytes = new byte[5];
-                try {
-                    bytes = scene.oneStepClient(dx, dy, msg).toMsg();;
-                } catch (NullPointerException ignored) { }
-            }
+            byte [] bytes = new byte[20];
+            try {
+                bytes = scene.oneStepForTwo(dx, dy, msg).toMsg();;
+            } catch (NullPointerException ignored) { }
             return bytes;
         }
     }

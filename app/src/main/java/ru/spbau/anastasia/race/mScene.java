@@ -3,6 +3,7 @@ package ru.spbau.anastasia.race;
 import android.content.res.Resources;
 
 public class mScene {
+    public int num = 1;
 
     public float speed = 1;
     public boolean isServer;
@@ -130,7 +131,7 @@ public class mScene {
         isSleeping = true;
     }
 
-    public synchronized FileForSent oneStepClient(float dx, float dy, FileForSent file) {
+    public synchronized FileForSent oneStepForTwo(float dx, float dy, FileForSent file) {
         recalcNewRound();
         FileForSent fileNew = null;
 
@@ -141,7 +142,7 @@ public class mScene {
             }
             if (!isSleeping) {
                 player2.isJumping = file.getIsJumping();
-                fileNew = addClient(dx, dy);
+                addForTwo();
                 update(dx, dy, file.getDX(), file.getDY());
                 count += DELTA_COUNT;
             }
@@ -155,50 +156,19 @@ public class mScene {
         return null;
     }
 
-    public synchronized FileForSent oneStepServer(float dx, float dy, FileForSent file) {
-        recalcNewRound();
-
-        if (status != STOPED) {
-            if (!isNewRound) {
-                player.updateStatus(isSleeping);
-                player2.updateStatus(isSleeping);
-            }
-            if (!isSleeping) {
-                player2.isJumping = file.getIsJumping();
-                addServer(file);
-                update(dx, dy, file.getDX(), file.getDY());
-                count += DELTA_COUNT;
-            }
-            updateExist();
-            recalcParametrs();
-            return new FileForSent(player.dx, player.dy, player.isJumping);
-        }
-        return null;
-    }
-
-    public synchronized FileForSent addClient(float dx, float dy) {
+    public synchronized void addForTwo() {
         addBackground();
-        return addBarrierClient(dx, dy);
+        addBarrierForTwo();
     }
 
-    public synchronized void addServer(FileForSent file) {
-        addBackground();
-        addBarrierServer(file);
-    }
-
-    public synchronized FileForSent addBarrierClient(float dx, float dy) {
+    public synchronized void addBarrierForTwo() {
         if (layers[0].tryToAdd()) {
-            mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height);
+            num++;
+            if (num > 150){
+                num = 1;
+            }
+            mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height, num);
             lastBarrier = barrierSprite;
-            return layers[0].addServer(dx, dy, barrierSprite, barrierSprite.row, barrierSprite.numOfImage, player.isJumping);
-        } else {
-            return null;
-        }
-    }
-
-    public synchronized void addBarrierServer(FileForSent file) {
-        if (layers[0].tryToAdd()) {
-            mBarrierSprite barrierSprite = new mBarrierSprite(file, speed, numOfTheme, height);
             layers[0].add(barrierSprite);
         }
     }
@@ -266,7 +236,11 @@ public class mScene {
 
     public synchronized void addBarrier() {
         if (layers[0].tryToAdd()) {
-            mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height);
+            num++;
+            if (num > 150){
+                num = 1;
+            }
+            mBarrierSprite barrierSprite = new mBarrierSprite(speed, numOfTheme, height, num);
             layers[0].add(barrierSprite);
         }
     }

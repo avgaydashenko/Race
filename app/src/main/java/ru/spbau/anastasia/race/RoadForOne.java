@@ -40,18 +40,22 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
         sound.isStopped = !isSound;
 
         final mScene scene = new mScene(getResources(), mScene.SINGLE_PLAY, numOfTheme, sound);
-        scene.width = gameView.getWidth();
-        scene.height = gameView.getHeight();
-        scene.player_id = player_id;
-        sceneManager = new SceneManager(scene);
+        synchronized (scene) {
 
-        gameView.scene = scene;
+            sceneManager = new SceneManager(scene);
+            sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+            sensorManager.registerListener(sceneManager, sensor, SensorManager.SENSOR_DELAY_GAME);
 
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-        pause = (ImageButton) findViewById(R.id.pause);
-        restart = (ImageButton) findViewById(R.id.restart);
+            scene.width = gameView.getWidth();
+            scene.height = gameView.getHeight();
+            scene.player_id = player_id;
+            sceneManager = new SceneManager(scene);
 
+            gameView.scene = scene;
+            pause = (ImageButton) findViewById(R.id.pause);
+            restart = (ImageButton) findViewById(R.id.restart);
+        }
 
         onPauseListener = new View.OnClickListener() {
             @Override
@@ -78,7 +82,6 @@ public class RoadForOne extends Activity implements mScene.SceneListener {
 
         gameView.initFon(numOfTheme);
 
-        sensorManager.registerListener(sceneManager, sensor, SensorManager.SENSOR_DELAY_GAME);
     }
 
     public void onBackButtonClickRoadForOne(View view) {
