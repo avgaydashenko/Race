@@ -104,19 +104,6 @@
             android:id="@+id/count2"
             android:layout_gravity="center_horizontal|top" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonPause"
-            android:src="@drawable/pause"
-            android:layout_marginBottom="10dp"
-            android:background="@null"
-            android:layout_marginLeft="10dp"
-            android:onClick="onClickButtonPause"
-            android:nestedScrollingEnabled="false"
-            android:layout_gravity="center_horizontal"
-            android:longClickable="false" />
-
     </FrameLayout>
 
 </FrameLayout>

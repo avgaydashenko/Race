@@ -34,30 +34,18 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ConnectionGame extends Activity implements mScene.SceneListener {
+public class ConnectionGame extends Activity {
     private final int REQUEST_CONNECT = 1;
     private final int REQUEST_ENABLE_BT = 2;
     private final int HANDLER_MESSAGE_GET = 1;
     private boolean isPlayed;
     private int numOfTheme;
     private boolean isSound;
-    private boolean isBegin;
 
-
-    private ImageButton pause;
     private SceneManager sceneManager;
     private SensorManager sensorManager;
     private Sensor sensor;
     private mScene scene;
-
-    View.OnClickListener onPauseListener, onResumeListener;
-
-    Runnable activateRestartButton = new Runnable() {
-        @Override
-        public void run() {
-            pause.setVisibility(View.GONE);
-        }
-    };
 
     private boolean isStoped;
     private static final String STOP_MESSAGE = "stop";
@@ -134,11 +122,6 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
             sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 
-            pause = (ImageButton) findViewById(R.id.buttonPause);
-
-            scene.sceneListener = this;
-            pause.setOnClickListener(onPauseListener);
-
             bindService(new Intent(this, BluetoothService.class), connection, Context.BIND_AUTO_CREATE);
 
             FrameLayout f = (FrameLayout) findViewById(R.id.gave_layout);
@@ -156,33 +139,9 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
         }
     }
 
-    public void onClickButtonPause(View view) {
-        if (isStoped){
-            resumClick();
-            if (btService.isBegin){
-                btService.write(RESUM_MESSAGE.getBytes());
-            }
-        } else {
-            pauseClick();
-            if (btService.isBegin){
-                btService.write(PAUSE_MESSAGE.getBytes());
-            }
-        }
-        isStoped = !isStoped;
-    }
-
-    public void pauseClick() {
-        scene.stop();
-        pause.setImageResource(R.drawable.play);
-    };
-
-    public void resumClick() {
-        scene.start();
-        pause.setImageResource(R.drawable.pause);
-    };
 
     public void onClickButtonBackTwoPlayerOption(View view) {
-        if (btService.isBegin){
+        if (btService != null && btService.isBegin){
             btService.write(STOP_MESSAGE.getBytes());
         }
         finish();
@@ -206,7 +165,7 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
     @Override
     protected void onStop() {
         super.onStop();
-        if(btService.isBegin){
+        if(btService != null && btService.isBegin){
             btService.write(STOP_MESSAGE.getBytes());
         }
     }
@@ -223,7 +182,7 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(btService.isBegin){
+        if(btService != null && btService.isBegin){
             btService.write(STOP_MESSAGE.getBytes());
         }
         unbindService(connection);
@@ -255,7 +214,6 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
             if (!btService.getBluetoothAdapter().isEnabled()) {
                 startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),
                         REQUEST_ENABLE_BT);
-                isBegin = true;
             } else if (!btService.isConnected()) {
                 startActivityForResult(new Intent(ConnectionGame.this, DeviceChooser.class),
                         REQUEST_CONNECT);
@@ -345,28 +303,24 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            } else if (pauseFlag) {
-                pauseClick();
-            } else if (resumFlag) {
-                resumClick();
             }
 
-                if (isPlayed) {
-                synchronized (scene) {
-                    scene.playerStatus = bytes;
-                    FileForSent file = new FileForSent(scene.playerStatus);
-                    sinchron();
-                    try {
-                        if (isBegin){
-                            Thread.sleep(1000/(SceneManager.FPS - 10));
-                        }
-                    } catch (InterruptedException ignor) { }
-                    FileForSent comeIn = new FileForSent(bytes);
-                    byte[] bytes1 = sceneManager.forTwoPlayer(comeIn);
-                    Log.d("tag", bytes1.toString());
-                    btService.write(bytes1);
-                    sinchron();
-                }
+            if (isPlayed) {
+            synchronized (scene) {
+                scene.playerStatus = bytes;
+                FileForSent file = new FileForSent(scene.playerStatus);
+                sinchron();
+                try {
+                    if (btService != null && btService.isBegin){
+                        Thread.sleep(1000/(SceneManager.FPS - 10));
+                    }
+                } catch (InterruptedException ignor) { }
+                FileForSent comeIn = new FileForSent(bytes);
+                byte[] bytes1 = sceneManager.forTwoPlayer(comeIn);
+                Log.d("tag", bytes1.toString());
+                btService.write(bytes1);
+                sinchron();
+            }
             } else {
                     arrayAdapter.add(btService.getBluetoothSocket().getRemoteDevice().getName() + ": " +
                             new String((byte[]) msg.obj, 0, msg.arg1));
@@ -377,14 +331,9 @@ public class ConnectionGame extends Activity implements mScene.SceneListener {
     public void onRestartButtonClick(View view) {}
 
     public void onClickButtonBackRoadForTwo(View view) {
-        if (btService.isBegin){
+        if (btService != null &&  btService.isBegin){
             btService.write(STOP_MESSAGE.getBytes());
         }
         finish();
-    }
-
-    @Override
-    public void onGameOver() {
-        runOnUiThread(activateRestartButton);
     }
 }

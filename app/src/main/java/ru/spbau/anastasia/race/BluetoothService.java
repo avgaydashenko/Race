@@ -88,6 +88,7 @@ public class BluetoothService extends Service {
         if (btAdapter == null) {
             throw new BtUnavailableException();
         }
+        isBegin = false;
     }
 
     public boolean isConnected() {
@@ -171,6 +172,7 @@ public class BluetoothService extends Service {
 
         }
 
+        isBegin = true;
         connectedThread = new ConnectedThread();
         connectedThread.start();
     }
